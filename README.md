@@ -15,15 +15,38 @@ INSTRUCTIONS:
 - Collect ACHIEVEMENTZ.
 - Token integration.
 
+---
+
 ## aWORDaGAME
+
+- Artificial Intelligence NLP Tokenizer (like ChatGPT, different) (AI, NLP) (prior work)
+     - an old... AI TXT ENGINE for ... song-lyrics.
+- NodeJS - Mint Server (w Royalties) (todo)
+- "MIX-MEDIA", everything above into TOKENZ or NFTZ...  by
+- GraphQL number-naming convention for NFT TOKEN SETS: NUMZ (designed)
+- for NEW SmartContract UTILITY, *ABILITY, custom, UNLOCKABLE. (concept)
+- NEW TokenWebz: overview layout | UI/UX (based on Reveal.js)  (designed)
+- in Next.js/React front-end template (done)!
+
+---
+
+
 
 TODO:
 
-1) O GET 20 year old.. Artificial Intelligence "Social-Phrases" DATA.
+1) X GET 20 year old.. Artificial Intelligence for Song Lyrics "Social-Phrases", C++, DATA.
 
-2) O Revive the C++ Lexical Tokenizer (NLP), and port to JavaScript.
+2) X Revive the C++ Lexical Tokenizer (NLP), and 
 
-3) O Get old NodeJS media server for the "AI-Phrases". Combine with "Interact"
+    O port to JavaScript.
+
+    O AI song-lyrics / word puzzles / txt stories / mix media stories.
+
+3) X Get old NodeJS media server templates...
+
+    O convert "AI-Phrases" into file, and GraphQL. 
+    
+    O MockData Combines with "Interact"
 
 4) O Display Phrases in UI. From Local. Then from Vercel.
 
@@ -39,7 +62,26 @@ TODO:
 
 10) O NUMZ number-naming-convention: view / url / route / file / uri / id / linkz / QRCode.
 
-11) O
+11) O 
+
+
+---
+
+### MINIMAL PATH: 
+
+Merge 5 sandboxes, in perfect order. Prioritize by order of construction.
+
+aWORDaGAME goes first.  Because TXT and Game mechanics easiest.
+But Data can be "stubbed" as MockData (save time and great for Info Architecture Design)
+
+What to implement 1st?
+
+Reveal UI in NextJS/React template...
+
+
+---
+
+### AI / NLP
 
 scintillal / centilla
 climate-change terms
