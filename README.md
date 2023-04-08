@@ -76,7 +76,16 @@ But Data can be "stubbed" as MockData (save time and great for Info Architecture
 
 What to implement 1st?
 
-Reveal UI in NextJS/React template...
+X Reveal UI (sandbox).
+  X - Minimum Overview to DappMap
+  X - Minimum Item / CARD_plain to NUMZ file. 
+  O - NextJS_with_Reveal_Template
+  O - Port into aWordaGame minimum (no build/server)
+O into NEW NextJS/React (sandbox)
+O into aWORDaGAME
+
+
+"
 
 
 ---
