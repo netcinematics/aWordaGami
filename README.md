@@ -110,3 +110,10 @@ zepher west wind
 corpuscular rays
 polar vortex
 
+---
+
+## Run
+
+npm install
+
+npm start
