@@ -22,9 +22,8 @@ function App() {
         {count%2===0 ? (
           <>
           {/* <Game/> */}
-          <PortfolioView/>
-          <OverView/>
-           <hr></hr>
+          {/* <PortfolioView/> */}
+          {/* <OverView/> */}
           <WordGame1/>
           </>
           ) : (

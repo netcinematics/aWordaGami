@@ -114,6 +114,8 @@ polar vortex
 
 ## Run
 
+npm install react-reveal --save
+
 npm install
 
 npm start
