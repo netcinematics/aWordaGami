@@ -13,7 +13,7 @@ function App() {
     }
 
   return (
-    <div className="App" style={{backgroundColor: 'black',minHeight: '100vh'}}>
+    <div className="App" style={{backgroundColor: 'black',minHeight: '84vh'}}>
       <header className="App-header">
       aWordaGami
       </header>
@@ -28,7 +28,7 @@ function App() {
           </>
           ) : (
             <Zoom>
-              <p>Markup that will be revealed on scroll</p>
+              <p>Markup  revealed on scroll</p>
             </Zoom>
 
         )}

@@ -11,33 +11,38 @@ export default function WordGame1(){
         background: '#6facf7', border: '1px solid #444', lineHeight: '34px', padding: '1em', textAlign: 'center',
         width: '10%', margin: '0.5em', borderRadius: '13px', boxShadow: 'inset 1px 1px 5px 0px blue',
         cursor: 'pointer', fontFamily: 'fangsong', color: '#013434', textShadow: '-1px 0px 1px whitesmoke',
-        width:'90%',height:'66px'        
+        width:'90%',height:'66px',userSelect:'none','&:hover':{background: "#efefef"}       
     }
 
     let txtAnswerStyle = {
         background:'floralwhite',border:'1px solid #444',lineHeight:'34px',padding:'1em',textAlign:'center',
-        height:'66px',margin:'0.5em',borderRadius:'13px',cursor:'pointer',fontFamily:'fangsong',
-        color:'#013434',textShadow:'-1px 0px 1px whitesmoke'
-        ,boxShadow:'darkslategrey 0px 0px 8px 1px inset'
+        height:'66px',margin:'0.5em',borderRadius:'13px',fontFamily:'fangsong',
+        color:'#013434',textShadow:'-1px 0px 1px whitesmoke',userSelect:'none',cursor:'no-drop',
+        boxShadow:'darkslategrey 0px 0px 8px 1px inset'
         // ,boxShadow:'red 0px 0px 8px 1px inset'
         // ,boxShadow:'lime 0px 0px 8px 1px inset'
-        // ,width:'10%'        
     }
 
     let gameFrameStyle = {
         display:'flex',alignItems:'flex-start',
-        // justifyContent:'center',    
         borderTop:'2px solid purple',borderRadius:'13px',margin:'1em',padding:'1em'  }
 
-    //ai 2. ALGORITHM - ADDS METADATA to DATA and loads into STATE(MACHINE).
-    const PromptView = promptARR.map( txt =>
-        <div style={promptStyle}>{txt}</div>
-    );
-    const GameView = phraseARR.map(txt => {
-        // ai 5. MASK the data from the human.
+    
+    const PromptView = promptARR.map( txt => { //ai 2. ALGORITHM - ADD METADATA to DATA and load STATE(MACHINE).
+        function btnClick ( e ) { solvePuzzle(e.target.innerText)}
+        return <button onClick={btnClick} style={promptStyle}  >
+            {txt}
+        </button>
+    }); 
+
+    const GameView = phraseARR.map(txt => { // ai 5. MASK the data from the human.
         const maskTXT =  txt.split('').map( letter => '_ ' ).join('');
        return <div style={txtAnswerStyle}>{maskTXT}</div>
     });
+
+    function solvePuzzle(guess){
+        
+    }
 
     return (
         <>
