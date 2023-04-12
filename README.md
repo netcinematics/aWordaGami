@@ -1,4 +1,4 @@
-# aWORDaGAME
+# aWordaGami
 pronounced - ah WORD uh Gah mi.
 like Oragami!
 
