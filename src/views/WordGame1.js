@@ -44,9 +44,10 @@ export default function WordGame1(){
         </button>
     }); 
 
+    const [gameCOUNT, setGameCOUNT] = useState(1);
     const [rightCOUNT, setRightCOUNT] = useState(0);
     const [wrongCOUNT, setWrongCOUNT] = useState(0);
-    // const [totalSCORE, setTotalScore] = useState(0);
+    const [totalSCORE, setTotalScore] = useState(0);
     const [nextGame, setNextGame] = useState(false);
     const [solutionARR, setSolutionARR] = useState([]);
 
@@ -58,11 +59,11 @@ export default function WordGame1(){
         return <div style={txtAnswerStyle}>{maskTXTARR.join('')}</div>
     });
 
-    // function calculateScore(){
-    //     if(!rightCOUNT){return 0}
-    //     const ttlSCORE = (rightCOUNT+wrongCOUNT) / phraseARR.length;
-    //     setTotalScore(ttlSCORE);
-    // }
+    function calculateScore(){
+        // if(!rightCOUNT){return 0}
+        const nextSCORE = ((rightCOUNT-wrongCOUNT<0)?0:(rightCOUNT-wrongCOUNT)) / phraseARR.length
+        setTotalScore(totalSCORE+nextSCORE);
+    }
 
     function solvePuzzle(guess){
         //AI 7 on user input check each TXT ANSWER against STATE.
@@ -79,7 +80,7 @@ export default function WordGame1(){
         console.log('Correct.');
         setRightCOUNT(rightCOUNT+1);
         setSolutionARR([ ...solutionARR , guess ] );
-        // calculateScore();
+        calculateScore();
         if(solutionARR.length+1 === phraseARR.length){
             console.log('WIN!');
             setNextGame(true);
@@ -96,7 +97,7 @@ export default function WordGame1(){
         wrongSOUND.play();
         console.log('Wrong.');
         setWrongCOUNT(wrongCOUNT+1);
-        // calculateScore();
+        calculateScore();
     }
 
     function nextGameCLICK(){
@@ -105,12 +106,13 @@ export default function WordGame1(){
         setRightCOUNT(0);
         setWrongCOUNT(0);
         setNextGame(false);
+        setGameCOUNT(gameCOUNT+1)
         setSolutionARR([]);        
 
     }
     return (
         <>
-            <h1><Zoom>ai Word Game 1</Zoom></h1>
+            <h1 style={{display:'flex',justifyContent:'center'}}><Zoom>ai Word Game &nbsp; {gameCOUNT}</Zoom></h1>
             <gameframe style={gameFrameStyle}>
 
                 <aside style={{width:'25%',paddingTop:'1em'}}>
@@ -132,7 +134,8 @@ export default function WordGame1(){
                             <aside style={{display:'flex',justifyContent:'space-around',color:'steelblue'}}>
                                 <div>right: {rightCOUNT}</div>
                                 <div>wrong: {wrongCOUNT}</div>
-                                <div>score: {((rightCOUNT-wrongCOUNT<0)?0:(rightCOUNT-wrongCOUNT)) / phraseARR.length}</div>
+                                <div>score: {totalSCORE}</div>
+                                {/* <div>score: {((rightCOUNT-wrongCOUNT<0)?0:(rightCOUNT-wrongCOUNT)) / phraseARR.length}</div> */}
                             </aside>
                          </article>
                     </section>

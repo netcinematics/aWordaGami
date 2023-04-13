@@ -1,5 +1,5 @@
 import './App.css';
-import DynamicWordGame1 from './views/DynamicWordGame1';
+// import DynamicWordGame1 from './views/DynamicWordGame1';
 import OverView from './views/OverView';
 import WordGame1 from './views/WordGame1';
 import Zoom from 'react-reveal/Zoom';
@@ -30,8 +30,6 @@ function App() {
           } else if (viewIDX === "TikTacToe") {
             return <OverView/> ;
             // return <MainView main={main} /> ;
-          } else if (viewIDX === "DynamicWordGame1") {
-            return <DynamicWordGame1 /> ;
           }
         })()
       }
