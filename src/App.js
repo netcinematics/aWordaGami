@@ -2,6 +2,8 @@ import './App.css';
 // import DynamicWordGame1 from './views/DynamicWordGame1';
 import OverView from './views/OverView';
 import WordGame1 from './views/WordGame1';
+import WordGame2 from './views/WordGame2';
+import WordGame3 from './views/WordGame3';
 import Zoom from 'react-reveal/Zoom';
 import { useState } from 'react';
 
@@ -26,6 +28,8 @@ function App() {
       {         
         (() => { //DYNAMIC-VIEW-DISPLAY (design~innovation)
           if (viewIDX === "MainView") {
+            // return <WordGame3/>;
+            // return <WordGame2/>;
             return <WordGame1/>;
           } else if (viewIDX === "TikTacToe") {
             return <OverView/> ;

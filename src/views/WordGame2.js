@@ -11,10 +11,10 @@ import { useState,useEffect } from 'react';
 //6
 //7
 
-export default function WordGame1(){
+export default function WordGame2(){
 
     //ai 1: MANY DIFFERENT DATA TYPES. In this case: TXT = 'text' data.
-    let phraseTXT = "fill in the blank" //'celebrate each other' 'raise all boats'
+    let phraseTXT = "raise all boats" //'celebrate each other' 'raise all boats'
     let phraseARR = phraseTXT.split(' ');
     let promptTXT = phraseTXT; 
     let promptARR = promptTXT.split(' ').reverse();
