@@ -28,18 +28,19 @@ function App() {
       borderRadius:'13px',margin:'1em'}}>
 
       {         
-        (() => { //DYNAMIC-VIEW-DISPLAY (design~innovation)
-          if (viewIDX === "MainView") {
-            // return <WordGame5/>;
-            return <WordGame4/>;
-            // return <WordGame3/>;
-            // return <WordGame2/>;
-            // return <WordGame1/>;
-          } else if (viewIDX === "TikTacToe") {
-            return <OverView/> ;
-            // return <MainView main={main} /> ;
-          }
-        })()
+        <WordGame4/>
+        // (() => { //DYNAMIC-VIEW-DISPLAY (design~innovation)
+        //   if (viewIDX === "MainView") {
+        //     // return <WordGame5/>;
+        //     return <WordGame4/>;
+        //     // return <WordGame3/>;
+        //     // return <WordGame2/>;
+        //     // return <WordGame1/>;
+        //   } else if (viewIDX === "TikTacToe") {
+        //     return <OverView/> ;
+        //     // return <MainView main={main} /> ;
+        //   }
+        // })()
       }
 
         {/* {count%2===0 ? ( */}

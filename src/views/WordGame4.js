@@ -14,71 +14,79 @@ import { useState,useEffect } from 'react';
 export default function WordGame4(){
 
     //ai 1: MANY DIFFERENT DATA TYPES. In this case: TXT = 'text' data.
-    // let phraseTXT = "last one there is a rotten egg" //'celebrate each other' 'raise all boats'
-    let puzzleSet1 = ["all the rage","last one there is a rotten egg","good to go"];
-    let phraseTXT = "good to go" //'celebrate each other' 'raise all boats'
-    let phraseARR = phraseTXT.split(' ');
-    let promptTXT = phraseTXT; 
-    let promptARR = promptTXT.split(' ').reverse();
+    // let puzzleSet1 = ["all the rage","last one there is a rotten egg","good to go"];
+    // let phraseTXT = "good to go" //'celebrate each other' 'raise all boats'
+    // let phraseARR = phraseTXT.split(' ');
+    // let promptTXT = phraseTXT; 
+    // let promptARR = promptTXT.split(' ').reverse();
 
-    const [puzzleSet, setPuzzleSet] = useState(puzzleSet1);
-    const [aPromptARR, setPromptARR] = useState([]);
     
-    const [gameCOUNT, setGameCOUNT] = useState(1);
-    const [rightCOUNT, setRightCOUNT] = useState(0);
-    const [wrongCOUNT, setWrongCOUNT] = useState(0);
-    const [totalSCORE, setTotalScore] = useState(0);
-    const [nextGame, setNextGame] = useState(false);
-    const [aPhraseARR, setPhraseARR] = useState([]);
-    const [solutionARR, setSolutionARR] = useState([]);
-    const [aPromptView, setPromptView] = useState(null);
-    const [aPhraseView, setPhraseView] = useState(null);
+    let [gameIDX, setGameIDX] = useState(0);
+    let [rightCOUNT, setRightCOUNT] = useState(0);
+    let [wrongCOUNT, setWrongCOUNT] = useState(0);
+    let [totalSCORE, setTotalScore] = useState(0);
+    let [nextGame, setNextGame] = useState(false);
+    let [aPhraseARR, setPhraseARR] = useState([]);
+    let [solutionARR, setSolutionARR] = useState([]);
+    let [aPromptView, setPromptView] = useState(null);
+    let [aPhraseView, setPhraseView] = useState(null);
+
+    let [aPhraseTXT, setPhraseTXT] = useState("");
+    let [testSTR, setTestSTR] = useState("BEGIN");
 
     useEffect(() => {
-        console.log('ONLY THE FIRST TIME',puzzleSet.length)
-        //
-// debugger;
-        // let phraseTXT = puzzleSet[gameCOUNT-1];
-        // let phraseARR = phraseTXT.split(' ');
-        // setPromptARR(phraseARR);
-        // loadPromptView();
-        // setPhraseARR(puzzleSet[gameCOUNT]);
-        // loadPhraseView();
-        // Update the document title using the browser API
-        // document.title = `You clicked ${count} times`;
-        // let nn = NeuralNet();
-        // console.log('lksjflj',nn[gameCOUNT]);
-        // phraseTXT = nn[gameCOUNT];
-        // phraseARR = phraseTXT.split(' ');
-        // promptTXT = phraseTXT; 
-        // promptARR = promptTXT.split(' ').reverse();
-        // // PromptView = "";
-        
+    //     initGame();
 
-
+         setTestSTR('FX')
       },[]);
 
 
-
-    function loadPromptView (promptARR){
-        // debugger;
-
-        console.log('LOADPROMPT',promptARR.length)
+    function getPromptView(){
+        // console.log("ATEST6",testSTR);
+        console.log("TESTLEN SCOP2332",aPhraseTXT) //must exist for scope.
+        let promptARR = aPhraseTXT.split(' ').reverse();
         const PromptView2 = promptARR.map( txt => { //ai 2. ALGORITHM - ADD METADATA to DATA and load STATE(MACHINE).
             function btnClick ( e ) { solvePuzzle(e.target.innerText)}
             return <button onClick={btnClick} style={promptStyle}  >
+            {/* return <button onClick={solvePuzzle()} style={promptStyle}  > */}
                     {txt}
                 </button>
         }); 
-        // if(gameCOUNT==1){
 
-            setPromptView(PromptView2)
-        // }
+        return PromptView2;
     }
 
-    function loadPhraseView(phraseARR){
+    // function loadPromptView (promptARR){
+    //     console.log("ATEST22",testSTR);
+    //     console.log("TESTLEN SCOP",aPhraseARR.length) //must exist for scope.
+    //     console.log("TESTLEN SCOP",solutionARR.length)
+    //     const PromptView2 = promptARR.map( txt => { //ai 2. ALGORITHM - ADD METADATA to DATA and load STATE(MACHINE).
+    //         function btnClick ( e ) { solvePuzzle(e.target.innerText)}
+    //         return <button onClick={btnClick} style={promptStyle}  >
+    //         {/* return <button onClick={solvePuzzle()} style={promptStyle}  > */}
+    //                 {txt}
+    //             </button>
+    //     }); 
+    //     setPromptView(PromptView2)
+    // }
 
-        console.log('LOADPHRASE',phraseARR.length)
+    // function loadPhraseView(phraseARR){
+
+    //     const GameView2 = phraseARR.map( (txt,idx) => { // ai 5. MASK the data from the human.
+    //         const maskTXTARR =  txt.split('').map( (letter,i) => {
+    //             if(idx<solutionARR.length){ return letter; }
+    //             return '_ ' 
+    //         })
+    //         return <div style={txtAnswerStyle}>{maskTXTARR.join('')}</div>
+    //     });
+
+    //     setPhraseView(GameView2)
+    // }
+
+    function getPhraseView(){
+        // console.log("ATEST333",testSTR);
+        console.log("TESTLEN SCOP",aPhraseTXT) //must exist for scope.
+        let phraseARR = aPhraseTXT.split(' ');
         const GameView2 = phraseARR.map( (txt,idx) => { // ai 5. MASK the data from the human.
             const maskTXTARR =  txt.split('').map( (letter,i) => {
                 if(idx<solutionARR.length){ return letter; }
@@ -87,10 +95,8 @@ export default function WordGame4(){
             return <div style={txtAnswerStyle}>{maskTXTARR.join('')}</div>
         });
 
-            setPhraseView(GameView2)
-        // }
+        return GameView2 
     }
-
 
 
     //ai 4: STYLE as METADATA because STYLE represents STATE.
@@ -118,33 +124,37 @@ export default function WordGame4(){
 
 
 
+        //todo remove
+    // let PromptView = promptARR.map( txt => { //ai 2. ALGORITHM - ADD METADATA to DATA and load STATE(MACHINE).
+    //     function btnClick ( e ) { solvePuzzle(e.target.innerText)}
+    //     return <button onClick={btnClick} style={promptStyle}  >
+    //             {txt}
+    //         </button>
+    // }); 
 
-    let PromptView = promptARR.map( txt => { //ai 2. ALGORITHM - ADD METADATA to DATA and load STATE(MACHINE).
-        function btnClick ( e ) { solvePuzzle(e.target.innerText)}
-        return <button onClick={btnClick} style={promptStyle}  >
-                {txt}
-            </button>
-    }); 
-
-    const GameView = phraseARR.map( (txt,idx) => { // ai 5. MASK the data from the human.
-        const maskTXTARR =  txt.split('').map( (letter,i) => {
-            if(idx<solutionARR.length){ return letter; }
-            return '_ ' 
-        })
-        return <div style={txtAnswerStyle}>{maskTXTARR.join('')}</div>
-    });
+    // const GameView = phraseARR.map( (txt,idx) => { // ai 5. MASK the data from the human.
+    //     const maskTXTARR =  txt.split('').map( (letter,i) => {
+    //         if(idx<solutionARR.length){ return letter; }
+    //         return '_ ' 
+    //     })
+    //     return <div style={txtAnswerStyle}>{maskTXTARR.join('')}</div>
+    // });
 
     function calculateScore(){
         // if(!rightCOUNT){return 0}
-        const nextSCORE = ((rightCOUNT-wrongCOUNT<0)?0:(rightCOUNT-wrongCOUNT)) / phraseARR.length
+        const nextSCORE = ((rightCOUNT-wrongCOUNT<0)?0:(rightCOUNT-wrongCOUNT)) / aPhraseARR.length
         setTotalScore(totalSCORE+nextSCORE);
     }
 
     function solvePuzzle(guess){
+        // console.log("ATEST3",testSTR);
+        console.log("TESTLENaaaA",aPhraseTXT)
+        console.log("TESTLENbbbB",solutionARR.length)
+        console.log("TESTLENcccc", aPhraseARR.length)
         //AI 7 on user input check each TXT ANSWER against STATE.
         // if(solutionARR.length < phraseARR.length && guess){ //Not last GUESS
-        if(solutionARR.length < phraseARR.length && guess){ //Not last GUESS
-            if (guess=== phraseARR[solutionARR.length]){ // CORRECT GUESS
+        if(solutionARR.length < aPhraseARR.length && guess){ //Not last GUESS
+            if (guess=== aPhraseARR[solutionARR.length]){ // CORRECT GUESS
                 correctGuess(guess);
             } else { //INCORRECT GUESS
                 wrongGuess(guess);
@@ -152,12 +162,15 @@ export default function WordGame4(){
         }
     }
 
-    function correctGuess(guess){
+    async function correctGuess(guess){
         console.log('Correct.');
         setRightCOUNT(rightCOUNT+1);
-        setSolutionARR([ ...solutionARR , guess ] );
+        // console.log('SOLLUTIONb4',solutionARR.length)
+        await setSolutionARR([ ...solutionARR , guess ] );
+        // console.log('SOLLUTIONafter',solutionARR.length)
         calculateScore();
-        if(solutionARR.length+1 === phraseARR.length){
+        console.log(solutionARR.length, aPhraseARR.length);
+        if(solutionARR.length+1 === aPhraseARR.length){
             console.log('WIN!');
             setNextGame(true);
             var windSOUND = new Audio("./sonic/nxWin1a.mp3");
@@ -176,56 +189,53 @@ export default function WordGame4(){
         calculateScore();
     }
 
-    function nextGameCLICK(){
+    async function nextGameCLICK(){
         var nextSOUND = new Audio("./sonic/nxWoop1.mp3");
         nextSOUND.play();
+        await setGameIDX(gameIDX+1)
         initGame();
     }
 
     function initGame(){
+        // setTestSTR('INIT')
         //RESET-STATE
         setRightCOUNT(0);
         setWrongCOUNT(0);
         setNextGame(false);
-        setGameCOUNT(gameCOUNT+1)
         setSolutionARR([]);  
         //RELOAD-NEXT-GAME-.
-        // debugger;
         let nn = NeuralNet(); //todo nn.puzzleset
-        let nextPhraseTXT = nn[gameCOUNT];
+        let nextPhraseTXT = nn[gameIDX];
+        setPhraseTXT(nextPhraseTXT);
+        setTestSTR(nextPhraseTXT);
+        // console.log("ATEST1",aPhraseTXT);
         let nextPhraseARR = nextPhraseTXT.split(' ');
+
         setPhraseARR(nextPhraseARR);
-        loadPromptView(nextPhraseARR);
-        loadPhraseView(nextPhraseARR);
-        // setPromptARR(nextPhraseARR);
-        // loadPromptView();
-        // setPhraseARR(puzzleSet[gameCOUNT]);
-        // loadPhraseView();
-        // Update the document title using the browser API
-        // document.title = `You clicked ${count} times`;
-        // 
-        // console.log('lksjflj',nn[gameCOUNT]);
-        // phraseTXT = nn[gameCOUNT];
-        // phraseARR = phraseTXT.split(' ');
-        // promptTXT = phraseTXT; 
-        // promptARR = promptTXT.split(' ').reverse();
-
-
+        // await setPhraseARR([ ...nextPhraseARR] );
+        // setPhraseARR( nextPhraseARR => [ ...nextPhraseARR] );
+        // setSearches(searches => [...searches, query])
+        // console.log("TEST1",aPhraseARR.length)
         //INIT PROMPT and PHRASE VIEWS
+        // loadPromptView(nextPhraseARR);
+        // loadPhraseView(nextPhraseARR);
+
+
     }
 
 
     return (
         <>
-            <h1 style={{display:'flex',justifyContent:'center'}}><Zoom>ai Word Game &nbsp; {gameCOUNT}</Zoom></h1>
+            <h1 style={{display:'flex',justifyContent:'center'}}><Zoom>ai Word Game &nbsp; {gameIDX+1}</Zoom></h1>
             <gameframe style={gameFrameStyle}>
 
                 <aside style={{width:'25%',paddingTop:'1em'}}>
                     <h2>Choices:</h2>
                 <section style={{border:'1px solid skyblue',borderRadius:'8px',
                         padding:'1em',overflowX:'hidden',overflowY:'auto',height:'355px'}}>
-                    {PromptView}
-                    {aPromptView}
+                    {/* {PromptView} */}
+                    {/* {aPromptView} */}
+                    { getPromptView() }
                 </section>
                 </aside>
                 <aside style={{height:'370px',width:'75%',paddingTop:'1em',marginLeft:'2em'}}>
@@ -234,14 +244,16 @@ export default function WordGame4(){
                         <gameboard style={{borderBottom:'1px solid darkslategray',borderRadius:'8px',
                             display:'flex',flexDirection:'row',alignContent:'center',minHeight:'300px',
                             justifyContent:'center',alignItems:'center',flexWrap:'wrap'}}>
-                            {GameView}
-                            {aPhraseView}
+                            {/* {GameView} */}
+                            {/* {aPhraseView} */}
+                            { getPhraseView() }
                         </gameboard>
                         <article style={{padding:'0.666em',color:'darkslategray'}}>
                             <aside style={{display:'flex',justifyContent:'space-around',color:'steelblue'}}>
                                 <div>right: {rightCOUNT}</div>
                                 <div>wrong: {wrongCOUNT}</div>
                                 <div>score: {totalSCORE}</div>
+                                <div>test: {testSTR}</div>
                                 {/* <div>score: {((rightCOUNT-wrongCOUNT<0)?0:(rightCOUNT-wrongCOUNT)) / phraseARR.length}</div> */}
                             </aside>
                          </article>
@@ -250,7 +262,9 @@ export default function WordGame4(){
             </gameframe>
             <footer style={{color:'darkcyan',fontSize:'small',paddingBottom:'1em'}}>
                 { 
-                    (!nextGame)? <>click a word, to solve the puzzle </>: 
+                    (!nextGame)? <>click a word, to solve the puzzle 
+                    <button onClick={initGame}>start</button>
+                    </>: 
                         <button style={{borderRadius:'8px',padding:'1em',background:'darkseagreen',
                             boxShadow:'0px -1px 5px 1px gold', cursor:'pointer' }}
                             onClick={nextGameCLICK}>NEXT GAME </button>
