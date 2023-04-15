@@ -92,8 +92,21 @@ O into aWORDaGAME
 
 ### AI / NLP
 
-scintillal / centilla
-climate-change terms
+Category: HUGE WORDS
+scintilla 
+hyper fragmented
+super structure
+infini-vasta
+
+Category: Psychology
+anthropomorphic
+red-herring
+confirmation-bias
+
+Category: aWordza...?
+
+Category: new climate-change words
+atmospheric-river
 long-track-tornado,
 mega-drought,
 bomb-cyclone,
@@ -109,12 +122,32 @@ sea-level-rise
 zepher west wind
 corpuscular rays
 polar vortex
+dense-smog
+artificial-reef
+preventable-burn
+treated-waste-water
+---
+
+### TODO:
+
+X - clean up, check in
+O - docs
+X - infinite game feature
+X - random mix prompt array - O in ai.randommix()
+O - random load - in ai.puzzleset()
+O - non reload Local Storage
+O - manifest error - logo.svg
+O - reset sound
+O - dynamic category ai.category()
+O - doublegame error
+O - highlight selected btns
+O - highlight Correct / Wrong words.
+O - add rich visual animations // npm install react-reveal --save
 
 ---
 
-## Run
 
-npm install react-reveal --save
+## Run
 
 npm install
 

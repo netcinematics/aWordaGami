@@ -1,6 +1,7 @@
 import './App.css';
 // import DynamicWordGame1 from './views/DynamicWordGame1';
 import OverView from './views/OverView';
+import AWordaGami1 from './views/aWordaGami1';
 import WordGame1 from './views/WordGame1';
 import WordGame2 from './views/WordGame2';
 import WordGame3 from './views/WordGame3';
@@ -28,7 +29,8 @@ function App() {
       borderRadius:'13px',margin:'1em'}}>
 
       {         
-        <WordGame4/>
+        <AWordaGami1/>
+        // <WordGame4/>
         // (() => { //DYNAMIC-VIEW-DISPLAY (design~innovation)
         //   if (viewIDX === "MainView") {
         //     // return <WordGame5/>;
