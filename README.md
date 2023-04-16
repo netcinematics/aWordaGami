@@ -130,7 +130,7 @@ treated-waste-water
 
 ### TODO:
 
-X - clean up, check in
+X - clean up, check in, deploy react to gh-pages
 O - docs
 X - infinite game feature
 X - random mix prompt array - O in ai.randommix()
@@ -146,6 +146,12 @@ O - add rich visual animations // npm install react-reveal --save
 
 ---
 
+## Manifest 
+// npm i create-react-app
+// npm i react-reveal --save
+// npm i gh-pages --save-dev
+// npm run deploy
+---
 
 ## Run
 
