@@ -99,7 +99,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             var windSOUND = new Audio("./sonic/nxWin1a.mp3");
             windSOUND.play();            
         } else { // Correct
-            var tallySOUND = new Audio("./public/sonic/nxBlip2b.mp3");
+            var tallySOUND = new Audio("./sonic/nxBlip2b.mp3");
             tallySOUND.play();
         }
     }
