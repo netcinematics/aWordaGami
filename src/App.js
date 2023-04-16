@@ -21,7 +21,7 @@ function App() {
     // }
 
   return (
-    <div className="App" style={{backgroundColor: 'black',minHeight: '84vh'}}>
+    <div className="App" style={{backgroundColor: 'black',minHeight: '84vh',maxWidth:'55em',margin:'0 auto'}}>
       <header className="App-header" style={{borderRadius:'13px'}}>
       aWordaGami
       </header>

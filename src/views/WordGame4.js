@@ -230,9 +230,10 @@ export default function WordGame4(){
             <gameframe style={gameFrameStyle}>
 
                 <aside style={{width:'25%',paddingTop:'1em'}}>
-                    <h2>Choices:</h2>
+                    
                 <section style={{border:'1px solid skyblue',borderRadius:'8px',
                         padding:'1em',overflowX:'hidden',overflowY:'auto',height:'355px'}}>
+                            <h2>Choices:</h2>
                     {/* {PromptView} */}
                     {/* {aPromptView} */}
                     { getPromptView() }

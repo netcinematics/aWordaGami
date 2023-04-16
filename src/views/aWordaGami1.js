@@ -3,17 +3,16 @@ import NeuralNet from './NeuralNet'
 import { useState,useEffect } from 'react';
 
 //ai DESIGN PATTERNS:
-//1
-//2
+//1 influence many data types.
+//2 ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
 //3
-//4
-//5
-//6
-//7
+//4 STYLE as METADATA because STYLE represents STATE.
+//5 MASK the data from the human...
+//6 USER INPUT check TXT ANSWER vs STATE.
 
 export default function AWordaGami1(){ //first letter needs to be capital to have class.
 
-    //ai 1: MANY DIFFERENT DATA TYPES to influence. In this case: TXT = 'text' data.  
+    //:ai: 1 MANY DIFFERENT DATA TYPES to influence. In this case: TXT = 'text' data.  
     let [gameIDX, setGameIDX] = useState(0);
     let [rightCOUNT, setRightCOUNT] = useState(0);
     let [wrongCOUNT, setWrongCOUNT] = useState(0);
@@ -28,15 +27,13 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         initGame();
       },[]);
 
-
     function getPromptView(){
         let promptARR = aPhraseTXT.split(' ').reverse();
-        let shuffledPrompts = promptARR
-            .map(value => ({ value, sort: Math.random() }))
+        let shuffledPrompts = promptARR.map(value => ({ value, sort: Math.random() }))
             .sort((a, b) => a.sort - b.sort)
             .map(({ value }) => value)
 
-        const PromptView2 = shuffledPrompts.map( txt => { //ai 2. ALGORITHM - ADD METADATA to DATA and load STATE(MACHINE).
+        const PromptView2 = shuffledPrompts.map( txt => { //:ai: 2. ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
             function btnClick ( e ) { solvePuzzle(e.target.innerText)}
             return <button onClick={btnClick} style={promptStyle}  >
                 {txt}
@@ -47,7 +44,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
 
     function getPhraseView(){
         let phraseARR = aPhraseTXT.split(' ');
-        const GameView2 = phraseARR.map( (txt,idx) => { // ai 5. MASK the data from the human.
+        const GameView2 = phraseARR.map( (txt,idx) => { // :ai: 5. MASK the data from the human.
             const maskTXTARR =  txt.split('').map( (letter,i) => {
                 if(idx<solutionARR.length){ return letter; }
                 return '_ ' 
@@ -57,7 +54,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         return GameView2 
     }
 
-    //ai 4: STYLE as METADATA because STYLE represents STATE.
+    //:ai: 4: STYLE as METADATA - STYLE represents STATE.
     let promptStyle = {
         background: '#6facf7', border: '1px solid #444', lineHeight: '34px', textAlign: 'center',
         width: '10%', margin: '0.5em', borderRadius: '13px', boxShadow: 'inset 1px 1px 5px 0px blue',
@@ -70,19 +67,18 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         height:'66px',margin:'0.5em',borderRadius:'13px',fontFamily:'fangsong',
         color:'#013434',textShadow:'-1px 0px 1px whitesmoke',userSelect:'none',cursor:'no-drop',
         boxShadow:'darkslategrey 0px 0px 8px 1px inset'// ,boxShadow:'red 0px 0px 8px 1px inset'// ,boxShadow:'lime 0px 0px 8px 1px inset'
-    }
+    } //TODO inline
 
-    let gameFrameStyle = {
-        display:'flex',alignItems:'flex-start',minHeight:'466px',
-        borderTop:'2px solid purple',borderRadius:'13px',margin:'1em',marginBottom:0,padding:'1em'  }
+    // let gameFrameStyle = {
+    //     display:'flex',alignItems:'flex-start',minHeight:'466px',
+    //     borderTop:'2px solid purple',borderRadius:'13px',margin:'1em',marginBottom:0,padding:'1em'  }
 
     function calculateScore(){
         const nextSCORE = ((rightCOUNT-wrongCOUNT<0)?0:(rightCOUNT-wrongCOUNT)) / aPhraseARR.length
         setTotalScore(totalSCORE+nextSCORE);
     }
 
-    function solvePuzzle(guess){
-        //AI 7 on user input check each TXT ANSWER against STATE.
+    function solvePuzzle(guess){ //:ai: 6 on user input check each TXT ANSWER against STATE.
         if(solutionARR.length < aPhraseARR.length && guess){ //Not last GUESS
             if (guess=== aPhraseARR[solutionARR.length]){ // CORRECT GUESS
                 correctGuess(guess);
@@ -103,7 +99,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             var windSOUND = new Audio("./sonic/nxWin1a.mp3");
             windSOUND.play();            
         } else { // Correct
-            var tallySOUND = new Audio("./sonic/nxBlip2b.mp3");
+            var tallySOUND = new Audio("./public/sonic/nxBlip2b.mp3");
             tallySOUND.play();
         }
     }
@@ -124,18 +120,15 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         if( gameIDX === nn.length){ //ENDGAME. TODO: NEW RANDOM PUZZLESET
             var resetSOUND = new Audio("./sonic/nxBoop3.mp3");
             resetSOUND.play();
-            // await setGameIDX(1);
             initGame();
         }else{
             var nextSOUND = new Audio("./sonic/nxWoop1.mp3");
             nextSOUND.play();
-            // await setGameIDX(gameIDX+1)
             initGame();
         }
     }
 
-    function initGame(){
-        //RESET-STATE
+    function initGame(){ //RESET-STATE
         setRightCOUNT(0);
         setWrongCOUNT(0);
         setNextGame(false);
@@ -145,32 +138,31 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         console.log('IDXTEST-INIT',gameIDX, nn.length)
         let nextPhraseTXT = '';
         if(gameIDX >= nn.length){ //ENDGAME. TODO: NEW RANDOM PUZZLESET
-            console.log('RESETGAME 0')
-            setGameIDX(0);
+            console.log('RESETGAME 1')
+            setGameIDX(1);
             nextPhraseTXT = nn[0];          
         } else {
             nextPhraseTXT = nn[gameIDX];
         }
-        // let nextPhraseTXT = nn[gameIDX];
         setPhraseTXT(nextPhraseTXT);
         let nextPhraseARR = nextPhraseTXT.split(' ');
         setPhraseARR(nextPhraseARR); //TODO
     }
-
-
     return (
         <>
             <h1 style={{display:'flex',justifyContent:'center'}}><Zoom>ai Word Game &nbsp; {gameIDX}</Zoom></h1>
-            <gameframe style={gameFrameStyle}>
+            {/* <gameframe style={gameFrameStyle}> */}
+            <gameframe style={{display:'flex',alignItems:'flex-start',minHeight:'466px',
+                borderTop:'2px solid purple',borderRadius:'13px',margin:'1em 3% 0px',padding:'2%'}}>
 
                 <aside style={{width:'25%',paddingTop:'1em'}}>
-                    <h2>Choices:</h2>
-                <section style={{border:'1px solid skyblue',borderRadius:'8px',
-                        padding:'1em',overflowX:'hidden',overflowY:'auto',height:'355px'}}>
+                    <h2 style={{marginRight:'1em'}}>Choices:</h2>
+                <section style={{border:'1px solid skyblue',borderRadius:'8px',marginRight:'2%',
+                        padding:'0.8em',overflowX:'hidden',overflowY:'auto',height:'355px'}}>
                     { getPromptView() }
                 </section>
                 </aside>
-                <aside style={{height:'370px',width:'75%',paddingTop:'1em',marginLeft:'2em'}}>
+                <aside style={{height:'370px',width:'75%',paddingTop:'1em'}}>
                     <h2>Common Phrase:</h2>
                     <section style={{border:'1px solid steelblue',borderRadius:'8px',display:'flex',flexDirection:'column',height:'100%',padding:'0.444em'}}>
                         <gameboard style={{borderBottom:'1px solid darkslategray',borderRadius:'8px',
