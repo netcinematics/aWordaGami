@@ -62,14 +62,18 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
 
     //:ai: 4: STYLE as METADATA - STYLE represents STATE.
     function getPromptBtnCLASSName (txt) {
-        debugger;
         if(solutionARR.includes(txt)){
             return 'promptSELECTED'; 
         }
     }
 
     function getPhraseWordCLASSName (txt) {
-        return 'main man'
+        if(solutionARR.includes(txt)){
+            return 'wordCORRECT';
+        } else { //WRONG
+
+        }
+        return ''
     }
 
     let promptStyle = {

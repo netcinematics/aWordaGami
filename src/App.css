@@ -22,4 +22,10 @@
   background-color: black !important;
  }
 
-
+ .wordCORRECT{ 
+  border: 2px solid green !important;
+ }
+ 
+ .wordWRONG{ 
+  border: 2px solid red !important;
+ }
