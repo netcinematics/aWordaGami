@@ -6,7 +6,7 @@ import { useState,useEffect } from 'react';
 //ai DESIGN PATTERNS:
 //1 influence many data types.
 //2 ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
-//3
+//3 FALSE answer replacment.
 //4 STYLE as METADATA because STYLE represents STATE.
 //5 MASK the data from the human...
 //6 USER INPUT check TXT ANSWER vs STATE.
@@ -22,6 +22,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     let [aPhraseARR, setPhraseARR] = useState([]);
     let [solutionARR, setSolutionARR] = useState([]);
     let [aPhraseTXT, setPhraseTXT] = useState("");
+    let [cursorIDX, setCursorIDX] = useState(0);
 
     useEffect(() => {
         // var initSOUND = new Audio(initSound);
@@ -32,51 +33,43 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
       },[]);
 
     function getPromptView(){
-        let promptARR = aPhraseTXT.split(' ').reverse();
-        let shuffledPrompts = promptARR.map(value => ({ value, sort: Math.random() }))
-            .sort((a, b) => a.sort - b.sort)
-            .map(({ value }) => value)
-        
-        return shuffledPrompts.map( txt => { //:ai: 2. ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
+        let promptARR = aPhraseTXT.split(' ');
+        let stateARR = promptARR.map( (txt,idx) => { //:ai: 2. ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
             function btnClick ( e ) { solvePuzzle(e.target.innerText)}
-            return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt) }  >
+            return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt,idx) }  >
                 {txt}
             </button>
-        }); 
+        });
+        let shuffledPrompts = stateARR.map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
+        return shuffledPrompts;
     }
 
     function getPhraseView(){
         let phraseARR = aPhraseTXT.split(' ');
         return phraseARR.map( (txt,idx) => { // :ai: 5. MASK the data from the human.
             const maskTXTARR =  txt.split('').map( (letter,i) => {
-                if(idx<solutionARR.length){ return letter; }
+                if(solutionARR[idx] && solutionARR[idx] === txt) { return letter; }
                 return '_ ' 
             })
-            return <div style={txtAnswerStyle} className={ getPhraseWordCLASSName(txt) }>
+            return <div style={txtAnswerStyle} className={ getPhraseWordCLASSName(txt,idx) }>
                 {maskTXTARR.join('')}</div>
         });
     }
 
     //:ai: 4: STYLE as METADATA - STYLE represents STATE.
-    function getPromptBtnCLASSName (txt) {
-        if(solutionARR.includes(txt)){
-            return 'promptSELECTED'; 
-        }
+    function getPromptBtnCLASSName (txt,idx) {
+        if(solutionARR[idx] && solutionARR[idx] === txt){ return 'promptSELECTED';  }
     }
 
-    function getPhraseWordCLASSName (txt) {
-        // debugger;
-        let x = aPhraseTXT;
-        let y = solutionARR.length;
-        let z =  aPhraseARR.length;
-        let a = gameIDX;
-
-
-
-        if(solutionARR.includes(txt)){
+    function getPhraseWordCLASSName (txt,idx) {
+        if(solutionARR[idx] && solutionARR[idx] === txt){
             return 'wordCORRECT';
-        } else if(txt != solutionARR[0]) { //WRONG
+        } else if(solutionARR[idx] && solutionARR[idx] != txt) { //WRONG
             return 'wordWRONG';
+        } else if (cursorIDX===idx){
+            return 'wordCURSOR';
         }
         return ''
     }
@@ -101,21 +94,22 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     }
 
     function solvePuzzle(guess){ //:ai: 6 on user input check each TXT ANSWER against STATE.
-        if(solutionARR.length < aPhraseARR.length && guess){ //Not last GUESS
-            if (guess=== aPhraseARR[solutionARR.length]){ // CORRECT GUESS
-                correctGuess(guess);
-            } else { //INCORRECT GUESS
-                wrongGuess(guess);
-            }
+        if (guess === aPhraseARR[cursorIDX]){ // CORRECT GUESS
+            correctGuess(guess);
+        } else { //INCORRECT GUESS
+            wrongGuess(guess);
         }
     }
 
-    async function correctGuess(guess){
+    function correctGuess(guess){
         console.log('Correct.');
+        let tempARR = solutionARR;
+        tempARR[cursorIDX] = guess; //ai 3 overwrite wrong answers.
+        setSolutionARR(tempARR);
         setRightCOUNT(rightCOUNT+1);
-        await setSolutionARR([ ...solutionARR , guess ] );
+        setCursorIDX(cursorIDX+1);
         calculateScore();
-        if(solutionARR.length+1 === aPhraseARR.length){
+        if(solutionARR.join('') === aPhraseARR.join('')){  //END GAME.
             console.log('WIN!');
             setNextGame(true);
             var windSOUND = new Audio("./sonic/nxWin1a.mp3");
@@ -131,6 +125,9 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         var wrongSOUND = new Audio("./sonic/nxBoop3.mp3");
         wrongSOUND.play();
         console.log('Wrong.');
+        let tempARR = solutionARR;
+        tempARR[cursorIDX] = guess; //ai 3 overwrite wrong answers.
+        setSolutionARR(tempARR);
         setWrongCOUNT(wrongCOUNT+1);
         calculateScore();
     }
@@ -150,8 +147,9 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     }
 
     function initGame(){ //RESET-STATE
-        setRightCOUNT(0);
-        setWrongCOUNT(0);
+        setCursorIDX(0);
+        // setRightCOUNT(0);
+        // setWrongCOUNT(0);
         setNextGame(false);
         setSolutionARR([]);  
         //RELOAD-NEXT-GAME-.
@@ -166,14 +164,13 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         }
         setPhraseTXT(nextPhraseTXT);
         let nextPhraseARR = nextPhraseTXT.split(' ');
-        setPhraseARR(nextPhraseARR); //TODO
+        setPhraseARR(nextPhraseARR); //TODO - optimization, replace Phrase TXT? rename aPhraseARR
     }
     return (
         <>
             <h1 style={{display:'flex',justifyContent:'center'}}><Zoom>ai Word Game &nbsp; {gameIDX}</Zoom></h1>
             <gameframe style={{display:'flex',alignItems:'flex-start',minHeight:'466px',
                 borderTop:'2px solid purple',borderRadius:'13px',margin:'1em 3% 0px',padding:'2%'}}>
-
                 <aside style={{width:'25%',paddingTop:'1em'}}>
                     <h2 style={{marginRight:'1em'}}>
                         choices:</h2>
