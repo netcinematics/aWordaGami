@@ -117,7 +117,8 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             windSOUND.play();            
         } else { // Correct
             var tallySOUND = new Audio("./sonic/nxBlip2b.mp3");
-            tallySOUND.play();
+            tallySOUND.play()
+             .then(() => {/*Audio playing*/}).catch(error => {console.log(error); });
         }
     }
 
