@@ -8,11 +8,9 @@ Ai ~ Oragami!
 LIVE EXAMPLE: https://netcinematics.github.io/aWordaGami/
 
 ---
-
 1. To LEARN Artificial Intelligence USE-CASES and 
 2. Constructs, Data Structures, Design Patterns.
 3. To deploy with AU: create-web3-dapp.
-
 ---
 
 ## AI-Generated Word-Game with Tokenomics.
@@ -36,6 +34,13 @@ INSTRUCTIONS:
 
      > Let's SEE!
 
+## AI INTEGRATIONS? ChatGPT
+
+- graduate difficulty, based on score.
+
+- complete the phrase, rhyming machine.
+
+- Tell us a story Ai!
 
 //SERVER TODO:
 
@@ -50,43 +55,27 @@ X - in React front-end template (done)!
 
 
 1) X Rescue 20 year old.. Ai Ii Song Lyrics "Social-Phrases" from DATA STORAGE!
-
 2) X Revive Lexical Tokenizer (NLP), into RICH REACT UI.
-
     O AI song-lyrics / X word puzzles / O txt stories / O mix media stories.
-
 3) X Get old NodeJS media server templates...
-
     O convert "AI-Phrases" into file, and GraphQL. 
-    
     O MockData Combines with "Interact"
-
 4) X Display Phrases in UI. From Local. O Then from Vercel.
-
 5) X Convert NEXT.JS, REACT.JS Portfolio to - DAPPMAP GALLERY.
-
 6) X Convert Reveal.js to Item display, and add to Gallery/routes.
-
 7) O Overview Mode - to: TokenWebZ, EPICWEBZ, DappMap, aSTORYaGAMi - with NUMZ.
-
 8) O Gamification / Tokenomics / Tokenization, aTOKENaGAMi - VISUALIZATION.
-
 9) O Creator Paid - Smart Contracts. - from Royalty code.
-
 10) X NUMZ number-naming-convention: view / url / route / file / uri / id / linkz / QRCode.
-
 11) O 
-
 
 ---
 
 ### MINIMAL PATH: 
 
 X Merge 5 sandboxes, in perfect order. Priority by order of construction.
-
 X aWORDaGAME first.  Because TXT and Game mechanics easy.
 X Data "stubbed" as MockData (save time && gr84 Info Architecture Design)
-
 X Reveal UI (sandbox).
   X - Minimum Overview to DappMap
   X - Minimum Item / CARD_plain to NUMZ file. 
@@ -94,7 +83,6 @@ X Reveal UI (sandbox).
   X - Port into aWordaGame minimum (no build/server)
 X into NEW NextJS/React (sandbox)
 X into aWORDaGAMi
-
 
 ---
 
@@ -165,10 +153,9 @@ O - menu / game routing
 
 - "Ai is Artificial"
 
-- When can we FOCUS on actual-intelligence? Or extra-intelligence? 
-
 - Why NOT use Artificial Intelligence... to GENERATE Actual Intelligence?
 
+- INTEGRATIONS...
 
 # CONCLUZIONZ / 
 

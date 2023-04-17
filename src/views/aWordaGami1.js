@@ -1,5 +1,6 @@
 import Zoom from 'react-reveal/Zoom';
 import NeuralNet from './NeuralNet'
+// import TallySound from '../sonic/nxTally0d.mp3'
 import { useState,useEffect } from 'react';
 
 //ai DESIGN PATTERNS:
@@ -36,19 +37,16 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             .sort((a, b) => a.sort - b.sort)
             .map(({ value }) => value)
         
-        // const PromptView2 = 
         return shuffledPrompts.map( txt => { //:ai: 2. ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
             function btnClick ( e ) { solvePuzzle(e.target.innerText)}
             return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt) }  >
                 {txt}
             </button>
         }); 
-        // return PromptView2;
     }
 
     function getPhraseView(){
         let phraseARR = aPhraseTXT.split(' ');
-        // const GameView2 = 
         return phraseARR.map( (txt,idx) => { // :ai: 5. MASK the data from the human.
             const maskTXTARR =  txt.split('').map( (letter,i) => {
                 if(idx<solutionARR.length){ return letter; }
@@ -57,7 +55,6 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             return <div style={txtAnswerStyle} className={ getPhraseWordCLASSName(txt) }>
                 {maskTXTARR.join('')}</div>
         });
-        // return GameView2 
     }
 
     //:ai: 4: STYLE as METADATA - STYLE represents STATE.
@@ -68,10 +65,18 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     }
 
     function getPhraseWordCLASSName (txt) {
+        // debugger;
+        let x = aPhraseTXT;
+        let y = solutionARR.length;
+        let z =  aPhraseARR.length;
+        let a = gameIDX;
+
+
+
         if(solutionARR.includes(txt)){
             return 'wordCORRECT';
-        } else { //WRONG
-
+        } else if(txt != solutionARR[0]) { //WRONG
+            return 'wordWRONG';
         }
         return ''
     }
@@ -198,9 +203,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             </gameframe>
             <footer style={{color:'darkcyan',fontSize:'small',paddingBottom:'1em',fontFamily:'sans-serif'}}>
                 { 
-                    (!nextGame)? <>click a word, to solve the puzzle 
-                    {/* <button onClick={initGame}>start</button> */}
-                    </>: 
+                    (!nextGame)? <>click a word, to solve the puzzle</>: 
                         <button style={{borderRadius:'8px',padding:'1em',background:'darkseagreen',
                             boxShadow:'0px -1px 5px 1px gold', cursor:'pointer' }}
                             onClick={nextGameCLICK}>NEXT GAME </button>
