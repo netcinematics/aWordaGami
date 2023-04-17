@@ -136,13 +136,17 @@ X - infinite game feature
 X - random mix prompt array - O in ai.randommix()
 O - random load - in ai.puzzleset()
 O - non reload Local Storage
-O - manifest error - logo.svg
+X - manifest error - logo.svg
 O - reset sound
 O - dynamic category ai.category()
-O - doublegame error
+X - doublegame error
+O - dynamic className
 O - highlight selected btns
 O - highlight Correct / Wrong words.
 O - add rich visual animations // npm install react-reveal --save
+O - textures
+O - icon / menu
+O - routing
 
 ---
 

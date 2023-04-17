@@ -9,7 +9,7 @@ import { useState,useEffect } from 'react';
 //4 STYLE as METADATA because STYLE represents STATE.
 //5 MASK the data from the human...
 //6 USER INPUT check TXT ANSWER vs STATE.
-
+// import initSound from './sonic/nxSonar1d.mp3'
 export default function AWordaGami1(){ //first letter needs to be capital to have class.
 
     //:ai: 1 MANY DIFFERENT DATA TYPES to influence. In this case: TXT = 'text' data.  
@@ -23,6 +23,9 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     let [aPhraseTXT, setPhraseTXT] = useState("");
 
     useEffect(() => {
+        // var initSOUND = new Audio(initSound);
+        var initSOUND = new Audio("./sonic/nxSonar1d.mp3");
+        initSOUND.play();
         setGameIDX(gameIDX+1)
         initGame();
       },[]);
@@ -32,34 +35,48 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         let shuffledPrompts = promptARR.map(value => ({ value, sort: Math.random() }))
             .sort((a, b) => a.sort - b.sort)
             .map(({ value }) => value)
-
-        const PromptView2 = shuffledPrompts.map( txt => { //:ai: 2. ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
+        
+        // const PromptView2 = 
+        return shuffledPrompts.map( txt => { //:ai: 2. ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
             function btnClick ( e ) { solvePuzzle(e.target.innerText)}
-            return <button onClick={btnClick} style={promptStyle}  >
+            return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt) }  >
                 {txt}
             </button>
         }); 
-        return PromptView2;
+        // return PromptView2;
     }
 
     function getPhraseView(){
         let phraseARR = aPhraseTXT.split(' ');
-        const GameView2 = phraseARR.map( (txt,idx) => { // :ai: 5. MASK the data from the human.
+        // const GameView2 = 
+        return phraseARR.map( (txt,idx) => { // :ai: 5. MASK the data from the human.
             const maskTXTARR =  txt.split('').map( (letter,i) => {
                 if(idx<solutionARR.length){ return letter; }
                 return '_ ' 
             })
-            return <div style={txtAnswerStyle}>{maskTXTARR.join('')}</div>
+            return <div style={txtAnswerStyle} className={ getPhraseWordCLASSName(txt) }>
+                {maskTXTARR.join('')}</div>
         });
-        return GameView2 
+        // return GameView2 
     }
 
     //:ai: 4: STYLE as METADATA - STYLE represents STATE.
+    function getPromptBtnCLASSName (txt) {
+        debugger;
+        if(solutionARR.includes(txt)){
+            return 'promptSELECTED'; 
+        }
+    }
+
+    function getPhraseWordCLASSName (txt) {
+        return 'main man'
+    }
+
     let promptStyle = {
         background: '#6facf7', border: '1px solid #444', lineHeight: '34px', textAlign: 'center',
         width: '10%', margin: '0.5em', borderRadius: '13px', boxShadow: 'inset 1px 1px 5px 0px blue',
         cursor: 'pointer', fontFamily: 'fangsong', color: '#013434', textShadow: '-1px 0px 1px whitesmoke',
-        width:'90%',userSelect:'none',fontSize:'large'     
+        width:'90%',userSelect:'none',fontSize:'large',fontFamily:'monospace'     
     }
 
     let txtAnswerStyle = {
@@ -67,11 +84,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         height:'66px',margin:'0.5em',borderRadius:'13px',fontFamily:'fangsong',
         color:'#013434',textShadow:'-1px 0px 1px whitesmoke',userSelect:'none',cursor:'no-drop',
         boxShadow:'darkslategrey 0px 0px 8px 1px inset'// ,boxShadow:'red 0px 0px 8px 1px inset'// ,boxShadow:'lime 0px 0px 8px 1px inset'
-    } //TODO inline
-
-    // let gameFrameStyle = {
-    //     display:'flex',alignItems:'flex-start',minHeight:'466px',
-    //     borderTop:'2px solid purple',borderRadius:'13px',margin:'1em',marginBottom:0,padding:'1em'  }
+    } 
 
     function calculateScore(){
         const nextSCORE = ((rightCOUNT-wrongCOUNT<0)?0:(rightCOUNT-wrongCOUNT)) / aPhraseARR.length
@@ -113,12 +126,10 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     }
 
     async function nextGameCLICK(){
-        console.log('IDXTEST-PRE',gameIDX)
         await setGameIDX(gameIDX+1)
         let nn = NeuralNet();
-        console.log('IDXTEST-NEXT',gameIDX, nn.length)
         if( gameIDX === nn.length){ //ENDGAME. TODO: NEW RANDOM PUZZLESET
-            var resetSOUND = new Audio("./sonic/nxBoop3.mp3");
+            var resetSOUND = new Audio("./sonic/nxTally0d.mp3");
             resetSOUND.play();
             initGame();
         }else{
@@ -135,7 +146,6 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         setSolutionARR([]);  
         //RELOAD-NEXT-GAME-.
         let nn = NeuralNet(); //todo nn.puzzleset
-        console.log('IDXTEST-INIT',gameIDX, nn.length)
         let nextPhraseTXT = '';
         if(gameIDX >= nn.length){ //ENDGAME. TODO: NEW RANDOM PUZZLESET
             console.log('RESETGAME 1')
@@ -151,19 +161,19 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     return (
         <>
             <h1 style={{display:'flex',justifyContent:'center'}}><Zoom>ai Word Game &nbsp; {gameIDX}</Zoom></h1>
-            {/* <gameframe style={gameFrameStyle}> */}
             <gameframe style={{display:'flex',alignItems:'flex-start',minHeight:'466px',
                 borderTop:'2px solid purple',borderRadius:'13px',margin:'1em 3% 0px',padding:'2%'}}>
 
                 <aside style={{width:'25%',paddingTop:'1em'}}>
-                    <h2 style={{marginRight:'1em'}}>Choices:</h2>
+                    <h2 style={{marginRight:'1em'}}>
+                        choices:</h2>
                 <section style={{border:'1px solid skyblue',borderRadius:'8px',marginRight:'2%',
                         padding:'0.8em',overflowX:'hidden',overflowY:'auto',height:'355px'}}>
                     { getPromptView() }
                 </section>
                 </aside>
                 <aside style={{height:'370px',width:'75%',paddingTop:'1em'}}>
-                    <h2>Common Phrase:</h2>
+                    <h2>common phrase:</h2>
                     <section style={{border:'1px solid steelblue',borderRadius:'8px',display:'flex',flexDirection:'column',height:'100%',padding:'0.444em'}}>
                         <gameboard style={{borderBottom:'1px solid darkslategray',borderRadius:'8px',
                             display:'flex',flexDirection:'row',alignContent:'center',minHeight:'300px',
@@ -171,7 +181,8 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
                             { getPhraseView() }
                         </gameboard>
                         <article style={{padding:'0.666em',color:'darkslategray'}}>
-                            <aside style={{display:'flex',justifyContent:'space-around',color:'steelblue'}}>
+                            <aside style={{display:'flex',justifyContent:'space-around',color:'steelblue'
+                                ,fontFamily:'sans-serif'}}>
                                 <div>right: {rightCOUNT}</div>
                                 <div>wrong: {wrongCOUNT}</div>
                                 <div>score: {totalSCORE}</div>
@@ -180,7 +191,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
                     </section>
                 </aside>
             </gameframe>
-            <footer style={{color:'darkcyan',fontSize:'small',paddingBottom:'1em'}}>
+            <footer style={{color:'darkcyan',fontSize:'small',paddingBottom:'1em',fontFamily:'sans-serif'}}>
                 { 
                     (!nextGame)? <>click a word, to solve the puzzle 
                     {/* <button onClick={initGame}>start</button> */}
