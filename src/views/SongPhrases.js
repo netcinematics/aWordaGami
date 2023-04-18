@@ -178,20 +178,19 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
                         your lyrics:</h2>
                 <section style={{border:'1px solid skyblue',borderRadius:'8px',marginRight:'2%',
                         padding:'0.8em',overflowX:'hidden',overflowY:'auto',display:'flex'}}>
-                    {/* { getPromptView() } */}
-                    <textarea name="TXTInput" cols="1" rows="4" 
-                        style={{width:'100%',borderRadius:'8px',padding:'1em',background:'burlywood'
+                    <textarea name="TXTInput" cols="1" rows="4" spellcheck='false' placeholder='type text to generate rhymes'
+                        style={{width:'100%',borderRadius:'8px',padding:'1em',background:'#feecd6'
                     }}></textarea>
                 </section>
                 <h2 style={{marginRight:'1em',marginTop:'1em'}}>
-                        rhymeset:</h2>
+                        rhyme~stems:</h2>
                 <section style={{border:'1px solid skyblue',borderRadius:'8px',marginRight:'2%',
                         padding:'0.8em',overflowX:'hidden',overflowY:'auto',display:'flex'}}>
                     { getPromptView() }
                 </section>
                 </aside>
                 <aside style={{width:'90%',paddingTop:'1em',margin:'0 auto'}}>
-                    <h2>possible phrases:</h2>
+                    <h2>suggestions:</h2>
                     <section style={{border:'1px solid steelblue',borderRadius:'8px',
                         display:'flex',flexDirection:'column',height:'100%',padding:'0.444em'}}>
                         <gameboard style={{borderBottom:'1px solid darkslategray',borderRadius:'8px',
@@ -212,12 +211,16 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
             </gameframe>
             <footer style={{color:'darkcyan',fontSize:'small',paddingBottom:'1em',fontFamily:'sans-serif'}}>
                 { 
-                    (!nextGame)? <>type in lyrics to see rhyme options</>: 
+                    <>type in lyrics to see rhyme options:&nbsp;
                         <button style={{borderRadius:'8px',padding:'1em',background:'darkseagreen',
                             boxShadow:'0px -1px 5px 1px gold', cursor:'pointer',userSelect:'none' }}
-                            onClick={nextGameCLICK}>NEXT GAME </button>
+                            onClick={nextGameCLICK}>GENERATE TXT</button>
+                            </> 
                 }
             </footer>
+            <section style={{marginBottom:'2em'}}>
+                Shows: NLP Text Generation, Agents, State and Language Model.
+            </section>
         </>
     )
 }

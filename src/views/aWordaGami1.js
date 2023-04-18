@@ -203,7 +203,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             </gameframe>
             <footer style={{color:'darkcyan',fontSize:'small',paddingBottom:'1em',fontFamily:'sans-serif'}}>
                 { 
-                    (!nextGame)? <>click a word, to solve the puzzle<div>demonstrates: NLP, MetaData, & Language Model.</div></>: 
+                    (!nextGame)? <>click a word, to solve the puzzle<div>Shows: NLP, MetaData, & Language Model.</div></>: 
                         <button style={{borderRadius:'8px',padding:'1em',background:'darkseagreen',
                             boxShadow:'0px -1px 5px 1px gold', cursor:'pointer',userSelect:'none' }}
                             onClick={nextGameCLICK}>NEXT GAME </button>

@@ -76,9 +76,14 @@ function TokenGrid (){ //Everything is a token.
 
 return (
     <>
-    <h1>TokenGrid</h1>
+    <h1>Neural Net NUMZ Map</h1>
      <hr></hr>
      <TokenGrid/>
+     <hr></hr>
+     <section style={{paddingTop:'2em'}}>dynamic UI to visualize infinite ai.<br/>
+     innovative "NUMZ" token-tracking-convention, <br/>
+     shows "tokenizing the tokenizer" concept, <br/>
+     in a visual grid map for ai</section>
     </>
 )
 

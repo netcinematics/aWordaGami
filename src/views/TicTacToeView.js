@@ -4,9 +4,9 @@ import "../styles.css";
 
 export default function TikTacToeView () {
 
-    function Square({ value, onSquareClick }) {
+    function Tile({ value, onTileClick }) {
         return (
-          <button className="square" onClick={onSquareClick}>
+          <button className="tile" onClick={onTileClick}>
             {value}
           </button>
         );
@@ -27,31 +27,37 @@ export default function TikTacToeView () {
         }
       
         const winner = calculateWinner(squares);
-        let status;
+        // let status;
+        let statusLable = '', statusSymbol = null;
         if (winner) {
-          status = 'Winner: ' + winner;
+          // status = 'Winner: ' + winner;
+          statusLable = 'Winner';
+          statusSymbol = winner;
         } else {
-          status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+          // status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+          statusLable = 'Next player';
+          statusSymbol = (xIsNext ? 'X' : 'O');
         }
       
         return (
           <>
-            <div className="status">{status}</div>
             <div className="board-row">
-              <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-              <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-              <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+              <Tile value={squares[0]} onTileClick={() => handleClick(0)} />
+              <Tile value={squares[1]} onTileClick={() => handleClick(1)} />
+              <Tile value={squares[2]} onTileClick={() => handleClick(2)} />
             </div>
             <div className="board-row">
-              <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-              <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-              <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+              <Tile value={squares[3]} onTileClick={() => handleClick(3)} />
+              <Tile value={squares[4]} onTileClick={() => handleClick(4)} />
+              <Tile value={squares[5]} onTileClick={() => handleClick(5)} />
             </div>
             <div className="board-row">
-              <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-              <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-              <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+              <Tile value={squares[6]} onTileClick={() => handleClick(6)} />
+              <Tile value={squares[7]} onTileClick={() => handleClick(7)} />
+              <Tile value={squares[8]} onTileClick={() => handleClick(8)} />
             </div>
+            <div className="status" style={{fontSize:'xxx-large',color:'yellow'}}>{statusLable}:&nbsp;{statusSymbol}</div>
+            {/* <div className="status" style={{fontSize:'xxx-large',color:'yellow'}}>{status}</div> */}
           </>
         );
       }
@@ -116,16 +122,37 @@ export default function TikTacToeView () {
 
 return (
   <article style={{display:'flex',flexDirection:'column',height:'100%'}}>
-    <h1>TicTacToe</h1>
+    <style>{`
+      .knot{ color:'blue'}
+      .cross{ color:'red'} 
+      .tile{
+        background: #fff;
+        border: 1px solid #999;
+        float: left;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 34px;
+        height: 34px;
+        margin-right: -1px;
+        margin-top: -1px;
+        padding:0;
+        text-align: center;
+        width: 34px; 
+        border-radius:5px;
+        margin:2px;       
+      } 
+    `}</style>
+    <h1>TicTacToe Example</h1>
     <section style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
      <Game/>
     </section>
     <section style={{display:'flex',flexDirection:'column',margin:'2em',alignItems:'center',
       marginBottom:'0.8em'}}>
-      EXAMPLE ALGORITHM:
-      <img src={example1} style={{height:'18em',width:'42em',marginTop:'1em'}}></img>
+      This ALGORITHM detects WIN condition, REFLECTS STATE:
+      <img src={example1} style={{width:'90%',marginTop:'1em'}}></img>
     </section>
-    <footer>From ReactJS Getting Started, to compute winner.</footer>
+    <footer style={{marginBottom:'2em'}}>From <a href='https://legacy.reactjs.org/tutorial/tutorial.html'>
+       ReactJS Getting Started</a>. Loops all possibities - to "detect" condition.</footer>
     <section>
       Demonstrates: algorithm and agent concepts.
     </section>
