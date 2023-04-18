@@ -12,7 +12,7 @@ import { useState,useEffect } from 'react';
 //5 MASK the data from the human...
 //6 USER INPUT check TXT ANSWER vs STATE.
 // import initSound from './sonic/nxSonar1d.mp3'
-export default function AWordaGami1(){ //first letter needs to be capital to have class.
+export default function SongPhrases(){ //first letter needs to be capital to have class.
 
     //:ai: 1 MANY DIFFERENT DATA TYPES to influence. In this case: TXT = 'text' data.  
     let [gameIDX, setGameIDX] = useState(0);
@@ -42,8 +42,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             </button>
         });
         let shuffledPrompts = stateARR.map(value => ({ value, sort: Math.random() }))
-        .sort((a, b) => a.sort - b.sort)
-        .map(({ value }) => value)
+            .sort((a, b) => a.sort - b.sort).map(({ value }) => value)
         return shuffledPrompts;
     }
 
@@ -171,20 +170,30 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     return (
         <>
             <h1 style={{display:'flex',justifyContent:'center'}}>
-                <Zoom>SocialPhrase Word Game &nbsp; {gameIDX}</Zoom></h1>
-            <gameframe style={{display:'flex',alignItems:'flex-start',
+                <Zoom>Social~Phrase Lyric Generator &nbsp; {gameIDX}</Zoom></h1>
+            <gameframe style={{display:'flex',alignItems:'flex-start',flexDirection:'column',
                 borderTop:'2px solid purple',borderRadius:'13px',margin:'1em 3% 0px',padding:'2%'}}>
-                <aside style={{width:'25%',paddingTop:'1em'}}>
+                <aside style={{width:'25%',paddingTop:'1em',width:'100%',paddingTop:'1em'}}>
                     <h2 style={{marginRight:'1em'}}>
-                        choices:</h2>
+                        your lyrics:</h2>
                 <section style={{border:'1px solid skyblue',borderRadius:'8px',marginRight:'2%',
-                        padding:'0.8em',overflowX:'hidden',overflowY:'auto',height:'355px'}}>
+                        padding:'0.8em',overflowX:'hidden',overflowY:'auto',display:'flex'}}>
+                    {/* { getPromptView() } */}
+                    <textarea name="TXTInput" cols="1" rows="4" 
+                        style={{width:'100%',borderRadius:'8px',padding:'1em',background:'burlywood'
+                    }}></textarea>
+                </section>
+                <h2 style={{marginRight:'1em',marginTop:'1em'}}>
+                        rhymeset:</h2>
+                <section style={{border:'1px solid skyblue',borderRadius:'8px',marginRight:'2%',
+                        padding:'0.8em',overflowX:'hidden',overflowY:'auto',display:'flex'}}>
                     { getPromptView() }
                 </section>
                 </aside>
-                <aside style={{height:'370px',width:'75%',paddingTop:'1em'}}>
-                    <h2>common phrase:</h2>
-                    <section style={{border:'1px solid steelblue',borderRadius:'8px',display:'flex',flexDirection:'column',height:'100%',padding:'0.444em'}}>
+                <aside style={{width:'90%',paddingTop:'1em',margin:'0 auto'}}>
+                    <h2>possible phrases:</h2>
+                    <section style={{border:'1px solid steelblue',borderRadius:'8px',
+                        display:'flex',flexDirection:'column',height:'100%',padding:'0.444em'}}>
                         <gameboard style={{borderBottom:'1px solid darkslategray',borderRadius:'8px',
                             display:'flex',flexDirection:'row',alignContent:'center',minHeight:'300px',
                             justifyContent:'center',alignItems:'center',flexWrap:'wrap'}}>
@@ -193,9 +202,9 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
                         <article style={{padding:'0.666em',color:'darkslategray'}}>
                             <aside style={{display:'flex',justifyContent:'space-around',color:'steelblue'
                                 ,fontFamily:'sans-serif'}}>
-                                <div style={{ color:'#197c19'}}>right: {rightCOUNT}</div>
-                                <div style={{ color:'#a62626'}}>wrong: {wrongCOUNT}</div>
-                                <div style={{ color:'steelblue'}}>score: {calculateScore()}</div>
+                                <div style={{ color:'#197c19'}}>words: {rightCOUNT}</div>
+                                <div style={{ color:'#946218'}}>types: {wrongCOUNT}</div>
+                                <div style={{ color:'steelblue'}}>count: </div>
                             </aside>
                          </article>
                     </section>
@@ -203,7 +212,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             </gameframe>
             <footer style={{color:'darkcyan',fontSize:'small',paddingBottom:'1em',fontFamily:'sans-serif'}}>
                 { 
-                    (!nextGame)? <>click a word, to solve the puzzle<div>demonstrates: NLP, MetaData, & Language Model.</div></>: 
+                    (!nextGame)? <>type in lyrics to see rhyme options</>: 
                         <button style={{borderRadius:'8px',padding:'1em',background:'darkseagreen',
                             boxShadow:'0px -1px 5px 1px gold', cursor:'pointer',userSelect:'none' }}
                             onClick={nextGameCLICK}>NEXT GAME </button>

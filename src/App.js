@@ -1,14 +1,14 @@
 import './App.css';
 import MainView from './views/MainView';
-import OverView from './views/OverView';
-import TikTacToe from './views/TikTacToeView';
+import TokenGrid from './views/OverView';
+import SongPhrases from './views/SongPhrases';
+import TicTacToe from './views/TicTacToeView';
 import AWordaGami1 from './views/aWordaGami1';
 import Zoom from 'react-reveal/Zoom';
 import { useState } from 'react';
 
 function App() {
   const [viewIDX, setViewIDX] = useState('aWORDaGAMi');
-
   
   function CLICKview (e) {
     setViewIDX(e.target.innerText);
@@ -20,18 +20,20 @@ function App() {
       <Zoom>{viewIDX}</Zoom>
       </header>
       <main style={{backgroundColor: 'rgb(22 35 62)', color:'skyblue',color:'skyblue',paddingTop:'1.5em',
-        borderRadius:'13px',margin:'1em',height:'42em'}}>
+        borderRadius:'13px',margin:'1em',height:'42em',overflowY:'auto'}}>
 
       {         
-        (() => { //SIMPLE-DYNAMIC-VIEW-DISPLAY: (design~innovation) // Routing - nah!
+        (() => { //SIMPLE-DYNAMIC-VIEW-DISPLAY: (design~innovation) // Routing - nah...
           if (viewIDX === "aWORDaGAMi") {
               return <AWordaGami1/>;
-          } else if (viewIDX === "TikTacToe") {
-            return <TikTacToe /> ;
-          } else if (viewIDX === "more") {
-            return <OverView/> ;
+          } else if (viewIDX === "TicTacToe") {
+            return <TicTacToe/>;
+          } else if (viewIDX === "TokenGrid") {
+            return <TokenGrid/>;
+          } else if (viewIDX === "SongPhrases") {
+            return <SongPhrases/>;
           } else {
-            return <MainView /> ;
+            return <MainView/>;
           }
         })()
       }
@@ -42,9 +44,11 @@ function App() {
         <button style={{borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px lime'}}
            onClick={CLICKview}>aWORDaGAMi</button>
         <button style={{borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px yellow'}}
-           onClick={CLICKview}>TikTacToe</button>
+           onClick={CLICKview}>TicTacToe</button>
         <button style={{borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
-           onClick={CLICKview}>more</button>
+           onClick={CLICKview}>TokenGrid</button>
+        <button style={{borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
+           onClick={CLICKview}>SongPhrases</button>
       </nav>
       <section style={{color:'steelblue',fontSize:'0.666em',marginTop:'2em'}}>
         work in progress by spazefalcon &copy; 2023

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import example1 from '../img/tictactoe1.png'
 import "../styles.css";
 
 export default function TikTacToeView () {
@@ -98,20 +99,12 @@ export default function TikTacToeView () {
       }
       
       function calculateWinner(squares) {
-        const lines = [
-          [0, 1, 2],
-          [3, 4, 5],
-          [6, 7, 8],
-          [0, 3, 6],
-          [1, 4, 7],
-          [2, 5, 8],
-          [0, 4, 8],
-          [2, 4, 6],
-        ];
+        const lines = [ [0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],
+                        [1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]  ];
         for (let i = 0; i < lines.length; i++) {
           const [a, b, c] = lines[i];
-          if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            return squares[a];
+          if (squares[a] && squares[a] === squares[b]
+             && squares[a] === squares[c]) { return squares[a]; //WIN
           }
         }
         return null;
@@ -123,11 +116,19 @@ export default function TikTacToeView () {
 
 return (
   <article style={{display:'flex',flexDirection:'column',height:'100%'}}>
-    <h1>TikTacToe</h1>
+    <h1>TicTacToe</h1>
     <section style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
      <Game/>
     </section>
-    <footer>From ReactJS Getting Started tutorial</footer>
+    <section style={{display:'flex',flexDirection:'column',margin:'2em',alignItems:'center',
+      marginBottom:'0.8em'}}>
+      EXAMPLE ALGORITHM:
+      <img src={example1} style={{height:'18em',width:'42em',marginTop:'1em'}}></img>
+    </section>
+    <footer>From ReactJS Getting Started, to compute winner.</footer>
+    <section>
+      Demonstrates: algorithm and agent concepts.
+    </section>
   </article>
 )
 
