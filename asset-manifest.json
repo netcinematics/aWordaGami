@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/aWordaGami/static/css/main.997426ca.css",
-    "main.js": "/aWordaGami/static/js/main.34aa35c3.js",
+    "main.js": "/aWordaGami/static/js/main.f2b69bb8.js",
     "index.html": "/aWordaGami/index.html",
     "main.997426ca.css.map": "/aWordaGami/static/css/main.997426ca.css.map",
-    "main.34aa35c3.js.map": "/aWordaGami/static/js/main.34aa35c3.js.map"
+    "main.f2b69bb8.js.map": "/aWordaGami/static/js/main.f2b69bb8.js.map"
   },
   "entrypoints": [
     "static/css/main.997426ca.css",
-    "static/js/main.34aa35c3.js"
+    "static/js/main.f2b69bb8.js"
   ]
 }
