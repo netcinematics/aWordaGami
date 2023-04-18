@@ -15,16 +15,14 @@ function App() {
   }
 
   return (
-    <div className="App" style={{backgroundColor: 'black',minHeight: '77vh',maxWidth:'55em',margin:'0 auto'}}>
+    <div className="App" style={{display:'flex',flexDirection:'column',backgroundColor: 'black',minHeight: '77vh',maxWidth:'55em',margin:'0 auto'}}>
       <header className="App-header" style={{borderRadius:'13px'}}>
       <Zoom>{viewIDX}</Zoom>
-      {/* <Zoom>aWORDaGAMi</Zoom> */}
       </header>
       <main style={{backgroundColor: 'rgb(22 35 62)', color:'skyblue',color:'skyblue',paddingTop:'1.5em',
-        borderRadius:'13px',margin:'1em'}}>
+        borderRadius:'13px',margin:'1em',height:'42em'}}>
 
       {         
-          // <AWordaGami1/>
         (() => { //SIMPLE-DYNAMIC-VIEW-DISPLAY: (design~innovation) // Routing - nah!
           if (viewIDX === "aWORDaGAMi") {
               return <AWordaGami1/>;
