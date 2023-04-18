@@ -89,11 +89,16 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     } 
 
     function calculateScore(){
-        const nextSCORE = ((rightCOUNT-wrongCOUNT<0)?0:(rightCOUNT-wrongCOUNT)) / aPhraseARR.length
-        setTotalScore(totalSCORE+nextSCORE);
+        let scorePCT = 0;
+        if (wrongCOUNT >= rightCOUNT){ return 0;}
+        if (!wrongCOUNT){scorePCT = 100}
+        else if (rightCOUNT){ scorePCT = ( 1 - ( wrongCOUNT / rightCOUNT) ) * 100; }
+        scorePCT = Math.floor(scorePCT).toFixed(0); //trim remainder-.
+        return scorePCT + '%';
     }
 
     function solvePuzzle(guess){ //:ai: 6 on user input check each TXT ANSWER against STATE.
+        if (nextGame){return}
         if (guess === aPhraseARR[cursorIDX]){ // CORRECT GUESS
             correctGuess(guess);
         } else { //INCORRECT GUESS
@@ -108,7 +113,6 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         setSolutionARR(tempARR);
         setRightCOUNT(rightCOUNT+1);
         setCursorIDX(cursorIDX+1);
-        calculateScore();
         if(solutionARR.join('') === aPhraseARR.join('')){  //END GAME.
             console.log('WIN!');
             setNextGame(true);
@@ -122,14 +126,13 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
     }
 
     function wrongGuess(guess){
+        console.log('Wrong.');
         var wrongSOUND = new Audio("./sonic/nxBoop3.mp3");
         wrongSOUND.play();
-        console.log('Wrong.');
         let tempARR = solutionARR;
         tempARR[cursorIDX] = guess; //ai 3 overwrite wrong answers.
         setSolutionARR(tempARR);
         setWrongCOUNT(wrongCOUNT+1);
-        calculateScore();
     }
 
     async function nextGameCLICK(){
@@ -148,8 +151,6 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
 
     function initGame(){ //RESET-STATE
         setCursorIDX(0);
-        // setRightCOUNT(0);
-        // setWrongCOUNT(0);
         setNextGame(false);
         setSolutionARR([]);  
         //RELOAD-NEXT-GAME-.
@@ -190,9 +191,10 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
                         <article style={{padding:'0.666em',color:'darkslategray'}}>
                             <aside style={{display:'flex',justifyContent:'space-around',color:'steelblue'
                                 ,fontFamily:'sans-serif'}}>
-                                <div>right: {rightCOUNT}</div>
-                                <div>wrong: {wrongCOUNT}</div>
-                                <div>score: {totalSCORE}</div>
+                                <div style={{ color:'#197c19'}}>right: {rightCOUNT}</div>
+                                <div style={{ color:'#a62626'}}>wrong: {wrongCOUNT}</div>
+                                {/* <div style={{ color:'steelblue'}}>score: {totalSCORE}</div> */}
+                                <div style={{ color:'steelblue'}}>score: {calculateScore()}</div>
                             </aside>
                          </article>
                     </section>
@@ -202,7 +204,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
                 { 
                     (!nextGame)? <>click a word, to solve the puzzle</>: 
                         <button style={{borderRadius:'8px',padding:'1em',background:'darkseagreen',
-                            boxShadow:'0px -1px 5px 1px gold', cursor:'pointer' }}
+                            boxShadow:'0px -1px 5px 1px gold', cursor:'pointer',userSelect:'none' }}
                             onClick={nextGameCLICK}>NEXT GAME </button>
                 }
             </footer>
