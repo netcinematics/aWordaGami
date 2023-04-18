@@ -148,16 +148,14 @@ O - menu / game routing
 ---
 
 
-# HYPOTHESIZ
+# HYPOTHESIS
+
+- Ai in Web3 experiments for innovative USE-CASES.
+
+"Tokenizing the Tokenizer"
 
 
-- "Ai is Artificial"
-
-- Why NOT use Artificial Intelligence... to GENERATE Actual Intelligence?
-
-- INTEGRATIONS...
-
-# CONCLUZIONZ / 
+# CONCLUSIONS / 
 
 ???
 
@@ -169,6 +167,15 @@ O - menu / game routing
 // npm i gh-pages --save-dev
 // npm run deploy
 ---
+
+
+# GOALS:
+
+1. Use to LEARN (simplified) Ai CONCEPTS:
+     - algorithm, LLM, NLP, Tokenizer
+     
+
+
 
 ## Run
 
