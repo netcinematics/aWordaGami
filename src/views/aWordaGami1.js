@@ -127,7 +127,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
 
     function wrongGuess(guess){
         console.log('Wrong.');
-        var wrongSOUND = new Audio("./sonic/nxBoop3.mp3");
+        var wrongSOUND = new Audio("./sonic/nxTally0d.mp3");
         wrongSOUND.play();
         let tempARR = solutionARR;
         tempARR[cursorIDX] = guess; //ai 3 overwrite wrong answers.
@@ -139,7 +139,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         await setGameIDX(gameIDX+1)
         let nn = NeuralNet();
         if( gameIDX === nn.length){ //ENDGAME. TODO: NEW RANDOM PUZZLESET
-            var resetSOUND = new Audio("./sonic/nxTally0d.mp3");
+            var resetSOUND = new Audio("./sonic/nxBoop3.mp3");
             resetSOUND.play();
             initGame();
         }else{
