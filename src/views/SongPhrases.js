@@ -34,9 +34,9 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
 
     function getStemsView(){
         function btnClick ( e ) {  console.log(e.target.innerText);    }
-        return stemsARR.map( (txt,i)=> {
-            return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt) }  >
-                {txt}
+        return stemsARR.map( (arr,i)=> {
+            return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(arr) }  >
+                {arr.join(' ')}
             </button>
         });
     }
@@ -74,10 +74,10 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
         setShowResults(true);
         var nextSOUND = new Audio("./sonic/nxWoop1.mp3");
         nextSOUND.play();
-        generateTXT();
+        generateTXT1();
     }
 
-    function generateTXT(){ //:ai: - LEXICAL-TOKENIZER !!!
+    function generateTXT1(){ //:ai: - LEXICAL-TOKENIZER !!!
         let nn = LangData(); 
         console.log('GENERATING from', promptTXT);
         let lineOfTXTARR = promptTXT.split('\n');
@@ -85,12 +85,12 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
         let lastLineTXT = lineOfTXTARR[lineOfTXTARR.length-1];
         let lastLineARR = lastLineTXT.split(' ');
         let lastWord = lastLineARR[lastLineARR.length-1];
-        let promptSuffix = getSuffix(lastWord);
+        let promptSuffix = getSuffix1(lastWord);
         let tgtARR = [], tgtItemARR = [], tgtItemSET = [], tgtSTR = '', tgtSuffix = '';
         for(let i=0; i<nn.length;i++){
             tgtItemARR = nn[i].split(' ');
             tgtSTR = tgtItemARR[tgtItemARR.length-1];
-            tgtSuffix = getSuffix(tgtSTR);
+            tgtSuffix = getSuffix1(tgtSTR);
             if(tgtSuffix===promptSuffix){ //console.log('MATCH',tgtSuffix, tgtSTR);
                 tgtARR.push(tgtSTR);
                 tgtItemSET.push(tgtItemARR);
@@ -100,7 +100,7 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
         setStemsARR( tgtItemSET );
     }
 
-    function getSuffix(tgt){ //:ai: TODO graduated difficulty *tion *sion *cion *zion *cean AGENT.
+    function getSuffix1(tgt){ //:ai: TODO graduated difficulty *tion *sion *cion *zion *cean AGENT.
         return ( tgt.length > 4 ) ? tgt.slice(tgt.length-4,tgt.length) : tgt.slice(tgt.length-2,tgt.length);
     }
     return (
@@ -129,7 +129,8 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
                         <h2 style={{marginRight:'1em',marginTop:'1em'}}>
                             rhyme_roots:</h2>
                         <section style={{border:'1px solid skyblue',borderRadius:'8px',marginRight:'2%',
-                            padding:'0.8em',overflowX:'hidden',overflowY:'auto',display:'flex'}}>
+                            padding:'0.8em',overflowX:'hidden',overflowY:'auto',display:'flex',
+                            overflowX:'scroll',marginBottom:'1.5em'}}>
                             {/* { getPromptView() } */}
                             { getRootsView() }
                         </section>
@@ -146,9 +147,9 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
                             <article style={{padding:'0.666em',color:'darkslategray'}}>
                                 <aside style={{display:'flex',justifyContent:'space-around',color:'steelblue'
                                     ,fontFamily:'sans-serif'}}>
-                                    <div style={{ color:'#197c19'}}>words: {rightCOUNT}</div>
-                                    <div style={{ color:'#946218'}}>types: {wrongCOUNT}</div>
-                                    <div style={{ color:'steelblue'}}>count: </div>
+                                    <div style={{ color:'#197c19'}}>words: {stemsARR.length}</div>
+                                    <div style={{ color:'#946218'}}>types: {rootsARR.length}</div>
+                                    <div style={{ color:'steelblue'}}>count: {stemsARR.length + rootsARR.length} </div>
                                 </aside>
                             </article>
                         </section>
