@@ -39,19 +39,19 @@ function App() {
       }
       </main>
       <nav style={{marginTop:'1em'}}>
-        <button style={{borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px purple'}}
+        <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px purple'}}
            onClick={CLICKview}>MAIN</button>
-        <button style={{borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px lime'}}
+        <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px lime'}}
            onClick={CLICKview}>aWORDaGAMi</button>
-        <button style={{borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px yellow'}}
+        <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px yellow'}}
            onClick={CLICKview}>TicTacToe</button>
-        <button style={{borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
+        <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
            onClick={CLICKview}>TokenGrid</button>
-        <button style={{borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
+        <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
            onClick={CLICKview}>SongPhrases</button>
       </nav>
       <section style={{color:'steelblue',fontSize:'0.666em',marginTop:'2em'}}>
-        work in progress by spazefalcon &copy; 2023
+        MIT - work in progress by spazefalcon  - &copy; 2023
       </section>      
     </div>
   );

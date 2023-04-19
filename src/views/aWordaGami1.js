@@ -1,6 +1,6 @@
 import Zoom from 'react-reveal/Zoom';
 // import NeuralNet from './NeuralNet'
-import NeuralNet from '../data/SocialPhraseSLM'
+import LangData from '../data/SocialPhraseCLM'
 // import TallySound from '../sonic/nxTally0d.mp3'
 import { useState,useEffect } from 'react';
 
@@ -138,7 +138,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
 
     async function nextGameCLICK(){
         await setGameIDX(gameIDX+1)
-        let nn = NeuralNet();
+        let nn = LangData();
         if( gameIDX === nn.length){ //ENDGAME. TODO: NEW RANDOM PUZZLESET
             var resetSOUND = new Audio("./sonic/nxBoop3.mp3");
             resetSOUND.play();
@@ -155,7 +155,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
         setNextGame(false);
         setSolutionARR([]);  
         //RELOAD-NEXT-GAME-.
-        let nn = NeuralNet(); //todo nn.puzzleset
+        let nn = LangData(); //todo nn.puzzleset
         let nextPhraseTXT = '';
         if(gameIDX >= nn.length){ //ENDGAME. TODO: NEW RANDOM PUZZLESET
             console.log('RESETGAME 1')

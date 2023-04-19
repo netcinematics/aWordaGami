@@ -5,8 +5,14 @@ import "../styles.css";
 export default function TikTacToeView () {
 
     function Tile({ value, onTileClick }) {
+
+        function getTileCLASS(){ //custom metadata state visualization
+          return  (value==='O') ? 'knot tile'  : 'cross tile';
+        }
+
         return (
-          <button className="tile" onClick={onTileClick}>
+          <button className={getTileCLASS()} onClick={onTileClick}>
+           {/* <button className="tile" onClick={onTileClick}> */}
             {value}
           </button>
         );
@@ -14,7 +20,12 @@ export default function TikTacToeView () {
       
       function Board({ xIsNext, squares, onPlay }) {
         function handleClick(i) {
-          if (calculateWinner(squares) || squares[i]) {
+          let result = calculateWinner(squares);
+          console.log('res',result)
+          if (result ==='O' || result==='X' || squares[i]) {
+            return;
+          } else if (result==='CAT'){
+            statusLable='CAT GAME';
             return;
           }
           const nextSquares = squares.slice();
@@ -25,22 +36,28 @@ export default function TikTacToeView () {
           }
           onPlay(nextSquares);
         }
-      
-        const winner = calculateWinner(squares);
-        // let status;
+     
+
+        const winner = calculateWinner(squares); //customized for color
         let statusLable = '', statusSymbol = null;
+        if(winner==='CAT'){
+          statusLable = 'CAT GAME';
+          statusSymbol = 0;          
+        }
         if (winner) {
-          // status = 'Winner: ' + winner;
           statusLable = 'Winner';
           statusSymbol = winner;
         } else {
-          // status = 'Next player: ' + (xIsNext ? 'X' : 'O');
           statusLable = 'Next player';
           statusSymbol = (xIsNext ? 'X' : 'O');
         }
       
         return (
           <>
+            <style>{`
+                .knot{ color:steelblue !important}
+                .cross{ color:lightcoral !important} 
+            `}</style>
             <div className="board-row">
               <Tile value={squares[0]} onTileClick={() => handleClick(0)} />
               <Tile value={squares[1]} onTileClick={() => handleClick(1)} />
@@ -56,8 +73,8 @@ export default function TikTacToeView () {
               <Tile value={squares[7]} onTileClick={() => handleClick(7)} />
               <Tile value={squares[8]} onTileClick={() => handleClick(8)} />
             </div>
-            <div className="status" style={{fontSize:'xxx-large',color:'yellow'}}>{statusLable}:&nbsp;{statusSymbol}</div>
-            {/* <div className="status" style={{fontSize:'xxx-large',color:'yellow'}}>{status}</div> */}
+            <div className="status" style={{fontSize:'xxx-large',color:'yellow'}}>{statusLable}:&nbsp;
+              <span className={(statusSymbol==='O') ? 'knot'  : 'cross'}>{statusSymbol}</span></div>
           </>
         );
       }
@@ -111,9 +128,10 @@ export default function TikTacToeView () {
           const [a, b, c] = lines[i];
           if (squares[a] && squares[a] === squares[b]
              && squares[a] === squares[c]) { return squares[a]; //WIN
-          }
+          } 
         }
-        return null;
+        if(squares.includes(null)){ return null} //Not over
+        return 'CAT'; //Modified to include TIE GAME-.
       }
 
 
@@ -123,9 +141,8 @@ export default function TikTacToeView () {
 return (
   <article style={{display:'flex',flexDirection:'column',height:'100%'}}>
     <style>{`
-      .knot{ color:'blue'}
-      .cross{ color:'red'} 
       .tile{
+        cursor: pointer;
         background: #fff;
         border: 1px solid #999;
         float: left;
@@ -151,10 +168,10 @@ return (
       This ALGORITHM detects WIN condition, REFLECTS STATE:
       <img src={example1} style={{width:'90%',marginTop:'1em'}}></img>
     </section>
-    <footer style={{marginBottom:'2em'}}>From <a href='https://legacy.reactjs.org/tutorial/tutorial.html'>
+    <footer  style={{marginBottom:'1em'}}>From <a href='https://legacy.reactjs.org/tutorial/tutorial.html'>
        ReactJS Getting Started</a>. Loops all possibities - to "detect" condition.</footer>
-    <section>
-      Demonstrates: algorithm and agent concepts.
+    <section style={{paddingBottom:'2em'}}>
+      Demonstrates: algorithm, state and agent concepts.
     </section>
   </article>
 )

@@ -10,11 +10,11 @@ export default function MainView () {
             a workspace to learn ai code<br/>
             <hr style={{width:'100%'}}></hr>
             <section style={{fontSize:'x-large',display:'flex',justifyContent:'center'}}>
-                <ol style={{width:'50%',margin:'1em auto'}}>
-                    <li>SHOW Ai NLP Concepts and Design Patterns</li>
-                    <li>EXPLORE ChatGPT API LLM integrations</li>
-                    <li>INNOVATE new Ai USE-CASES with WEB3</li>
-                    <li>MERGE with create-web3-DApp!</li>
+                <ol style={{width:'48%',margin:'1em auto',textAlign:'left'}}>
+                    <li>SHOW Ai NLP Concepts</li>
+                    <li>EXPLORE ChatGPT API</li>
+                    <li>INNOVATE Web3/Ai USE-CASES</li>
+                    <li>MERGE create-web3-DApp!</li>
                 </ol>
             </section>
             <hr style={{width:'100%'}}></hr>
