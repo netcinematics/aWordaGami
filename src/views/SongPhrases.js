@@ -33,59 +33,17 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
       },[]);
 
     function getStemsView(){
-
-
-        function btnClick ( e ) {  console.log(e.target.innerText);
-        }
+        function btnClick ( e ) {  console.log(e.target.innerText);    }
         return stemsARR.map( (txt,i)=> {
             return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt) }  >
                 {txt}
             </button>
         });
-
-        // return <article>STEMS</article>
-        // let promptARR = aPhraseTXT.split(' ');
-        // let stateARR = promptARR.map( (txt,idx) => { //:ai: 2. ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
-        //     function btnClick ( e ) { //solvePuzzle(e.target.innerText)
-        //     }
-        //     return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt,idx) }  >
-        //         {txt}
-        //     </button>
-        // });
-        // let shuffledPrompts = stateARR.map(value => ({ value, sort: Math.random() }))
-        //     .sort((a, b) => a.sort - b.sort).map(({ value }) => value)
-        // return shuffledPrompts;
     }
 
-    // function getPromptView(){
-    //     let promptARR = aPhraseTXT.split(' ');
-    //     let stateARR = promptARR.map( (txt,idx) => { //:ai: 2. ALGORITHM - add METADATA to DATA and load STATE(MACHINE).
-    //         function btnClick ( e ) { //solvePuzzle(e.target.innerText)
-    //         }
-    //         return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt,idx) }  >
-    //             {txt}
-    //         </button>
-    //     });
-    //     let shuffledPrompts = stateARR.map(value => ({ value, sort: Math.random() }))
-    //         .sort((a, b) => a.sort - b.sort).map(({ value }) => value)
-    //     return shuffledPrompts;
-    // }
-
-    // function getPhraseView(){
-    //     let phraseARR = aPhraseTXT.split(' ');
-    //     return phraseARR.map( (txt,idx) => { // :ai: 5. MASK the data from the human.
-    //         const maskTXTARR =  txt.split('').map( (letter,i) => {
-    //             if(solutionARR[idx] && solutionARR[idx] === txt) { return letter; }
-    //             return '_ ' 
-    //         })
-    //         return <div style={txtAnswerStyle} className={ getPhraseWordCLASSName(txt,idx) }>
-    //             {maskTXTARR.join('')}</div>
-    //     });
-    // }
 
     function getRootsView(){
-        function btnClick ( e ) {  console.log(e.target.innerText);
-        }
+        function btnClick ( e ) {  console.log(e.target.innerText);    }
         return rootsARR.map( (txt,i)=> {
             return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt) }  >
                 {txt}
@@ -98,22 +56,11 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
         if(solutionARR[idx] && solutionARR[idx] === txt){ return 'promptSELECTED';  }
     }
 
-    // function getPhraseWordCLASSName (txt,idx) {
-    //     if(solutionARR[idx] && solutionARR[idx] === txt){
-    //         return 'wordCORRECT';
-    //     } else if(solutionARR[idx] && solutionARR[idx] != txt) { //WRONG
-    //         return 'wordWRONG';
-    //     } else if (cursorIDX===idx){
-    //         return 'wordCURSOR';
-    //     }
-    //     return ''
-    // }
-
     let promptStyle = {
         background: '#6facf7', border: '1px solid #444', lineHeight: '34px', textAlign: 'center',
-        width: '10%', margin: '0.5em', borderRadius: '13px', boxShadow: 'inset 1px 1px 5px 0px blue',
+        margin: '0.5em', borderRadius: '13px', boxShadow: 'inset 1px 1px 5px 0px blue',
         cursor: 'pointer', fontFamily: 'fangsong', color: '#013434', textShadow: '-1px 0px 1px whitesmoke',
-        width:'90%',userSelect:'none',fontSize:'large',fontFamily:'monospace'     
+        userSelect:'none',fontSize:'large',fontFamily:'monospace',padding:'0 1em'     
     }
 
     let txtAnswerStyle = {
@@ -153,7 +100,7 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
         setStemsARR( tgtItemSET );
     }
 
-    function getSuffix(tgt){
+    function getSuffix(tgt){ //:ai: TODO graduated difficulty *tion *sion *cion *zion *cean AGENT.
         return ( tgt.length > 4 ) ? tgt.slice(tgt.length-4,tgt.length) : tgt.slice(tgt.length-2,tgt.length);
     }
     return (
