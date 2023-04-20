@@ -23,6 +23,8 @@ INSTRUCTIONS:
 - Collect ACHIEVEMENTZ.
 - Token integrationz...
 
+- 
+
 ---
 
 ## aWORDaGAMi
@@ -144,7 +146,8 @@ O - add rich visual animations // npm install react-reveal --save
 O - textures
 O - icon / menu
 O - menu / game routing
-
+O - ai object
+O - GRID in song lyrics. shows Rhyme_Strength. FOCUS.
 ---
 
 
@@ -182,3 +185,9 @@ O - menu / game routing
 npm install
 
 npm start
+
+## LIVE EXAMPLE
+
+LIVE EXAMPLE: https://netcinematics.github.io/aWordaGami/
+
+# ~ : ) 
