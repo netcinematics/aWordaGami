@@ -24,24 +24,21 @@ function TokenCard({ value, onTokenClick }) {
     let cardStyle =  {
         background: '#6facf7',
         border: '1px solid #444',
-        lineHeight: '34px',
-        padding: '1em',
-        textAlign: 'center',
-        width: '10%',
+        lineHeight: '20px',
         margin: '0.5em',
         borderRadius: '13px',
         boxShadow: 'inset 1px 1px 5px 0px blue',
         cursor: 'pointer',
-        fontFamily: 'fangsong',
         color: '#013434',
         textShadow: '-1px 0px 1px whitesmoke'
     } 
     //GAMIFICATION AGENT
-    let displayValue = gameAGENT(value); 
+    // console.log('AGENT tst',value)
+    // let displayValue = gameAGENT(value); 
     return (
         <button style={cardStyle} onClick={onTokenClick}>
-        {displayValue}
-        {/* {value} */}
+        {/* {displayValue} */}
+        {value}
         </button>
     );
 }
@@ -56,9 +53,9 @@ function gameAGENT(token){ //REACT to state and RESPOND
 
 function TokenGrid (){ //Everything is a token.
     function onTokenClick(){
-        // console.log('ASD')
+        console.log('ASD')
     }
-    console.log('x2',langData.roots.length)  
+    // console.log('x2',langData.roots.length)  
     let COLNUM=4;
     //roots already sorted by "rhyme-closeness" by agents.
     //agent_RHYMECLOSE()
@@ -67,33 +64,67 @@ function TokenGrid (){ //Everything is a token.
     //then cut into columns of maxCOL AGENT
     //agent_COLUMNCUT() 
 
+  
     //CONVERT WORDS into TOKENS:
-    let tokenCardARR = langData.roots.map( (word, idx)=>{
-        return <TokenCard value={word} onTokenClick={() => onTokenClick(idx)} />
-    });
+    // let tokenCardARR = langData.roots.map( (word, idx)=>{
+    //     return <TokenCard value={word} onTokenClick={() => onTokenClick(idx)} />
+    // });
+
     //CUT TOKENS into COLUMNS:
     let tokenCOLARR = [];
     let colm = [];
-    // debugger;
-    for(let i=0; i<tokenCardARR.length; i += COLNUM){
-        colm = tokenCardARR.slice(i,i+COLNUM);
-        console.log('COLM',colm.length)
-        // tokenCOLARR.push( <div> )
-        tokenCOLARR.push( colm )
-        // tokenCOLARR.push( </div> )
-    }
-
-    let tokenCOLUMNS = tokenCOLARR.map( (item,idx)=>{
-
-        return <column style={{display:'flex',flexDirection:'column'}}>
-            <header>{idx}</header>
+    debugger;
+    let humanIDX = 0;
+    let tokenCOLUMNS = [];
+    for(let i=0; i<langData.roots.length; i += COLNUM){
+        colm = langData.roots.slice(i,i+COLNUM);
+        // console.log('COLM',colm.length)
+        ++humanIDX;
+         tokenCOLUMNS.push( <div style={{display:'flex',flexDirection:'column'}}>
+            <header>{humanIDX}</header>
             {
-                item
+                colm.map( (word,idx)=>{ 
+                    return <TokenCard value={word} onTokenClick={() => onTokenClick(idx)} />
+                    // return <div>{word}</div> 
+                })
             }
-        </column>
+
+         </div> 
+         );
+        
+        
+
+    }    
+    
+    
+    // //CONVERT WORDS into TOKENS:
+    // let tokenCardARR = langData.roots.map( (word, idx)=>{
+    //     return <TokenCard value={word} onTokenClick={() => onTokenClick(idx)} />
+    // });
+
+    // //CUT TOKENS into COLUMNS:
+    // let tokenCOLARR = [];
+    // let colm = [];
+    // debugger;
+    // for(let i=0; i<tokenCardARR.length; i += COLNUM){
+    //     colm = tokenCardARR.slice(i,i+COLNUM);
+    //     console.log('COLM',colm.length)
+    //     // tokenCOLARR.push( <div> )
+    //     tokenCOLARR.push( colm )
+    //     // tokenCOLARR.push( </div> )
+    // }
+
+    // let tokenCOLUMNS = tokenCOLARR.map( (item,idx)=>{
+
+    //     return <column style={{display:'flex',flexDirection:'column'}}>
+    //         <header>{idx}</header>
+    //         {
+    //             item
+    //         }
+    //     </column>
 
 
-    });
+    // });
 
     // let tokenCOLARR = tokenCardARR.map( (tokn,idx)=>{ 
 
