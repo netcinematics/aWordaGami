@@ -2,6 +2,7 @@ import Zoom from 'react-reveal/Zoom';
 
 // import NeuralNet from './NeuralNet'
 import LangData from '../data/SocialPhraseCLM'
+import SuffixMap from '../data/SuffixMap'
 import TokenGrid2 from './TokenGrid2';
 // import TallySound from '../sonic/nxTally0d.mp3'
 import { useState,useEffect } from 'react';
@@ -19,16 +20,108 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
 
     //:ai: 1 MANY DIFFERENT DATA TYPES to influence. In this case: TXT = 'text' data.  
     let [gameIDX, setGameIDX] = useState(0);
-    let [rightCOUNT, setRightCOUNT] = useState(0);
-    let [wrongCOUNT, setWrongCOUNT] = useState(0);
+    // let [rightCOUNT, setRightCOUNT] = useState(0);
+    // let [wrongCOUNT, setWrongCOUNT] = useState(0);
     let [solutionARR, setSolutionARR] = useState([]);
-    let [aPhraseTXT, setPhraseTXT] = useState("");
-    let [cursorIDX, setCursorIDX] = useState(0);
+    // let [aPhraseTXT, setPhraseTXT] = useState("");
+    // let [cursorIDX, setCursorIDX] = useState(0);
     
     let [stemsARR, setStemsARR] = useState([]);
     let [rootsARR, setRootsARR] = useState([]);
     let [showResults, setShowResults] = useState(false);
     let [promptTXT, setPromptTXT] = useState('');
+
+    //:ai: INIT - artificial intelligence TEMPLATE OBJ.
+    const ai = {
+        roots:[], //cross-dataset: name convention
+        stems:[], //cross-dataset: name convention
+        agents:{}, //DYNAMIC AGENT OBJECT
+        context:{}, //DYNAMIC CONTEXT OBJECT
+        tasks:{}  //DYNAMIC TASK OBJECT
+    }
+    //:ai: ADD BEHAVIOR as function in array of TASKS. 
+    ai.agents = { //:ai: HINT this could be init/train/run DYNAMICALLY by LLM.
+        // SUFFIX_exact : function (tgtRootSTR,promptSuffix,tgtStemARR){
+        //     let roots = [], stems = [];
+        //     let tgtSuffix = getSuffix2(tgtRootSTR); //TARGET-SUFFIX            
+        //     if(tgtSuffix === promptSuffix){ //EXACT MATCH SUFFIX
+        //         roots.push(tgtRootSTR);
+        //         stems.push(tgtStemARR.join(' '));
+        //         // stems.push(tgtStemARR);
+        //     }
+        //     return {roots:roots,stems:stems}
+        // },
+        SUFFIX_EXACTROOTS : function (tgtSuffix,seedSuffix){
+            // let tgtSuffix = getSuffix2(tgtRootSTR); //TARGET-SUFFIX  
+            if(seedSuffix===tgtSuffix){return true}  //EXACT MATCH
+            return false;
+        },
+        SUFFIX_SYNONYMROOTS : function (tgtSuffix,seedSuffix){
+            if(tgtSuffix===seedSuffix){return false}
+            let synonymSuffixARR = SuffixMap(seedSuffix);
+            if (synonymSuffixARR){ //synonyms exists, compare
+                for(let i=0; i<synonymSuffixARR.length;i++){
+                    if(tgtSuffix===synonymSuffixARR[i]){return true}  //SYNONYM MATCH 
+                }
+            }
+            return false;
+
+            // let roots = [], stems = [];
+            // return {roots:roots,stems:stems}
+        },  
+        //TODO suffix PLURAL      
+        SUFFIX_synonym : function (tgtRootSTR,promptSuffix,tgtStemARR){
+            //find words of exact match and of synonymous sound.
+            let roots = [], stems = [];
+            let results = [];
+            let tgtSuffix = getSuffix2(tgtRootSTR); //TARGET-SUFFIX
+            // debugger;
+            let exactMatchSynonymSet = [];
+            console.log('SUFFIX',tgtSuffix)
+            let synonymSuffixARR = SuffixMap(tgtSuffix);
+            if (synonymSuffixARR){
+
+                let synonymResultsARR = [];
+                //for each SYNONYM compile EXACT MATCH SUFFIX
+                for(let i=0; i<synonymSuffixARR.length;i++){
+                    results = ai.tasks.RHYME_STEMS_byPromptSuffix(synonymSuffixARR[i])
+                }
+
+                //Return all the ROOTS and STEMS of all the SYNONYMS.
+                // for(let i=0; i<synonymSuffixARR.length;i++){
+                //     exactMatchSynonymSet = ai.agents.SUFFIX_exact(tgtSuffix,synonymSuffixARR[i],[])
+                //     synonymResultsARR.push(exactMatchSynonymSet)
+                // }
+                // for(let i=0; i<synonymResultsARR.length;i++){
+                //     roots.push(synonymResultsARR.roots);
+                //     stems.push(synonymResultsARR.stems);
+                // }
+                
+            }
+            // if(tgtSuffix===promptSuffix){ //console.log('MATCH',tgtSuffix, tgtRootSTR);
+            //     roots.push(tgtRootSTR);
+            //     stems.push(tgtStemARR);
+            // }
+            // debugger;
+            return {roots:roots,stems:stems}
+            // return {roots:['notion'],stems:[['get', 'the', 'notion']]}
+        }
+    } //END-AGENTS-.
+
+
+    ai.tasks = { //:ai: HINT this could be init/train/run DYNAMICALLY by LLM.
+        RHYME_STEMS_byPromptSuffix : function (promptSuffix, rootTXT){ //return EXACT MATCH roots,stems for given prompt suffix.
+            // let roots = [], stems = [];
+            let stems = [];
+            return stems;
+            // return {roots:roots,stems:stems}
+            // return {roots:['notion'],stems:[['get', 'the', 'notion']]}
+
+        }
+    } //END-tasks-.
+
+
+
 
     useEffect(() => {
         var initSOUND = new Audio("./sonic/nxSonar1d.mp3");
@@ -37,34 +130,17 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
 
     function getStemsView(){
         function btnClick ( e ) {  console.log(e.target.innerText);    }
-        return stemsARR.map( (arr,i)=> {
-            return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(arr) }  >
-                {arr.join(' ')}
+        return stemsARR.map( (txt,i)=> {
+            return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(txt) }  >
+                {txt}
             </button>
         });
+        // return stemsARR.map( (arr,i)=> {
+        //     return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(arr) }  >
+        //         {arr.join(' ')}
+        //     </button>
+        // });
     }
-
-    function getTokenGridView(){
-        function btnClick ( e ) {  console.log(e.target.innerText);    }
-        return rootsARR.map( (token,i)=> {
-            return <button onClick={btnClick} style={promptStyle} className={ getPromptBtnCLASSName(token) }  >
-                {/* BUILD TOKEN GRID: {arr} */
-                
-                      
-                
-                
-                
-                
-                
-                
-                }
-
-
-
-            </button>
-        });
-    }
-
 
     function getRootsView(){
         function btnClick ( e ) {  console.log(e.target.innerText);    }
@@ -98,32 +174,83 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
         setShowResults(true);
         var nextSOUND = new Audio("./sonic/nxWoop1.mp3");
         nextSOUND.play();
-        generateTXT1();
+        // generateTXT1();
+        generateTXT2();
     }
 
-    function generateTXT1(){ //:ai: - LEXICAL-TOKENIZER !!!
+    // function generateTXT1(){ //:ai: - LEXICAL-TOKENIZER !!!
+    //     let nn = LangData(); 
+    //     console.log('GENERATING from', promptTXT);
+    //     let lineOfTXTARR = promptTXT.split('\n');
+    //     //AGENT - LAST WORD
+    //     let lastLineTXT = lineOfTXTARR[lineOfTXTARR.length-1];
+    //     let lastLineARR = lastLineTXT.split(' ');
+    //     let lastWord = lastLineARR[lastLineARR.length-1];
+    //     let promptSuffix = getSuffix1(lastWord);
+    //     let tgtARR = [], tgtItemARR = [], tgtItemSET = [], tgtSTR = '', tgtSuffix = '';
+    //     for(let i=0; i<nn.length;i++){
+    //         tgtItemARR = nn[i].split(' ');
+    //         tgtSTR = tgtItemARR[tgtItemARR.length-1];
+    //         tgtSuffix = getSuffix1(tgtSTR);
+    //         if(tgtSuffix===promptSuffix){ //console.log('MATCH',tgtSuffix, tgtSTR);
+    //             tgtARR.push(tgtSTR);
+    //             tgtItemSET.push(tgtItemARR);
+    //         }
+    //     }
+    //     setRootsARR( tgtARR );
+    //     setStemsARR( tgtItemSET );
+    // }
+
+    function generateTXT2(){ //:ai: - LEXICAL-TOKENIZER !!!
         let nn = LangData(); 
         console.log('GENERATING from', promptTXT);
         let lineOfTXTARR = promptTXT.split('\n');
         //AGENT - LAST WORD
+        // debugger;
+        let matchEXACTROOTS = false;
+        let matchSYNONYMROOTS = false;
         let lastLineTXT = lineOfTXTARR[lineOfTXTARR.length-1];
         let lastLineARR = lastLineTXT.split(' ');
         let lastWord = lastLineARR[lastLineARR.length-1];
-        let promptSuffix = getSuffix1(lastWord);
-        let tgtARR = [], tgtItemARR = [], tgtItemSET = [], tgtSTR = '', tgtSuffix = '';
-        for(let i=0; i<nn.length;i++){
-            tgtItemARR = nn[i].split(' ');
-            tgtSTR = tgtItemARR[tgtItemARR.length-1];
-            tgtSuffix = getSuffix1(tgtSTR);
-            if(tgtSuffix===promptSuffix){ //console.log('MATCH',tgtSuffix, tgtSTR);
-                tgtARR.push(tgtSTR);
-                tgtItemSET.push(tgtItemARR);
+        let promptSuffix = getSuffix2(lastWord); //SEARCH-SUFFIX
+        let tgtRootARR = [], tgtStemARR = [], tgtStemSET = [], tgtRootSTR = '', tgtSuffix = '';
+        let matchEXACT_Obj = {}, matchSYNONYM_Obj = {roots:[],stems:[]};
+        for(let i=0; i<nn.length;i++){ //TASK: LOOP nn, match exact, match synonym, sort by length
+            tgtStemARR = nn[i].split(' ');
+            tgtRootSTR = tgtStemARR[tgtStemARR.length-1];
+            // matchEXACT_Obj = ai.agents.SUFFIX_exact(tgtRootSTR,promptSuffix,tgtStemARR);
+            matchEXACTROOTS = ai.agents.SUFFIX_EXACTROOTS(getSuffix2(tgtRootSTR),promptSuffix);
+            if(matchEXACTROOTS){
+                console.log('EXACT-MATCH',tgtRootSTR)
+                tgtRootARR.push(tgtRootSTR);//Save ROOT.
+                tgtStemSET.push(tgtStemARR.join(' '));//Save STEM.
             }
-        }
-        setRootsARR( tgtARR );
-        setStemsARR( tgtItemSET );
-    }
+            
+            matchSYNONYMROOTS = ai.agents.SUFFIX_SYNONYMROOTS(getSuffix2(tgtRootSTR),promptSuffix);
+            if(matchSYNONYMROOTS){
+                console.log('SYNONYM-MATCH',tgtRootSTR)
+                tgtRootARR.push(tgtRootSTR);//Save ROOT.
+                tgtStemSET.push(tgtStemARR.join(' '));//Save STEM.                
+            }
+            // matchSYNONYM_Obj = ai.agents.SUFFIX_synonym(tgtRootSTR,promptSuffix,tgtStemARR);
+            // tgtSuffix = getSuffix2(tgtRootSTR); //TARGET-SUFFIX
+            // if(tgtSuffix===promptSuffix){ //console.log('MATCH',tgtSuffix, tgtRootSTR);
+            //     tgtRootARR.push(tgtRootSTR);
+            //     tgtStemSET.push(tgtStemARR);
+            // }
+            //EXACT-MATCH
+            // tgtRootARR.push(...matchEXACT_Obj.roots);
+            // tgtStemSET.push(...matchEXACT_Obj.stems);
+            //SYNONYM-MATCH
+            // debugger;
+            // tgtRootARR.push(...matchSYNONYM_Obj.roots);
+            // tgtStemSET.push(...matchSYNONYM_Obj.stems);
 
+        }
+        // debugger;
+        setRootsARR( tgtRootARR );
+        setStemsARR( tgtStemSET );
+    }
     //:ai: FUNCTIONAL-AGENCY. With arrays of functions.
     //RHYME_AGENT: alter RHYME-SCHEME "Attention" matrix
     // agent_SuffixARR = [getSuffix1, getSuffix2,...n]
@@ -142,8 +269,27 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
 - "Tug" on sort order "importance". EXAMPLE: syllables.
 */
 
-    function getSuffix1(tgt){ //:ai: TODO graduated difficulty *tion *sion *cion *zion *cean AGENT.
-        return ( tgt.length > 4 ) ? tgt.slice(tgt.length-4,tgt.length) : tgt.slice(tgt.length-2,tgt.length);
+    // function getSuffix1(tgt){ 
+    //     return ( tgt.length > 4 ) ? tgt.slice(tgt.length-4,tgt.length) : tgt.slice(tgt.length-2,tgt.length);
+    // }
+
+    function getSuffix2(tgt){ 
+        //:ai: EXAMPLE - GRADUATED Difficulty, RHYME-AGENT.
+        return(tgt.length>4)?tgt.slice(tgt.length-4,tgt.length):
+                    (tgt.length>3)?tgt.slice(tgt.length-2,tgt.length)
+                        :tgt.slice(tgt.length-2,tgt.length);
+    }
+
+    function getSuffix3(tgt){ //:ai: TODO graduated difficulty *tion *sion *cion *zion *cean AGENT.
+        //:ai: EXAMPLE - GRADUATED Difficulty, RHYME-AGENT.
+        let directMatchARR = [], syllableSortARR = [];
+        directMatchARR = (tgt.length>4)?tgt.slice(tgt.length-4,tgt.length):
+                            (tgt.length>3)?tgt.slice(tgt.length-3,tgt.length)
+                                :tgt.slice(tgt.length-2,tgt.length);
+        //:ai: EXAMPLE - Sort by similar letter length
+        syllableSortARR = directMatchARR.sort((a, b) => b.length - a.length);
+                    
+        return syllableSortARR;
     }
 
     return (
@@ -179,7 +325,8 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
                             display:'flex',flexDirection:'column',height:'100%',padding:'0.444em'}}>
                             <gameboard style={{borderBottom:'1px solid darkslategray',borderRadius:'8px',
                                 display:'flex',flexDirection:'row',alignContent:'center',minHeight:'300px',
-                                justifyContent:'center',alignItems:'center',flexWrap:'wrap'}}>
+                                alignContent:'flex-start',marginTop:'1.5em',overflowX:'auto',
+                                justifyContent:'center',flexWrap:'wrap'}}>
                                 {/* { getTokenGridView() } */}
                                 { <TokenGrid2 langData = {{roots:rootsARR,stems:[]}}/> }
                             </gameboard>
@@ -198,7 +345,7 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
                         <h2 style={{marginRight:'1em',marginTop:'1em'}}>
                             rhyme_roots:</h2>
                         <section style={{border:'1px solid skyblue',borderRadius:'8px',marginRight:'2%',
-                            padding:'0.8em',overflowX:'hidden',overflowY:'auto',display:'flex',
+                            padding:'0.8em',overflowY:'auto',display:'flex',
                             overflowX:'scroll',marginBottom:'1.5em'}}>
                             { getRootsView() }
                         </section>

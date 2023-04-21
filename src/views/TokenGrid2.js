@@ -3,7 +3,7 @@ import "../styles.css";
 
 export default function TokenGrid2 ({langData}) {
 
-console.log('x1',langData.roots.length)  
+// console.log('x1',langData.roots.length)  
 
 //----------------------TOKEN-GRID------------------------------------
 
@@ -73,7 +73,7 @@ function TokenGrid (){ //Everything is a token.
     //CUT TOKENS into COLUMNS:
     let tokenCOLARR = [];
     let colm = [];
-    debugger;
+    // debugger;
     let humanIDX = 0;
     let tokenCOLUMNS = [];
     for(let i=0; i<langData.roots.length; i += COLNUM){
