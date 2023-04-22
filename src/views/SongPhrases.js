@@ -232,22 +232,17 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
                 tgtRootARR.push(tgtRootSTR);//Save ROOT.
                 tgtStemSET.push(tgtStemARR.join(' '));//Save STEM.                
             }
-            // matchSYNONYM_Obj = ai.agents.SUFFIX_synonym(tgtRootSTR,promptSuffix,tgtStemARR);
-            // tgtSuffix = getSuffix2(tgtRootSTR); //TARGET-SUFFIX
-            // if(tgtSuffix===promptSuffix){ //console.log('MATCH',tgtSuffix, tgtRootSTR);
-            //     tgtRootARR.push(tgtRootSTR);
-            //     tgtStemSET.push(tgtStemARR);
-            // }
-            //EXACT-MATCH
-            // tgtRootARR.push(...matchEXACT_Obj.roots);
-            // tgtStemSET.push(...matchEXACT_Obj.stems);
-            //SYNONYM-MATCH
-            // debugger;
-            // tgtRootARR.push(...matchSYNONYM_Obj.roots);
-            // tgtStemSET.push(...matchSYNONYM_Obj.stems);
-
         }
-        // debugger;
+        debugger;
+        //SORT by word length;
+        // tgtRootARR.sort((a, b) => b.length - a.length);
+        let comparitor = 0;
+        tgtRootARR.sort((a, b) => {
+            comparitor = b.length - a.length;
+            if(a.length > lastWord.length) {return -2}
+            console.log(comparitor,a,b);
+            return comparitor;
+        });
         setRootsARR( tgtRootARR );
         setStemsARR( tgtStemSET );
     }
@@ -268,15 +263,10 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
 - "Distant Weight", added later (forever) as...fns(). 
 - "Tug" on sort order "importance". EXAMPLE: syllables.
 */
-
-    // function getSuffix1(tgt){ 
-    //     return ( tgt.length > 4 ) ? tgt.slice(tgt.length-4,tgt.length) : tgt.slice(tgt.length-2,tgt.length);
-    // }
-
     function getSuffix2(tgt){ 
         //:ai: EXAMPLE - GRADUATED Difficulty, RHYME-AGENT.
         return(tgt.length>4)?tgt.slice(tgt.length-4,tgt.length):
-                    (tgt.length>3)?tgt.slice(tgt.length-2,tgt.length)
+                    (tgt.length>3)?tgt.slice(tgt.length-3,tgt.length)
                         :tgt.slice(tgt.length-2,tgt.length);
     }
 
