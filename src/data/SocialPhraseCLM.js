@@ -1,5 +1,5 @@
 export default function SocialPhraseCLM(){ //CUSTOM-LANGUAGE-MODEL
-    return ['get the notion','rise to the occasion','bottom of the ocean','act of desperation','warm congratulations','just a simulation','fill in the blank','raise all boats', 'good to go', 'early bird gets the worm', 'get it while its hot',
+    return ['up to no good','get the notion','rise to the occasion','bottom of the ocean','act of desperation','warm congratulations','just a simulation','fill in the blank','raise all boats', 'good to go', 'early bird gets the worm', 'get it while its hot',
         'so far so good', 'have your cake and eat it too','runnin out of time','lay it on the line','what can I say',
         'it was a grey gloomy day','it was a dark and stormy night','you get the idea','instant gratification',
         'across the ocean','sense of devotion','overcome with emotion','ask a silly question','check the expiration',
