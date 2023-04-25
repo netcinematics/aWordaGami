@@ -1,6 +1,7 @@
 import './App.css';
 import MainView from './views/MainView';
-import TokenGrid1 from './views/TokenGrid1';
+// import TokenGrid1 from './views/TokenGrid1';
+import TokenGrid3 from './views/TokenGrid3';
 import SongPhrases from './views/SongPhrases';
 import TicTacToe from './views/TicTacToeView';
 import AWordaGami1 from './views/aWordaGami1';
@@ -29,7 +30,8 @@ function App() {
           } else if (viewIDX === "TicTacToe") {
             return <TicTacToe/>;
           } else if (viewIDX === "TokenGrid") {
-            return <TokenGrid1/>;
+            return <TokenGrid3   langData = {{roots:[1,2,3,4,5,6],stems:[]}}/>;
+            // return <TokenGrid1/>;
           } else if (viewIDX === "SongPhrases") {
             return <SongPhrases/>;
           } else {
