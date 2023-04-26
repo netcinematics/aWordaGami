@@ -1,6 +1,6 @@
 import './App.css';
 import MainView from './views/MainView';
-// import TokenGrid1 from './views/TokenGrid1';
+import TokenGrid1 from './views/TokenGrid1';
 import TokenGrid3 from './views/TokenGrid3';
 import SongPhrases from './views/SongPhrases';
 import TicTacToe from './views/TicTacToeView';
@@ -16,7 +16,8 @@ function App() {
   }
 
   return (
-    <div className="App" style={{display:'flex',flexDirection:'column',backgroundColor: 'black',minHeight: '77vh',maxWidth:'55em',margin:'0 auto'}}>
+    <div className="App" style={{display:'flex',flexDirection:'column',backgroundColor: 'black',
+      minHeight: '77vh',maxWidth:'55em',margin:'0 auto',padding:'0.444em'}}>
       <header className="App-header" style={{borderRadius:'13px'}}>
       <Zoom>{viewIDX}</Zoom>
       </header>

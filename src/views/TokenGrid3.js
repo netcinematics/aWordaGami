@@ -1,9 +1,33 @@
 // import { useState } from 'react';
 import "../styles.css";
+import LangData from '../data/SocialPhraseCLM'
+import SuffixMap from '../data/SuffixMap'
+
+import { useState, useEffect } from 'react';
 
 export default function TokenGrid3 ({langData}) {
 
-// console.log('x1',langData.roots.length)  
+let [stemsARR, setStemsARR] = useState([]);
+let [rootsARR, setRootsARR] = useState([]);
+
+useEffect(() => {
+    loadTokenData();
+ }, [])
+
+ function loadTokenData(){
+    // debugger;
+    let nn = LangData(); 
+    let tgtRootARR = [], tgtStemARR=[],tgtRootSTR='';
+    for(let i=0; i<nn.length;i++){ //TASK: LOOP nn, match exact, match synonym, sort by length
+        tgtStemARR = nn[i].split(' ');
+        tgtRootSTR = tgtStemARR[tgtStemARR.length-1];
+        tgtRootARR.push(tgtRootSTR);//Save ROOT.
+    }
+
+    setRootsARR( tgtRootARR );
+    // setStemsARR( tgtStemSET );
+
+ }
 
 //----------------------TOKEN-GRID------------------------------------
 
@@ -21,23 +45,17 @@ const tokenz = [  //NUMZ INFORMATION-ARCHITECTURE
 
 
 function TokenCard({ value, onTokenClick }) {
-    let cardStyle =  {
-        background: '#6facf7',
-        border: '1px solid #444',
-        lineHeight: '20px',
-        margin: '0.5em',
-        borderRadius: '13px',
-        boxShadow: 'inset 1px 1px 5px 0px blue',
-        cursor: 'pointer',
-        color: '#013434',
-        textShadow: '-1px 0px 1px whitesmoke'
+    let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
+        borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
+        color:'#013434',textShadow:'-1px 0px 1px whitesmoke',padding:'0.444em',
+        display:'flex',alignContent:'flex-end',alignItems:'flex-end',height:'10em',width:'8em'
     } 
     //GAMIFICATION AGENT
-    // console.log('AGENT tst',value)
-    // let displayValue = gameAGENT(value); 
+    console.log('AGENT tst',value)
+    let displayValue = gameAGENT(value); 
     return (
         <button style={cardStyle} onClick={onTokenClick}>
-        {/* {displayValue} */}
+        {displayValue}
         {value}
         </button>
     );
@@ -51,121 +69,24 @@ function gameAGENT(token){ //REACT to state and RESPOND
   else if (token.state==='clue'){return '?'}
 }
 
-function TokenGrid (){ //Everything is a token.
-    function onTokenClick(){
-        console.log('ASD')
-    }
-    // console.log('x2',langData.roots.length)  
-    let COLNUM=4;
-    //roots already sorted by "rhyme-closeness" by agents.
-    //agent_RHYMECLOSE()
-    //sort tokens by letter density, AGENT 
-    //agent_LETTERDENSITY()
-    //then cut into columns of maxCOL AGENT
-    //agent_COLUMNCUT() 
-
-  
-    //CONVERT WORDS into TOKENS:
-    // let tokenCardARR = langData.roots.map( (word, idx)=>{
-    //     return <TokenCard value={word} onTokenClick={() => onTokenClick(idx)} />
-    // });
-
-    //CUT TOKENS into COLUMNS:
-    let tokenCOLARR = [];
+function TokenGrid (){ //"Everything is a token". A grid for everything - Episodic TOKENS wrapped into COLUMNS:
+    function onTokenClick(){ console.log('AS222')}
     let colm = [];
-    // debugger;
-    let humanIDX = 0;
+    let COLNUM=3; //vertical wrap limit
     let tokenCOLUMNS = [];
-    for(let i=0; i<langData.roots.length; i += COLNUM){
-        colm = langData.roots.slice(i,i+COLNUM);
-        // console.log('COLM',colm.length)
+    let humanIDX = 0; //column header
+    for(let i=0; i<tokenz.length; i += COLNUM){
+        colm = tokenz.slice(i,i+COLNUM);
         ++humanIDX;
          tokenCOLUMNS.push( <div style={{display:'flex',flexDirection:'column'}}>
             <header>{humanIDX}</header>
-            {
-                colm.map( (word,idx)=>{ 
-                    return <TokenCard value={word} onTokenClick={() => onTokenClick(idx)} />
-                    // return <div>{word}</div> 
-                })
-            }
-
+            { colm.map( (token,idx)=>{ 
+                return <TokenCard value={token.numz} onTokenClick={() => onTokenClick(token.numz)} />
+            }) }
          </div> 
          );
-        
-        
-
     }    
-    
-    
-    // //CONVERT WORDS into TOKENS:
-    // let tokenCardARR = langData.roots.map( (word, idx)=>{
-    //     return <TokenCard value={word} onTokenClick={() => onTokenClick(idx)} />
-    // });
-
-    // //CUT TOKENS into COLUMNS:
-    // let tokenCOLARR = [];
-    // let colm = [];
-    // debugger;
-    // for(let i=0; i<tokenCardARR.length; i += COLNUM){
-    //     colm = tokenCardARR.slice(i,i+COLNUM);
-    //     console.log('COLM',colm.length)
-    //     // tokenCOLARR.push( <div> )
-    //     tokenCOLARR.push( colm )
-    //     // tokenCOLARR.push( </div> )
-    // }
-
-    // let tokenCOLUMNS = tokenCOLARR.map( (item,idx)=>{
-
-    //     return <column style={{display:'flex',flexDirection:'column'}}>
-    //         <header>{idx}</header>
-    //         {
-    //             item
-    //         }
-    //     </column>
-
-
-    // });
-
-    // let tokenCOLARR = tokenCardARR.map( (tokn,idx)=>{ 
-
-    // });
-
     return(tokenCOLUMNS)
-    // return(tokenCardARR)
-    // return(tokenCOLARR)
-
-    // return ([
-    //      <div className="status">{".!."}</div>
-    //      ,
-    //       <div className="board-row">
-    //         <TokenCard value={tokenz[0]} onTokenClick={() => onTokenClick(0)} />
-    //         <TokenCard value={tokenz[1]} onTokenClick={() => onTokenClick(1)} />
-    //         <TokenCard value={tokenz[2]} onTokenClick={() => onTokenClick(2)} />
-    //       </div>
-    // ])
-    // return (
-
-    //       <>
-    //       <div className="status">{"..."}</div>
-    //       <div className="board-row">
-    //         <TokenCard value={tokenz[0]} onTokenClick={() => onTokenClick(0)} />
-    //         <TokenCard value={tokenz[1]} onTokenClick={() => onTokenClick(1)} />
-    //         <TokenCard value={tokenz[2]} onTokenClick={() => onTokenClick(2)} />
-    //       </div>
-    //       <div className="board-row">
-    //         <TokenCard value={tokenz[3]} onTokenClick={() => onTokenClick(3)} />
-    //         <TokenCard value={tokenz[4]} onTokenClick={() => onTokenClick(4)} />
-    //         <TokenCard value={tokenz[5]} onTokenClick={() => onTokenClick(5)} />
-    //       </div>
-    //       <div className="board-row">
-    //         <TokenCard value={tokenz[6]} onTokenClick={() => onTokenClick(6)} />
-    //         <TokenCard value={tokenz[7]} onTokenClick={() => onTokenClick(7)} />
-    //         <TokenCard value={tokenz[8]} onTokenClick={() => onTokenClick(8)} />
-    //       </div>
-    //     </>
-
-
-    // );
 }
 
 //----------------------END TOKEN-GRID------------------------------------
@@ -173,9 +94,12 @@ function TokenGrid (){ //Everything is a token.
 
 return (
     <>
-    <tokengridframe style={{display:'flex',width:'100%',justifyContent:'space-around'}}>
+    <tokengridframe style={{display:'flex',display:'flex',justifyContent:'flex-start',paddingLeft:'1.444em'}}>
         <TokenGrid/>
     </tokengridframe>
+        <footer style={{marginTop:'2em'}}>
+        "Everything is a token". A grid for everything - Episodic TOKENS in COLUMNS.
+        </footer>
     </>
 )
 
