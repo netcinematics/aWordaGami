@@ -44,26 +44,38 @@ const tokenz = [  //NUMZ INFORMATION-ARCHITECTURE
   ];
 
 
-function TokenCard({ value, onTokenClick }) {
+function TokenCard({ token, onTokenClick }) {
     let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
         borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
-        color:'#013434',textShadow:'-1px 0px 1px whitesmoke',padding:'0.444em',
-        display:'flex',alignContent:'flex-end',alignItems:'flex-end',height:'10em',width:'8em'
+        color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
+        alignContent:'flex-end',alignItems:'stretch',height:'10em',width:'8em',
+        flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly'
     } 
     //GAMIFICATION AGENT
-    console.log('AGENT tst',value)
-    let displayValue = gameAGENT(value); 
+    console.log('AGENT tst',token.numz)
+    let gameTitle = gameAGENT(token); 
     return (
         <button style={cardStyle} onClick={onTokenClick}>
-        {displayValue}
-        {value}
+            <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
+                borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
+                alignItems:'center',fontSize:'xx-large'}}>
+                { (gameTitle)? gameTitle : token.title}
+            </section>
+            <footer style={{background:'cornflowerblue',fontSize:'x-small',
+                borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px'}}>
+                {token.numz}
+            </footer>
         </button>
+        // <button style={cardStyle} onClick={onTokenClick}>
+        // { (gameTitle)? gameTitle : token.title}
+        // {token.numz}
+        // </button>
     );
 }
 
 function gameAGENT(token){ //REACT to state and RESPOND
   if(!token){return ''}
-  if(!token.state){return token.numz}
+//   if(!token.state){return token.numz}
   else if (token.state==='locked'){return 'X'}
   else if (token.state==='prize'){return '!'}
   else if (token.state==='clue'){return '?'}
@@ -81,7 +93,7 @@ function TokenGrid (){ //"Everything is a token". A grid for everything - Episod
          tokenCOLUMNS.push( <div style={{display:'flex',flexDirection:'column'}}>
             <header>{humanIDX}</header>
             { colm.map( (token,idx)=>{ 
-                return <TokenCard value={token.numz} onTokenClick={() => onTokenClick(token.numz)} />
+                return <TokenCard token={token} onTokenClick={() => onTokenClick(token)} />
             }) }
          </div> 
          );
