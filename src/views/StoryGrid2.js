@@ -93,12 +93,32 @@ function gameAGENT(token){ //REACT to state and RESPOND
 }
 
 function PageView (){ 
-    return(
-    <>
-        <button onClick={ ()=>{  setViewState('overview');  }  } >back</button>
-        <button onClick={ ()=>{  setViewState('detailview');  }  } >details</button>
-    </>
-    )
+    return(<>
+    <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
+        display:'flex',width:'100%',flexDirection:'column',marginRight:'1.444em'}}>
+        <header>
+        <button style={{width:'4em'}} 
+            onClick={ ()=>{setViewState('overview')}}>UP</button>
+        <button style={{width:'4em'}} 
+            onClick={ ()=>{setViewState('overview')}}>RIGHT</button>
+        </header>
+        <footer>
+            <button style={{width:'4em'}} 
+                onClick={ ()=>{setViewState('overview')}}>LEFT</button>
+            <button style={{width:'4em'}} 
+                onClick={ ()=>{setViewState('overview')}}>DOWN</button>
+        </footer>
+        {/* <button style={{width:'4em',    flex: 1,
+    flexDirection:'row',
+    alignSelf: "right",
+    justifyContent: "space-between",
+    backgroundColor: "transparent",
+    borderWidth: 0.666,
+    borderRadius: 20
+    }} 
+            onClick={ ()=>{setViewState('detailview')}}>details</button> */}
+    </main>
+    </>)
 }
 
 function DetailView (){ 
@@ -110,7 +130,7 @@ function DetailView (){
     )
 }
 
-function TokenGrid (){ //"Everything is a token". A grid for everything - Episodic TOKENS wrapped into COLUMNS:
+function TokenGrid (){ //"Everything's a token!" A grid for everything - Episodic TOKENS wrapped into COLUMNS:
     let colm = [];
     let COLNUM=3; //vertical wrap limit
     let tokenCOLUMNS = [];
@@ -140,7 +160,8 @@ function onTokenClick( token ){
 
 return (
     <>
-    <tokengridframe style={{display:'flex',display:'flex',justifyContent:'flex-start',paddingLeft:'1.444em'}}>
+    <section className='mainframe' style={{display:'flex',display:'flex',justifyContent:'flex-start',
+    paddingLeft:'1.444em',height:'100%'}}>
         { (viewState==='overview') ?
             <TokenGrid/>
         : (viewState==='pageview') ?
@@ -150,7 +171,7 @@ return (
         : <TokenGrid/>
         }
         {/* <TokenGrid/> */}
-    </tokengridframe>
+    </section>
         <footer style={{marginTop:'2em'}}>
         A grid for everything - Episodic TOKENS in COLUMNS - "Everything's a token".
         </footer>
