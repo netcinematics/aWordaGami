@@ -1,11 +1,8 @@
-// import { useState } from 'react';
 import "../styles.css";
 import LangData from '../data/SocialPhraseCLM'
-import SuffixMap from '../data/SuffixMap'
-
 import { useState, useEffect } from 'react';
 
-export default function TokenGrid3 ({langData}) {
+export default function StoryGrid1 () {
 
 let [stemsARR, setStemsARR] = useState([]);
 let [rootsARR, setRootsARR] = useState([]);
@@ -15,7 +12,6 @@ useEffect(() => {
  }, [])
 
  function loadTokenData(){
-    // debugger;
     let nn = LangData(); 
     let tgtRootARR = [], tgtStemARR=[],tgtRootSTR='';
     for(let i=0; i<nn.length;i++){ //TASK: LOOP nn, match exact, match synonym, sort by length
@@ -54,7 +50,7 @@ function TokenCard({ token, onTokenClick }) {
     let fontColor = (token.state==='prize')?'mediumpurple':(token.state==='clue')
                     ?'#d08701':(token.state==='locked')?'#de6666':'steelblue';
     //GAMIFICATION AGENT
-    console.log('AGENT tst',token.numz)
+    console.log('AGENT tstsdfsdfs',token.numz)
     let gameTitle = gameAGENT(token); 
     return (
         <button style={cardStyle} onClick={onTokenClick}>
@@ -90,7 +86,6 @@ function gameAGENT(token){ //REACT to state and RESPOND
 }
 
 function TokenGrid (){ //"Everything is a token". A grid for everything - Episodic TOKENS wrapped into COLUMNS:
-    function onTokenClick(){ console.log('AS222')}
     let colm = [];
     let COLNUM=3; //vertical wrap limit
     let tokenCOLUMNS = [];
@@ -107,6 +102,11 @@ function TokenGrid (){ //"Everything is a token". A grid for everything - Episod
          );
     }    
     return(tokenCOLUMNS)
+}
+
+function onTokenClick( token ){ 
+    console.log('AS222333',token.numz);
+    //Show PageView of Item
 }
 
 //----------------------END TOKEN-GRID------------------------------------

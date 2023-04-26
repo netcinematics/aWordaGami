@@ -1,7 +1,7 @@
 import './App.css';
 import MainView from './views/MainView';
 import TokenGrid1 from './views/TokenGrid1';
-import TokenGrid3 from './views/TokenGrid3';
+import StoryGrid1 from './views/StoryGrid1';
 import SongPhrases from './views/SongPhrases';
 import TicTacToe from './views/TicTacToeView';
 import AWordaGami1 from './views/aWordaGami1';
@@ -30,8 +30,8 @@ function App() {
               return <AWordaGami1/>;
           } else if (viewIDX === "TicTacToe") {
             return <TicTacToe/>;
-          } else if (viewIDX === "TokenGrid") {
-            return <TokenGrid3   langData = {{roots:[1,2,3,4,5,6],stems:[]}}/>;
+          } else if (viewIDX === "StoryGrid") {
+            return <StoryGrid1/>;
             // return <TokenGrid1/>;
           } else if (viewIDX === "SongPhrases") {
             return <SongPhrases/>;
@@ -49,7 +49,7 @@ function App() {
         <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px yellow'}}
            onClick={CLICKview}>TicTacToe</button>
         <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
-           onClick={CLICKview}>TokenGrid</button>
+           onClick={CLICKview}>StoryGrid</button>
         <button style={{cursor:'pointer',borderRadius:'8px',margin:'0px 10px',boxShadow:'1px 1px 5px orange'}}
            onClick={CLICKview}>SongPhrases</button>
       </nav>
