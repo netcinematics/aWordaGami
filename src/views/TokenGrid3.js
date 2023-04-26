@@ -51,18 +51,31 @@ function TokenCard({ token, onTokenClick }) {
         alignContent:'flex-end',alignItems:'stretch',height:'10em',width:'8em',
         flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly'
     } 
+    let fontColor = (token.state==='prize')?'mediumpurple':(token.state==='clue')
+                    ?'#d08701':(token.state==='locked')?'#de6666':'steelblue';
     //GAMIFICATION AGENT
     console.log('AGENT tst',token.numz)
     let gameTitle = gameAGENT(token); 
     return (
         <button style={cardStyle} onClick={onTokenClick}>
+            { (token.state)?
             <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
                 borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
-                alignItems:'center',fontSize:'xx-large'}}>
-                { (gameTitle)? gameTitle : token.title}
+                color:fontColor,
+                alignItems:'center',fontSize:'xx-large',paddingTop:'0.333em'}}>
+                {gameTitle}
             </section>
+            :
+            <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
+                borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
+                color:'#2374b7',
+                alignItems:'flex-end',fontSize:'large',paddingBottom:'0.222em'}}>
+                {token.title}
+            </section>            
+            }
             <footer style={{background:'cornflowerblue',fontSize:'x-small',
-                borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px'}}>
+                borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px',
+                color:'#4c038c'}}>
                 {token.numz}
             </footer>
         </button>
