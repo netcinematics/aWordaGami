@@ -22,7 +22,8 @@ function App() {
       <Zoom>{viewIDX}</Zoom>
       </header>
       <main style={{backgroundColor: 'rgb(22 35 62)', color:'skyblue',color:'skyblue',paddingTop:'1.5em',
-        borderRadius:'13px',margin:'1em',height:'42em',overflowY:'auto'}}>
+        borderRadius:'13px',margin:'1em',height:'42em',overflowY:'auto',
+        display:'flex',flexDirection:'column'}}>
 
       {         
         (() => { //SIMPLE-DYNAMIC-VIEW-DISPLAY: (design~innovation) // Routing - nah...

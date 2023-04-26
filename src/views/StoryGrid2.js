@@ -96,13 +96,18 @@ function PageView (){
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
         display:'flex',width:'100%',flexDirection:'column',marginRight:'1.444em'}}>
-        <header>
-        <button style={{width:'4em'}} 
-            onClick={ ()=>{setViewState('overview')}}>UP</button>
-        <button style={{width:'4em'}} 
-            onClick={ ()=>{setViewState('overview')}}>RIGHT</button>
+        <header style={{width:'100%',display:'flex',justifyContent:'space-between',
+            padding:'0.666em'}}>
+            <button style={{width:'4em'}} 
+                onClick={ ()=>{setViewState('overview')}}>UP</button>
+            <button style={{width:'4em'}} 
+                onClick={ ()=>{setViewState('overview')}}>RIGHT</button>
         </header>
-        <footer>
+        <article style={{flex:1}}>
+            x
+        </article>
+        <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
+            padding:'0.666em'}}>
             <button style={{width:'4em'}} 
                 onClick={ ()=>{setViewState('overview')}}>LEFT</button>
             <button style={{width:'4em'}} 
@@ -161,7 +166,7 @@ function onTokenClick( token ){
 return (
     <>
     <section className='mainframe' style={{display:'flex',display:'flex',justifyContent:'flex-start',
-    paddingLeft:'1.444em',height:'100%'}}>
+    paddingLeft:'1.444em',flex:1}}>
         { (viewState==='overview') ?
             <TokenGrid/>
         : (viewState==='pageview') ?
