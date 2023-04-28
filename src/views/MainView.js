@@ -1,3 +1,4 @@
+import Fade from 'react-reveal/Fade';
 import { useState } from 'react';
 import "../styles.css";
 
@@ -11,17 +12,20 @@ export default function MainView () {
             <hr style={{width:'100%'}}></hr>
             <section style={{fontSize:'x-large',display:'flex',justifyContent:'center'}}>
                 <ol style={{width:'48%',margin:'1em auto',textAlign:'left'}}>
+            <Fade cascade  damping={0.444} delay='1000' duration='4000'>
                     <li>SHOW Ai NLP Concepts</li>
                     <li>EXPLORE ChatGPT API</li>
                     <li>INNOVATE Web3/Ai USE-CASES</li>
                     <li>MERGE create-web3-DApp!</li>
+            </Fade>
                 </ol>
             </section>
             <hr style={{width:'100%'}}></hr>
             <section style={{marginBottom:'2em',fontSize:'medium',padding:'0 2em'}}>
-                This code is a WORKSPACE to PRACTICE Ai CONCEPTS like:
-                Natural Language Processing (NLP), Language Models (LLM),
-                Tokenizers, MetaData, State Attribution, Algorithms and more!
+                <Fade delay={1e3} cascade damping={1e-1}>
+                <span>This code is a WORKSPACE to PRACTICE Ai CONCEPTS like:</span>
+                <span>Natural Language Processing (NLP), Language Models (LLM),</span>
+                <span>Tokenizers, MetaData, State Attribution, Algorithms and more!</span></Fade>
                 <br></br><br></br>fork, PR, or drop a star:&nbsp;
                 <a href='https://github.com/netcinematics/aWordaGami' target="_blank">GitHub</a>...
             </section>
