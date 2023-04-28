@@ -1,5 +1,5 @@
 {
-  "homepage":"https://netcinematics.github.io/aWordaGami/",
+  "homepage": "https://netcinematics.github.io/aWordaGami/",
   "name": "aWordaGami",
   "version": "0.1.0",
   "private": false,
@@ -11,11 +11,12 @@
     "react-dom": "^18.2.0",
     "react-reveal": "^1.2.2",
     "react-scripts": "5.0.1",
+    "typewriter-effect": "^2.19.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy":"npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",

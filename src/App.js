@@ -5,7 +5,7 @@ import StoryGrid2 from './views/StoryGrid2';
 import SongPhrases from './views/SongPhrases';
 import TicTacToe from './views/TicTacToeView';
 import AWordaGami1 from './views/aWordaGami1';
-import Zoom from 'react-reveal/Zoom';
+// import Zoom from 'react-reveal/Zoom';
 import { useState } from 'react';
 
 function App() {
@@ -18,10 +18,10 @@ function App() {
   return (
     <div className="App" style={{display:'flex',flexDirection:'column',backgroundColor: 'black',
       minHeight: '77vh',maxWidth:'55em',margin:'0 auto',padding:'0.444em'}}>
-      <header className="App-header" style={{borderRadius:'13px'}}>
+      {/* <header className="App-header" style={{borderRadius:'13px'}}>
       <Zoom>{viewIDX}</Zoom>
-      </header>
-      <main style={{backgroundColor: 'rgb(22 35 62)', color:'skyblue',color:'skyblue',paddingTop:'1.5em',
+      </header> */}
+      <main style={{color:'skyblue',color:'skyblue',
         borderRadius:'13px',margin:'1em',height:'42em',overflowY:'auto',
         display:'flex',flexDirection:'column'}}>
 
