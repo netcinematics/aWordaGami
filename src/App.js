@@ -28,7 +28,7 @@ function App() {
       {         
         (() => { //SIMPLE-DYNAMIC-VIEW-DISPLAY: (design~innovation) // Routing - nah...
           if (viewIDX === "aWORDaGAMi") {
-              return <AWordaGami1/>;
+            return <AWordaGami1/>;
           } else if (viewIDX === "TicTacToe") {
             return <TicTacToe/>;
           } else if (viewIDX === "StoryGrid") {

@@ -1,7 +1,7 @@
 import Zoom from 'react-reveal/Zoom';
 // import NeuralNet from './NeuralNet'
 import LangData from '../data/SocialPhraseCLM'
-// import TallySound from '../sonic/nxTally0d.mp3'
+// import TallySound from './sonic/nxTally0d.mp3'
 import { useState,useEffect } from 'react';
 
 //ai DESIGN PATTERNS:
@@ -120,9 +120,12 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             var windSOUND = new Audio("./sonic/nxWin1a.mp3");
             windSOUND.play();            
         } else { // Correct
+            // TallySound.play();
+            // var tallySOUND = new Audio("./nxTally0d.mp3");
             var tallySOUND = new Audio("./sonic/nxBlip2b.mp3");
             tallySOUND.play()
-             .then(() => {/*Audio playing*/}).catch(error => {console.log(error); });
+             .then(() => {/*Audio playing*/}).catch(error => {console.log('CATCH THIS:',error); });
+            // tallySOUND.onload = () => tallySOUND.play()
         }
     }
 
@@ -203,7 +206,7 @@ export default function AWordaGami1(){ //first letter needs to be capital to hav
             </gameframe>
             <footer style={{color:'darkcyan',fontSize:'small',paddingBottom:'1em',fontFamily:'sans-serif'}}>
                 { 
-                    (!nextGame)? <>click a word, to solve the puzzle<div>Shows: NLP, MetaData, & Language Model.</div></>: 
+                    (!nextGame)? <>click a word, to solve the puzzle<div>Shows: NLP, Tokenizer, MetaData State System, & Language Model.</div></>: 
                         <button style={{borderRadius:'8px',padding:'1em',background:'darkseagreen',
                             boxShadow:'0px -1px 5px 1px gold', cursor:'pointer',userSelect:'none' }}
                             onClick={nextGameCLICK}>NEXT GAME </button>
