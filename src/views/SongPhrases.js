@@ -263,13 +263,14 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
         <>
             <h1 style={{display:'flex',justifyContent:'center'}}>
                 <Zoom>Lyric Generator &nbsp; {gameIDX}</Zoom></h1>
-            <gameframe style={{display:'flex',alignItems:'flex-start',flexDirection:'column',
-                borderTop:'2px solid purple',borderRadius:'13px',margin:'1em 3% 0px',padding:'2%'}}>
+            <article className='gameframe' style={{display:'flex',alignItems:'flex-start',flexDirection:'column',
+                borderTop:'2px solid purple',borderRadius:'13px',margin:'1em 3% 0px',
+                overflowY:'auto', padding:'2%'}}>
                 <aside style={{width:'25%',paddingTop:'1em',width:'100%',paddingTop:'1em'}}>
                     <h2 style={{marginRight:'1em'}}>
                         your lyrics:</h2>
                 <section style={{border:'1px solid skyblue',borderRadius:'8px',marginRight:'2%',
-                        padding:'0.8em',overflowX:'hidden',overflowY:'auto',display:'flex',
+                        padding:'0.8em',overflowX:'hidden',display:'flex',
                         boxShadow:'inset 0px 1px 8px 0px blue'}}>
                     <textarea name="TXTInput" cols="1" rows="4" spellcheck='false' 
                         placeholder='type text to generate rhymes'
@@ -281,14 +282,14 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
                 <button style={{borderRadius:'8px',padding:'0.5em',background:'darkseagreen',marginTop:'1.3em',
                             boxShadow:'0px -1px 5px 1px gold', cursor:'pointer',userSelect:'none' }}
                             onClick={generateTXTCLICK}>GENERATE TXT</button>
-            </aside>
+                </aside>
                 {
                    (showResults) ?
                     <aside style={{width:'90%',paddingTop:'1em',margin:'0 auto'}}>
 
                         <h2>rhyme_stems:</h2>
                         <section style={{border:'1px solid steelblue',borderRadius:'8px',
-                            display:'flex',flexDirection:'column',height:'100%',padding:'0.444em'}}>
+                            display:'flex',flexDirection:'column',padding:'0.444em'}}>
                             <gameboard style={{borderBottom:'1px solid darkslategray',borderRadius:'8px',
                                 display:'flex',flexDirection:'row',alignContent:'center',minHeight:'300px',
                                 justifyContent:'center',alignItems:'center',flexWrap:'wrap'}}>
@@ -306,7 +307,7 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
 
                         <h2>token_grid:</h2>
                         <section style={{border:'1px solid steelblue',borderRadius:'8px',
-                            display:'flex',flexDirection:'column',height:'100%',padding:'0.444em'}}>
+                            display:'flex',flexDirection:'column',padding:'0.444em'}}>
                             <gameboard style={{borderBottom:'1px solid darkslategray',borderRadius:'8px',
                                 display:'flex',flexDirection:'row',alignContent:'center',minHeight:'300px',
                                 alignContent:'flex-start',marginTop:'1.5em',overflowX:'auto',
@@ -332,7 +333,7 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
                     </aside>
                     : ''
                 }
-            </gameframe>
+            </article>
             <footer style={{color:'darkcyan',fontSize:'small',paddingBottom:'1em',fontFamily:'sans-serif'}}>
                 { <p style={{lineHeight:'1.5em'}}>
                     Shift + Enter to Generate TXT. <br/>

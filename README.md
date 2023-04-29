@@ -160,7 +160,9 @@ O - GRID in song lyrics. shows Rhyme_Strength. FOCUS.
 
 # CONCLUSIONS / 
 
-???
+> It is GREAT to CODE with ChatGPT.
+
+> Use ChatGPT instead of Google to code.
 
 ---
 
@@ -168,6 +170,7 @@ O - GRID in song lyrics. shows Rhyme_Strength. FOCUS.
 // npm i create-react-app
 // npm i react-reveal --save
 // npm i gh-pages --save-dev
+// npm i typewriter-effect
 // npm run deploy
 ---
 

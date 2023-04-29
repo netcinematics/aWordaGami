@@ -18,11 +18,11 @@ export default function MainView () {
             <section style={{fontSize:'x-large',display:'flex',justifyContent:'center'}}>
                 <ol style={{margin:'1em auto',textAlign:'left'}}>
             <Fade cascade  damping={0.444} delay='1000' duration='4000'>
-                    <li>SHOW Ai NLP Concepts</li>
-                    <li>EXPLORE Ai Patterns, React</li>
-                    <li>INNOVATE Ai with Web3</li>
-                    <li>INTEGRATE Ai in NodeJS</li>
-                    <li>Data Visualization with D3.js</li>
+                    <li>Ai NLP Concepts</li>
+                    <li>Ai Patterns in React</li>
+                    <li>Ai with Web3?</li>
+                    <li>Ai in NodeJS?</li>
+                    <li>Data Visualization D3.js</li>
             </Fade>
                 </ol>
             </section>
@@ -38,7 +38,7 @@ export default function MainView () {
               autoStart: true,
               loop: true,
               delay: 50,
-              changeDeleteSpeed:44
+              changeDeleteSpeed:4
             }}
           />
         </div>

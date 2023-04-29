@@ -98,3 +98,40 @@
     background:blue !important;
     color:white !important;
    } */
+   .cardTileBtn{
+    background: rgb(111, 172, 247);
+    border: 1px solid rgb(68, 68, 68);
+    line-height: 20px;
+    margin: 0.5em;
+    border-radius: 13px;
+    box-shadow: blue 1px 1px 5px 0px inset;
+    cursor: pointer;
+    color: rgb(1, 52, 52);
+    text-shadow: whitesmoke -1px 0px 1px;
+    display: flex;
+    place-content: flex-end space-evenly;
+    align-items: stretch;
+    min-width: 15em;
+    flex-direction: column;
+    padding: 0.555em;
+  }
+
+  /* mobile styles here */
+  @media only screen and (min-width: 350px) {
+    .cardTileBtn{ min-width: 15em; flex: 1 1 0; }
+  }
+  @media only screen and (max-width: 350px) {
+    .cardTileBtn{ width:10vw; height:10vw}
+  }
+  /*tablet styles here*/
+  @media only screen and (min-width: 550px) {
+    .cardTileBtn{ width:18vw; height:18vw}
+  }
+  /*desktop styles here*/
+  @media only screen and (min-width: 800px) {
+    .cardTileBtn{ width:20vw; height:20vw }  
+  }
+  /*desktop styles here*/
+  @media only screen and (min-width: 1500px) {
+    .cardTileBtn{ width:18vw; height:18vw }  
+  }

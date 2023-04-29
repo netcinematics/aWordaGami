@@ -1,7 +1,7 @@
 import './App.css';
 import MainView from './views/MainView';
-import TokenGrid1 from './views/TokenGrid1';
 import StoryGrid2 from './views/StoryGrid2';
+import StoryGrid3 from './views/StoryGrid3';
 import SongPhrases from './views/SongPhrases';
 import TicTacToe from './views/TicTacToeView';
 import AWordaGami1 from './views/aWordaGami1';
@@ -9,20 +9,17 @@ import AWordaGami1 from './views/aWordaGami1';
 import { useState } from 'react';
 
 function App() {
-  const [viewIDX, setViewIDX] = useState('aWORDaGAMi');
-  
-  function CLICKview (e) {
-    setViewIDX(e.target.innerText);
-  }
+  const [viewIDX, setViewIDX] = useState(''); 
+  function CLICKview (e) { setViewIDX(e.target.innerText); }
 
   return (
     <div className="App" style={{display:'flex',flexDirection:'column',backgroundColor: 'black',
-      minHeight: '77vh',maxWidth:'55em',margin:'0 auto',padding:'0.444em'}}>
+      minHeight: '80vh',maxWidth:'55em',margin:'0 auto',padding:'0.444em'}}>
       {/* <header className="App-header" style={{borderRadius:'13px'}}>
       <Zoom>{viewIDX}</Zoom>
       </header> */}
-      <main style={{color:'skyblue',color:'skyblue',
-        borderRadius:'13px',margin:'1em',height:'42em',overflowY:'auto',
+      <main style={{color:'skyblue',color:'skyblue', paddingTop:'1.5em',
+        borderRadius:'13px',margin:'1em',height:'48em',
         display:'flex',flexDirection:'column'}}>
 
       {         
@@ -32,8 +29,7 @@ function App() {
           } else if (viewIDX === "TicTacToe") {
             return <TicTacToe/>;
           } else if (viewIDX === "StoryGrid") {
-            return <StoryGrid2/>;
-            // return <TokenGrid1/>;
+            return <StoryGrid3/>;
           } else if (viewIDX === "SongPhrases") {
             return <SongPhrases/>;
           } else {

@@ -138,7 +138,8 @@ export default function TikTacToeView () {
 //----------------------TOKEN-GRID------------------------------------
 
 
-return (
+return (<>
+  <h1>TicTacToe</h1>
   <article style={{display:'flex',flexDirection:'column',height:'100%'}}>
     <style>{`
       .tile{
@@ -159,7 +160,7 @@ return (
         margin:2px;       
       } 
     `}</style>
-    <h1>TicTacToe Example</h1>
+    <h1>Algorithm Example</h1>
     <section style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
      <Game/>
     </section>
@@ -174,6 +175,7 @@ return (
       Demonstrates: algorithm, state and agent concepts.
     </section>
   </article>
+  </>
 )
 
 };
