@@ -1,17 +1,15 @@
 import "../styles.css";
 import LangData from '../data/SocialPhraseCLM'
 import { useState, useEffect } from 'react';
+import TokenFrame from "./TokenFrame1";
 
 export default function StoryGrid3 () {
-
-// let [stemsARR, setStemsARR] = useState([]);
 let [rootsARR, setRootsARR] = useState([]);
 let [viewState, setViewState] = useState('overview');
 
 const [hover, setHover] = useState(false);
 const handleMouseIn = ()=> {setHover(true) };
 const handleMouseOut = ()=> {setHover(false) };
-
 
 useEffect(() => {
     loadTokenData();
@@ -58,29 +56,31 @@ function TokenCard({ token, onTokenClick }) {
     //GAMIFICATION AGENT
     let gameTitle = gameAGENT(token); 
     return (
-        <button style={cardStyle} onClick={onTokenClick} className={hover?'btnHover':''}
-            onMouseOver={handleMouseIn} onMouseOut={handleMouseOut}>
-            { (token.state)?
-            <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
-                borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
-                color:fontColor,
-                alignItems:'center',fontSize:'xx-large',paddingTop:'0.333em'}}>
-                {gameTitle}
-            </section>
-            :
-            <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
-                borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
-                color:'#2374b7',
-                alignItems:'flex-end',fontSize:'large',paddingBottom:'0.222em'}}>
-                {token.title}
-            </section>            
-            }
-            <footer style={{background:'cornflowerblue',fontSize:'x-small',
-                borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px',
-                color:'#4c038c'}}>
-                {token.numz}
-            </footer>
-        </button>
+        <TokenFrame/>
+        // <button style={cardStyle} onClick={onTokenClick} className={hover?'btnHover':''}
+        //     onMouseOver={handleMouseIn} onMouseOut={handleMouseOut}>
+        //     { (token.state)?
+        //     <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
+        //         borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
+        //         color:fontColor,
+        //         alignItems:'center',fontSize:'xx-large',paddingTop:'0.333em'}}>
+        //         {gameTitle}
+        //     </section>
+        //     :
+        //     <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
+        //         borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
+        //         color:'#2374b7',
+        //         alignItems:'flex-end',fontSize:'large',paddingBottom:'0.222em'}}>
+        //         {token.title}
+        //     </section>            
+        //     }
+            
+        //     <footer style={{background:'cornflowerblue',fontSize:'x-small',
+        //         borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px',
+        //         color:'#4c038c'}}>
+        //         {token.numz}
+        //     </footer>
+        // </button>
     );
 }
 

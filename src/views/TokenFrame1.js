@@ -13,11 +13,11 @@ class TokenFrame extends Component {
   render() {
     return (
       <button
-        className={this.state.isHovered ? 'hovered-button' : ''}
+        className={this.state.isHovered ? 'btnHover' : ''}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
-        A...
+
       </button>
     );
   }
