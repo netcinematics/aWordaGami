@@ -3,27 +3,25 @@ pronounced: ah-WORD_uh_GAH-mi
 
 Ai ~ Oragami!
 
-> AI and CRYPTO-WORD-GAME.
+> AI WORD-GAME.
+
+> AI SONG-LYRICS.
 
 LIVE EXAMPLE: https://netcinematics.github.io/aWordaGami/
 
 ---
-1. To LEARN Artificial Intelligence USE-CASES and 
+1. EXAMPLE Artificial Intelligence USE-CASES and 
 2. Constructs, Data Structures, Design Patterns.
-3. To deploy with AU: create-web3-dapp.
+3. To deploy aWordza
 ---
 
-## AI-Generated Word-Game with Tokenomics.
+## AI-Generated Word-Game & Song-Lyrics & Story-Tree UI.
 
 INSTRUCTIONS:
 - Navigate a Tree of Puzzles.
 - Unlock new puzzles.
 - Word Puzzles
 - EPICZ MixMedia renderer
-- Collect ACHIEVEMENTZ.
-- Token integrationz...
-
-- 
 
 ---
 
@@ -44,32 +42,16 @@ INSTRUCTIONS:
 
 - Tell us a story Ai!
 
-//SERVER TODO:
-
-O - NodeJS / Python - Mint Server (w Royalties) 
-O - "MIX-MEDIA", everything above into TOKENZ or NFTZ...  by
-X - Number-naming convention for NFT TOKEN SETS: NUMZ (designed) (GraphQL)
-O - NEW SmartContract UTILITY, *ABILITY, custom, UNLOCKABLE. (concept)
-O - NEW TokenWebz: overview layout | UI/UX (based on Reveal.js)  (designed)
-X - in React front-end template (done)!
+//SERVER 
+- http://localhost:8008/news
+- https://node-dashboard-server.vercel.app/news
 
 ---
 
-
 1) X Rescue 20 year old.. Ai Ii Song Lyrics "Social-Phrases" from DATA STORAGE!
 2) X Revive Lexical Tokenizer (NLP), into RICH REACT UI.
-    O AI song-lyrics / X word puzzles / O txt stories / O mix media stories.
+    X AI song-lyrics / X word puzzles / O story_tree / O mix media story_tree.
 3) X Get old NodeJS media server templates...
-    O convert "AI-Phrases" into file, and GraphQL. 
-    O MockData Combines with "Interact"
-4) X Display Phrases in UI. From Local. O Then from Vercel.
-5) X Convert NEXT.JS, REACT.JS Portfolio to - DAPPMAP GALLERY.
-6) X Convert Reveal.js to Item display, and add to Gallery/routes.
-7) O Overview Mode - to: TokenWebZ, EPICWEBZ, DappMap, aSTORYaGAMi - with NUMZ.
-8) O Gamification / Tokenomics / Tokenization, aTOKENaGAMi - VISUALIZATION.
-9) O Creator Paid - Smart Contracts. - from Royalty code.
-10) X NUMZ number-naming-convention: view / url / route / file / uri / id / linkz / QRCode.
-11) O 
 
 ---
 
@@ -125,6 +107,8 @@ artificial-reef
 preventable-burn
 treated-waste-water
 great-pacific-garbage-patch
+toxic-fog
+wildfire-haze
 ---
 
 ### UI TODO:
@@ -153,16 +137,12 @@ O - GRID in song lyrics. shows Rhyme_Strength. FOCUS.
 
 # HYPOTHESIS
 
-- Ai in Web3 experiments for innovative USE-CASES.
-
-"Tokenizing the Tokenizer"
+new viewz
 
 
 # CONCLUSIONS / 
 
-> It is GREAT to CODE with ChatGPT.
-
-> Use ChatGPT instead of Google to code.
+> Use ChatGPT as copilot with Google to code.
 
 ---
 
@@ -173,21 +153,22 @@ O - GRID in song lyrics. shows Rhyme_Strength. FOCUS.
 // npm i typewriter-effect
 // npm run deploy
 ---
+// npm i axios
+
 
 
 # GOALS:
 
-1. Use to LEARN (simplified) Ai CONCEPTS:
-     - algorithm, LLM, NLP, Tokenizer
+1. EXAMPLE (simple) Ai CONCEPTS and PATTERNS:
+    X - algorithm, LLM, NLP, Tokenizer
+    O - file-server integration
      
-
-
-
 ## Run
 
 npm install
 
 npm start
+//http://localhost:3000/aWordaGami
 
 ## LIVE EXAMPLE
 

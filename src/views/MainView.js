@@ -1,10 +1,43 @@
 import Typewriter from "typewriter-effect";
 import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade';
-import { useState } from 'react';
+// import { useState } from 'react';
+// import React, { useEffect } from "react";
+import { useEffect } from "react";
+// import {useEffect, useState} from 'react'
+import axios from 'axios'
 import "../styles.css";
 
 export default function MainView () {
+
+    useEffect(() => { document.title = "Good_Ai";  }, []);
+    useEffect(() => {
+       getMarkdownDATA();
+    }, [])
+
+    function getMarkdownDATA(){
+    // if(!prompt)return; 
+    const options = {
+        method: 'GET',
+        // url: 'https://node-dashboard-server.vercel.app/ai2',
+        params: {'lookup':'tokenz'},
+        // url: 'http://localhost:8008/news',
+        url: 'http://localhost:8008/libz/',
+        // params: {prompt:'what time is it?'}
+    }
+    axios.request(options).then((response) => {
+        // debugger;
+        console.log("CLIENT data:", response.data)
+        //setResponses(response.data)
+    }).catch((error) => {
+        console.error(error)
+    })    
+    }
+
+    function handleClick(){
+        getMarkdownDATA();
+    }
+
 
     return (<>
         <header className="App-header" style={{borderRadius:'13px'}}>
