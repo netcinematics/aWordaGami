@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+
+// import ReactMarkdown from 'react-markdown'
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render( <App />);
+// root.render(<ReactMarkdown># Hello, *world*!</ReactMarkdown>, document.body)
 // root.render(
 //   <React.StrictMode>
 //     <App />
