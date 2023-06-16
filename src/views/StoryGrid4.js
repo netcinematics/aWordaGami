@@ -1,7 +1,8 @@
 import "../styles.css";
 import LangData from '../data/SocialPhraseCLM'
 import { useState, useEffect } from 'react';
-import TokenFrame from "./TokenFrame1";
+// import TokenFrame from "./TokenFrame1";
+import TokenFrame from "./TokenFrame2";
 import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
 
@@ -24,21 +25,29 @@ function getMarkdownDATA(){
         method: 'GET',
         // url: 'https://node-dashboard-server.vercel.app/ai2',
         params: {'lookup':'tokenz'},
-        // url: 'http://localhost:8008/news',
         url: 'http://localhost:8008/libz/',
-        // params: {prompt:'what time is it?'}
     }
     axios.request(options).then((response) => {
-        // debugger;
-        console.log("CLIENT data:", response.data)
         displayMarkdown(response.data)
-        //setResponses(response.data)
     }).catch((error) => {
         console.error(error)
     })    
 }
 
 function displayMarkdown(md){
+    // setMarkdownDATA(md)
+    let spaceData = md.split(' ');
+    let linkData = spaceData.map( (item)=>{
+        if(item.includes('~')){
+            return '!~!'
+        } else if (item.includes('_')) {
+            return '!_!'
+        } else {
+            return item
+        }
+    } )
+    debugger;
+    
     setMarkdownDATA(md)
 }
 
@@ -79,7 +88,7 @@ const tokenz = [  //NUMZ INFORMATION-ARCHITECTURE
   ];
 
 
-function TokenCard({ token, onTokenClick }) {
+function TokenCard({ token }) {
     let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
         borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
         color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
@@ -91,7 +100,7 @@ function TokenCard({ token, onTokenClick }) {
     //GAMIFICATION AGENT
     let gameTitle = gameAGENT(token); 
     return (
-        <TokenFrame/>
+        <TokenFrame token={token}/>
         // <button style={cardStyle} onClick={onTokenClick} className={hover?'btnHover':''}
         //     onMouseOver={handleMouseIn} onMouseOut={handleMouseOut}>
         //     { (token.state)?
@@ -191,7 +200,6 @@ function TokenGrid (){ //"Everything's a token!" A grid for everything - Episodi
 function onTokenClick( token ){ 
     console.log('A',token.numz);
     setViewState("pageview");
-    //Show PageView of Item
 }
 
 //----------------------END TOKEN-GRID------------------------------------
@@ -203,10 +211,10 @@ flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly' }
 
 return (
     < >
-    <h1>StoryGrid</h1>
-    <ReactMarkdown>
+    <h1>StoryTree</h1>
+    {/* <ReactMarkdown>
             {markdownDATA}
-        </ReactMarkdown>
+        </ReactMarkdown> */}
 <main style={{overflowY:'auto'}}>
     <section className='mainframe' style={{display:'flex',display:'flex',justifyContent:'space-evenly',
     paddingLeft:'1.444em',paddingRight:'1.444em',flex:1}}>

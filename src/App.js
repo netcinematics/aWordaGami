@@ -30,7 +30,7 @@ function App() {
           } else if (viewIDX === "TicTacToe") {
             return <TicTacToe/>;
           } else if (viewIDX === "StoryGrid") {
-            return <StoryGrid3/>;
+            return <StoryGrid4/>;
           } else if (viewIDX === "SongPhrases") {
             return <SongPhrases/>;
           } else {
