@@ -3,9 +3,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 function TokenFrame ( { token } ) {
-    // console.log("param",token)
-    // useEffect(() => { document.title = "Good_Ai";  }, []);
-    // useEffect(() => {  }, []);
+    useEffect(() => { document.title = "aGood_a_Storya";  }, []);
+    // useEffect(() => { getTokenz()  }, []);
 
     let [isHovered, setHovered] = useState(false);
 
@@ -28,16 +27,46 @@ function TokenFrame ( { token } ) {
         flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly'
     } 
 
+    function gameAGENT(token){ //REACT to state and RESPOND
+        if(!token){return ''}
+        else if (token.state==='locked'){return 'X'}
+        else if (token.state==='prize'){return '!'}
+        else if (token.state==='clue'){return '?'}
+    }
+    let gameTitle = gameAGENT(token); 
+    let dynamicFontColor = (token.state==='prize')?'mediumpurple':(token.state==='clue')
+    ?'#d08701':(token.state==='locked')?'#de6666':'steelblue';
     return (<>
-        <h2>StoryFrame</h2>
-        <h3>{token.numz}</h3>
-        <h4> {token.title}</h4>
-
+        {/* <h2>StoryFrame</h2> */}
+        {/* <h3>{token.numz}</h3> */}
+        {/* <h4> {token.title}</h4> */}
+        {/* {gameTitle} */}
         <button className={isHovered ? 'btnHover' : 'x'} style={cardStyle}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={onTokenClick}
-        ></button>
+            onClick={onTokenClick}>
+                 { (token.state)?
+            <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
+                borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
+                color:dynamicFontColor,
+                alignItems:'center',fontSize:'xx-large',paddingTop:'0.333em'}}>
+                {gameTitle}
+            </section>
+            :
+            <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
+                borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
+                color:'#2374b7',
+                alignItems:'flex-end',fontSize:'large',paddingBottom:'0.222em'}}>
+                {token.title}
+            </section>            
+            }
+            
+            <footer style={{background:'cornflowerblue',fontSize:'x-small',
+                borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px',
+                color:'#4c038c'}}>
+                {token.numz}
+            </footer>
+        </button>
     </>)
 
 }

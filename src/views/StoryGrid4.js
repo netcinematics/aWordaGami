@@ -15,10 +15,25 @@ const handleMouseIn = ()=> {setHover(true) };
 const handleMouseOut = ()=> {setHover(false) };
 
 let [markdownDATA, setMarkdownDATA] = useState("");
+let [tokenzDATA, setTokenzDATA] = useState([]);
 useEffect(() => { document.title = "Good_Ai";  }, []);
-useEffect(() => {
-   getMarkdownDATA();
-}, [])
+// useEffect(() => { getMarkdownDATA(); }, [])
+useEffect(() => { getTokenzDATA() }, []);
+
+function getTokenzDATA(){
+    const options = {
+        method: 'GET',
+        // url: 'https://node-dashboard-server.vercel.app/ai2',
+        params: {'lookup':'tokenz'},
+        url: 'http://localhost:8008/libz/tokenz/',
+    }
+    axios.request(options).then((response) => {
+        console.log(response.data.tokenz)
+        displayTokenz(response.data.tokenz)
+    }).catch((error) => {
+        console.error(error)
+    })    
+}
 
 function getMarkdownDATA(){
     const options = {
@@ -32,6 +47,24 @@ function getMarkdownDATA(){
     }).catch((error) => {
         console.error(error)
     })    
+}
+
+function displayTokenz(tokenz){
+    setTokenzDATA(tokenz)
+    // // setMarkdownDATA(md)
+    // let spaceData = md.split(' ');
+    // let linkData = spaceData.map( (item)=>{
+    //     if(item.includes('~')){
+    //         return '!~!'
+    //     } else if (item.includes('_')) {
+    //         return '!_!'
+    //     } else {
+    //         return item
+    //     }
+    // } )
+    // debugger;
+    
+    // setMarkdownDATA(md)
 }
 
 function displayMarkdown(md){
@@ -75,17 +108,17 @@ useEffect(() => {
 
 //----------------------TOKEN-GRID------------------------------------
 
-const tokenz = [  //NUMZ INFORMATION-ARCHITECTURE
-    { title: 'First', numz: '1_0', id:1 },
-    { title: 'First.1', numz: '1_1', id:4 },
-    { title: 'First.2', numz: '1_2', id:5 },
-    { title: 'First.2', numz: '1_3', id:7,state:'locked' },
-    { title: 'Second', numz: '2_0', id:2},
-    { title: 'Second.1', numz: '2_1', id:6},
-    { title: 'Second.2', numz: '2_2', id:8, state:'clue'},
-    { title: 'Third', numz: '3_0', id:3 },
-    { title: 'Third.1', numz: '3_1', id:9, state:'prize' },
-  ];
+// const tokenz = [  //NUMZ INFORMATION-ARCHITECTURE
+//     { title: 'First', numz: '1_0', id:1 },
+//     { title: 'First.1', numz: '1_1', id:4 },
+//     { title: 'First.2', numz: '1_2', id:5 },
+//     { title: 'First.2', numz: '1_3', id:7,state:'locked' },
+//     { title: 'Second', numz: '2_0', id:2},
+//     { title: 'Second.1', numz: '2_1', id:6},
+//     { title: 'Second.2', numz: '2_2', id:8, state:'clue'},
+//     { title: 'Third', numz: '3_0', id:3 },
+//     { title: 'Third.1', numz: '3_1', id:9, state:'prize' },
+//   ];
 
 
 function TokenCard({ token }) {
@@ -183,8 +216,10 @@ function TokenGrid (){ //"Everything's a token!" A grid for everything - Episodi
     let COLNUM=3; //vertical wrap limit
     let tokenCOLUMNS = [];
     let humanIDX = 0; //column header
-    for(let i=0; i<tokenz.length; i += COLNUM){
-        colm = tokenz.slice(i,i+COLNUM);
+    // for(let i=0; i<tokenz.length; i += COLNUM){
+    for(let i=0; i<tokenzDATA.length; i += COLNUM){
+        // colm = tokenz.slice(i,i+COLNUM);
+        colm = tokenzDATA.slice(i,i+COLNUM);
         ++humanIDX;
          tokenCOLUMNS.push( <div style={{display:'flex',flexDirection:'column',flex:'1 1 0'}}>
             <header>{humanIDX}</header>
