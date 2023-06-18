@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-function TokenFrame ( { token } ) {
+function TokenFrame ( { token, setMainViewStatefn } ) {
     useEffect(() => { document.title = "aGood_a_Storya";  }, []);
     // useEffect(() => { getTokenz()  }, []);
 
@@ -16,7 +16,8 @@ function TokenFrame ( { token } ) {
     }
 
     function onTokenClick(  ){ 
-        console.log('A',token.numz);
+        console.log('enable page view',token.numz);
+        setMainViewStatefn("pageview",token);
         // setViewState("pageview");
     }
 
@@ -36,29 +37,27 @@ function TokenFrame ( { token } ) {
     let gameTitle = gameAGENT(token); 
     let dynamicFontColor = (token.state==='prize')?'mediumpurple':(token.state==='clue')
     ?'#d08701':(token.state==='locked')?'#de6666':'steelblue';
+    //-----------------TOKEN---------------
     return (<>
         {/* <h2>StoryFrame</h2> */}
-        {/* <h3>{token.numz}</h3> */}
-        {/* <h4> {token.title}</h4> */}
-        {/* {gameTitle} */}
         <button className={isHovered ? 'btnHover' : 'x'} style={cardStyle}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={onTokenClick}>
-                 { (token.state)?
-            <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
-                borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
-                color:dynamicFontColor,
-                alignItems:'center',fontSize:'xx-large',paddingTop:'0.333em'}}>
-                {gameTitle}
-            </section>
+            { (token.state)?
+                <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
+                    borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
+                    color:dynamicFontColor,
+                    alignItems:'center',fontSize:'xx-large',paddingTop:'0.333em'}}>
+                    {gameTitle}
+                </section>
             :
-            <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
-                borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
-                color:'#2374b7',
-                alignItems:'flex-end',fontSize:'large',paddingBottom:'0.222em'}}>
-                {token.title}
-            </section>            
+                <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
+                    borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
+                    color:'#2374b7',
+                    alignItems:'flex-end',fontSize:'large',paddingBottom:'0.222em'}}>
+                    {token.title}
+                </section>            
             }
             
             <footer style={{background:'cornflowerblue',fontSize:'x-small',

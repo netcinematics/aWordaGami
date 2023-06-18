@@ -1,7 +1,6 @@
 import "../styles.css";
 import LangData from '../data/SocialPhraseCLM'
 import { useState, useEffect } from 'react';
-// import TokenFrame from "./TokenFrame1";
 import TokenFrame from "./TokenFrame2";
 import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
@@ -9,10 +8,11 @@ import ReactMarkdown from 'react-markdown'
 export default function StoryGrid4 () {
 let [rootsARR, setRootsARR] = useState([]);
 let [viewState, setViewState] = useState('overview');
+let [selectedToken, setSelectedToken] = useState({});
 
 const [hover, setHover] = useState(false);
-const handleMouseIn = ()=> {setHover(true) };
-const handleMouseOut = ()=> {setHover(false) };
+// const handleMouseIn = ()=> {setHover(true) };
+// const handleMouseOut = ()=> {setHover(false) };
 
 let [markdownDATA, setMarkdownDATA] = useState("");
 let [tokenzDATA, setTokenzDATA] = useState([]);
@@ -28,8 +28,9 @@ function getTokenzDATA(){
         url: 'http://localhost:8008/libz/tokenz/',
     }
     axios.request(options).then((response) => {
-        console.log(response.data.tokenz)
-        displayTokenz(response.data.tokenz)
+        // console.log(response.data.tokenz)
+        // displayTokenz(response.data.tokenz)
+        setTokenzDATA(response.data.tokenz)
     }).catch((error) => {
         console.error(error)
     })    
@@ -49,23 +50,9 @@ function getMarkdownDATA(){
     })    
 }
 
-function displayTokenz(tokenz){
-    setTokenzDATA(tokenz)
-    // // setMarkdownDATA(md)
-    // let spaceData = md.split(' ');
-    // let linkData = spaceData.map( (item)=>{
-    //     if(item.includes('~')){
-    //         return '!~!'
-    //     } else if (item.includes('_')) {
-    //         return '!_!'
-    //     } else {
-    //         return item
-    //     }
-    // } )
-    // debugger;
-    
-    // setMarkdownDATA(md)
-}
+// function displayTokenz(tokenz){
+//     setTokenzDATA(tokenz)
+// }
 
 function displayMarkdown(md){
     // setMarkdownDATA(md)
@@ -79,13 +66,8 @@ function displayMarkdown(md){
             return item
         }
     } )
-    debugger;
-    
+    // debugger;    
     setMarkdownDATA(md)
-}
-
-function handleClick(){
-    getMarkdownDATA();
 }
 
 useEffect(() => {
@@ -106,20 +88,6 @@ useEffect(() => {
 
  }
 
-//----------------------TOKEN-GRID------------------------------------
-
-// const tokenz = [  //NUMZ INFORMATION-ARCHITECTURE
-//     { title: 'First', numz: '1_0', id:1 },
-//     { title: 'First.1', numz: '1_1', id:4 },
-//     { title: 'First.2', numz: '1_2', id:5 },
-//     { title: 'First.2', numz: '1_3', id:7,state:'locked' },
-//     { title: 'Second', numz: '2_0', id:2},
-//     { title: 'Second.1', numz: '2_1', id:6},
-//     { title: 'Second.2', numz: '2_2', id:8, state:'clue'},
-//     { title: 'Third', numz: '3_0', id:3 },
-//     { title: 'Third.1', numz: '3_1', id:9, state:'prize' },
-//   ];
-
 
 function TokenCard({ token }) {
     let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
@@ -133,31 +101,7 @@ function TokenCard({ token }) {
     //GAMIFICATION AGENT
     let gameTitle = gameAGENT(token); 
     return (
-        <TokenFrame token={token}/>
-        // <button style={cardStyle} onClick={onTokenClick} className={hover?'btnHover':''}
-        //     onMouseOver={handleMouseIn} onMouseOut={handleMouseOut}>
-        //     { (token.state)?
-        //     <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
-        //         borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
-        //         color:fontColor,
-        //         alignItems:'center',fontSize:'xx-large',paddingTop:'0.333em'}}>
-        //         {gameTitle}
-        //     </section>
-        //     :
-        //     <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
-        //         borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
-        //         color:'#2374b7',
-        //         alignItems:'flex-end',fontSize:'large',paddingBottom:'0.222em'}}>
-        //         {token.title}
-        //     </section>            
-        //     }
-            
-        //     <footer style={{background:'cornflowerblue',fontSize:'x-small',
-        //         borderBottomLeftRadius:'10px',borderBottomRightRadius:'10px',
-        //         color:'#4c038c'}}>
-        //         {token.numz}
-        //     </footer>
-        // </button>
+        <TokenFrame token={token} setMainViewStatefn={setMainViewStatefn}/>
     );
 }
 
@@ -179,8 +123,8 @@ function PageView (){
             <button style={{width:'4em'}} 
                 onClick={ ()=>{setViewState('overview')}}>RIGHT</button>
         </header>
-        <article style={{flex:1}}>
-            x
+        <article style={{flex:1, color:'steelblue'}}>
+            {(selectedToken && selectedToken.title)?selectedToken.title:'_'}
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
@@ -189,15 +133,6 @@ function PageView (){
             <button style={{width:'4em'}} 
                 onClick={ ()=>{setViewState('overview')}}>DOWN</button>
         </footer>
-        {/* <button style={{width:'4em',    flex: 1,
-    flexDirection:'row',
-    alignSelf: "right",
-    justifyContent: "space-between",
-    backgroundColor: "transparent",
-    borderWidth: 0.666,
-    borderRadius: 20
-    }} 
-            onClick={ ()=>{setViewState('detailview')}}>details</button> */}
     </main>
     </>)
 }
@@ -224,7 +159,8 @@ function TokenGrid (){ //"Everything's a token!" A grid for everything - Episodi
          tokenCOLUMNS.push( <div style={{display:'flex',flexDirection:'column',flex:'1 1 0'}}>
             <header>{humanIDX}</header>
             { colm.map( (token,idx)=>{ 
-                return <TokenCard token={token} onTokenClick={() => onTokenClick(token)} />
+                return <TokenCard token={token}/>
+                // return <TokenCard token={token} onTokenClick={() => onTokenClick(token)} />
             }) }
          </div> 
          );
@@ -232,12 +168,17 @@ function TokenGrid (){ //"Everything's a token!" A grid for everything - Episodi
     return(tokenCOLUMNS)
 }
 
-function onTokenClick( token ){ 
-    console.log('A',token.numz);
-    setViewState("pageview");
+// function onTokenClick( token ){ //todo removeme?
+//     console.log('A',token.numz);
+//     setViewState("pageview");
+// }
+
+function setMainViewStatefn(selection,token){
+    // debugger;
+    setViewState(selection);
+    setSelectedToken(token);
 }
 
-//----------------------END TOKEN-GRID------------------------------------
 let btnCardStyle = { background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
 borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
 color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
@@ -263,9 +204,8 @@ return (
         }
         {/* <TokenGrid/> */}
     </section>
-    <section style={{display:'flex',justifyContent:'flex-start',paddingLeft:'1.444em',
+    {/* <section style={{display:'flex',justifyContent:'flex-start',paddingLeft:'1.444em',
         paddingRight:'1.444em',flexWrap:'wrap'}}>
-        {/* <div style={btnCardStyle}>X</div> */}
         <div className='cardTileBtn'>X</div>
         <div className='cardTileBtn'>X</div>
         <div className='cardTileBtn'>X</div>
@@ -274,7 +214,7 @@ return (
         <div className='cardTileBtn'>X</div>
         <div className='cardTileBtn'>X</div>
         <div className='cardTileBtn'>X</div>
-    </section>
+    </section> */}
 
         </main>
         <footer style={{marginTop:'2em'}}>
