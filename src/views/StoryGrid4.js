@@ -112,15 +112,17 @@ function gameAGENT(token){ //REACT to state and RESPOND
   else if (token.state==='clue'){return '?'}
 }
 
+let pageViewBtnStyle = {width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue'}
+
 function PageView (){ 
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
         display:'flex',width:'100%',flexDirection:'column',marginRight:'1.444em'}}>
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
-            <button style={{width:'4em'}} 
+            <button style={pageViewBtnStyle} 
                 onClick={ ()=>{setViewState('overview')}}>UP</button>
-            <button style={{width:'4em'}} 
+            <button style={pageViewBtnStyle} 
                 onClick={ ()=>{setViewState('overview')}}>RIGHT</button>
         </header>
         <article style={{flex:1, color:'steelblue'}}>
@@ -128,9 +130,9 @@ function PageView (){
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
-            <button style={{width:'4em'}} 
+            <button style={pageViewBtnStyle} 
                 onClick={ ()=>{setViewState('overview')}}>LEFT</button>
-            <button style={{width:'4em'}} 
+            <button style={pageViewBtnStyle} 
                 onClick={ ()=>{setViewState('overview')}}>DOWN</button>
         </footer>
     </main>
@@ -173,7 +175,7 @@ function TokenGrid (){ //"Everything's a token!" A grid for everything - Episodi
 //     setViewState("pageview");
 // }
 
-function setMainViewStatefn(selection,token){
+function setMainViewStatefn(selection,token){ //update app, show view
     // debugger;
     setViewState(selection);
     setSelectedToken(token);
