@@ -34,12 +34,9 @@ function TokenCard({ value, onTokenClick }) {
         color: '#013434',
         textShadow: '-1px 0px 1px whitesmoke'
     } 
-    //GAMIFICATION AGENT
-    // console.log('AGENT tst',value)
-    // let displayValue = gameAGENT(value); 
+
     return (
         <button style={cardStyle} onClick={onTokenClick}>
-        {/* {displayValue} */}
         {value}
         </button>
     );

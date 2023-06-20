@@ -1,8 +1,7 @@
 import './App.css';
 import MainView from './views/MainView';
-import StoryGrid2 from './views/StoryGrid2';
-import StoryGrid3 from './views/StoryGrid3';
-import StoryGrid4 from './views/StoryGrid4';
+// import StoryGrid4 from './views/StoryGrid4';
+import StoryGrid from './views/StoryGrid5';
 import SongPhrases from './views/SongPhrases';
 import TicTacToe from './views/TicTacToeView';
 import AWordaGami1 from './views/aWordaGami1';
@@ -30,7 +29,7 @@ function App() {
           } else if (viewIDX === "TicTacToe") {
             return <TicTacToe/>;
           } else if (viewIDX === "StoryGrid") {
-            return <StoryGrid4/>;
+            return <StoryGrid/>;
           } else if (viewIDX === "SongPhrases") {
             return <SongPhrases/>;
           } else {

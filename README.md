@@ -114,7 +114,7 @@ wildfire-haze
 ### UI TODO:
 
 X - clean up, check in, deploy react to gh-pages
-O - docs
+X - docs
 X - infinite game feature
 X - random mix prompt array - O in ai.randommix()
 O - random load - in ai.puzzleset()
@@ -176,3 +176,45 @@ npm start
 LIVE EXAMPLE: https://netcinematics.github.io/aWordaGami/
 
 # ~ : ) 
+
+
+#### Future Steps:
+
+REACTJS:
+O - Add details click
+O - Move to new project called aPRYZMaWORDZa
+O - Responsive Resize.
+O - Clean up other tabs.
+O - simple context input/combo ui (security/envpwd)
+
+NODEJS
+O - train/ data1/ folder with txt and md and scriptz/: 
+
+O - tokenz/ folder with ontology names.
+
+O - token_net/ taxonomy data files.
+
+
+1) NODEJS LOOPS
+- open md file, or txt file, or html file
+- search for 
+a) [_] underscore words.
+b) `~...~` tilde words.
+c) errors_list of partial tokenz
+
+2) NODEJS "training" 
+- TOKENIZE search results
+- TRANSFORM data into TAXONOMY by title
+- Title is KEY for different "training" loops
+
+3) NODEJS SCRIPTS for PARSE_PIPELINE
+- parse_tokenz () 
+- index_tokenz ()
+- alpha_tokenz ()
+- prefix_tokenz ()
+- postfix_tokenz ()
+- cross_link_tokenz ()
+- all_reference_tokenz ()
+- reference_link_tokenz ()
+
+DESCRIPTION: add super~powers to tokenz (above).

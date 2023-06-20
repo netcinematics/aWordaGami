@@ -5,7 +5,7 @@ import TokenFrame from "./TokenFrame3";
 import axios from 'axios'
 import ReactMarkdown from 'react-markdown'
 
-export default function StoryGrid4 () {
+export default function StoryGrid () {
 let [rootsARR, setRootsARR] = useState([]);
 let [viewState, setViewState] = useState('overview');
 // let [tokenDetailArray, setTokenDetailArray] = useState([]);
@@ -29,8 +29,6 @@ function getTokenzDATA(){
         url: 'http://localhost:8008/libz/tokenz/',
     }
     axios.request(options).then((response) => {
-        // console.log(response.data.tokenz)
-        // displayTokenz(response.data.tokenz)
         setTokenzDATA(response.data.tokenz)
     }).catch((error) => {
         console.error(error)
@@ -50,10 +48,6 @@ function getMarkdownDATA(){
         console.error(error)
     })    
 }
-
-// function displayTokenz(tokenz){
-//     setTokenzDATA(tokenz)
-// }
 
 function displayMarkdown(md){
     // setMarkdownDATA(md)
@@ -84,8 +78,6 @@ useEffect(() => {
     }
 
     setRootsARR( tgtRootARR );
-    // setStemsARR( tgtStemSET );
-
  }
 
 
@@ -112,72 +104,60 @@ function gameAGENT(token){ //REACT to state and RESPOND
   else if (token.state==='clue'){return '?'}
 }
 
+let DetailView =  ( {itemDetails} ) => { 
+    let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
+    let [localDetails,setLocalDetails] = useState([])
+
+    useEffect(() => {
+        if(itemDetails){
+            setLocalDetails(itemDetails)
+        }
+        else { console.log("details",0 )}
+     }, [])
+
+    function addLocalItemDetails(){
+        let newArr = [...localDetails , exampleDetail]
+        setLocalDetails(newArr)
+        setSelectedDetails(newArr)
+    }
+
+    return(
+    <>
+        <h1>example details</h1>
+        <button onClick={ ()=>{ addLocalItemDetails()   }  } >details</button>
+        {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )}
+    </>
+    )
+}
+
 let pageViewBtnStyle = {width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue'}
 
-function PageView ( {token}){ 
-    useEffect(() => {
-        // loadTokenData();
-     }, token)
+let PageView =  ( {token} ) => { 
+
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
         display:'flex',width:'100%',flexDirection:'column',marginRight:'1.444em'}}>
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
             <button style={pageViewBtnStyle} 
-                onClick={ ()=>{setViewState('overview')}}>UP</button>
+                onClick={ ()=>{setViewState('overview')}}>UP1</button>
             <button style={pageViewBtnStyle} 
                 onClick={ ()=>{setViewState('overview')}}>RIGHT</button>
         </header>
         <article style={{flex:1, color:'steelblue'}}>
-            {(token && token.title)?token.title:'_'}
-            {/* {(selectedToken && selectedToken.title)?selectedToken.title:'_'} */}
+            {(selectedToken && selectedToken.title)?selectedToken.title:'_'}
             <hr></hr>
-
-            { 
-            //    (selectedToken && selectedToken.details && selectedToken.details.length) ?
-               (token && token.details && token.details.length) ?
-            // tokenDetailArray.map( (token)=>{ 
-                // selectedToken.details.map( (token)=>{ 
-                token.details.map( (item)=>{ 
-                // return <TokenCard token={token}/>
-                return <DetailView/>
-            }) 
-            : '~'
-            }
-
-
+            <DetailView itemDetails={selectedToken.details}/>
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
             <button style={pageViewBtnStyle} 
                 onClick={ ()=>{setViewState('overview')}}>LEFT</button>
             <button style={pageViewBtnStyle} 
-                onClick={ ()=>{addTokenDetail()}}>DOWN</button>
+                onClick={ ()=>{setViewState('overview')}}>DOWN</button>
         </footer>
     </main>
     </>)
-}
-
-let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
-
-function addTokenDetail(){
-    // setTokenDetailArray([...tokenDetailArray, exampleDetail]);
-    if(!selectedToken ) return;
-    let newTokenDetails = selectedToken;
-    if(!newTokenDetails.details) newTokenDetails.details = [];
-    newTokenDetails.details.push(exampleDetail)
-    setSelectedToken(newTokenDetails);
-}
-
-
-function DetailView (){ 
-    return(
-    <>
-        <h1>example detals</h1>
-        <button onClick={ ()=>{  setViewState('overview');  }  } >1</button>
-        <button onClick={ ()=>{  setViewState('pageview');  }  } >11</button>
-    </>
-    )
 }
 
 function TokenGrid (){ 
@@ -203,6 +183,12 @@ function TokenGrid (){
 function setMainViewStatefn(selection,token){ //update app, show view
     setViewState(selection);
     setSelectedToken(token);
+}
+
+function setSelectedDetails(newDetails){
+    let newObj = selectedToken
+    newObj.details = newDetails
+    setSelectedToken(newObj);
 }
 
 let btnCardStyle = { background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
