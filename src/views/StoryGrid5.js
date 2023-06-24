@@ -168,9 +168,9 @@ function setPageViewContent(direction){
         if(offsetRight>= humanIDX){ offsetRight = 1; } //reset default
         if(colm && colm.length && offsetVert >= colm[offsetRight].length){ offsetRight = 1; } //reset default
         tgt = offsetRight+'.'+offsetVert;
-        //let newToken = lookUpNewToken();
-        let newToken = {numz:tgt, id:111, txt:'hi',title:'yooooo!'}
-        setSelectedToken(newToken); //load tgt view.
+        let nextToken = lookUpNUMZToken(tgt);
+        // let newToken = {numz:tgt, id:111, txt:'hi',title:'yooooo!'}
+        if(nextToken) { setSelectedToken(nextToken); } //load tgt view.
     }
 }
 
@@ -231,7 +231,10 @@ function TokenGrid (){
     return(tokenCOLUMNS)
 }
 
-
+function lookUpNUMZToken(tgt){
+    debugger;
+    console.log("test3",colm.length)
+}
 
 function setMainViewStatefn(selection,token){ //update app, show view
     setViewState(selection);
@@ -252,7 +255,8 @@ flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly' }
 
 return (
     < >
-    <h1>StoryTree</h1>
+    <h1>aWORDaGAME</h1>
+    {/* <h1>StoryTree</h1> */}
     {/* <ReactMarkdown>
             {markdownDATA}
         </ReactMarkdown> */}
