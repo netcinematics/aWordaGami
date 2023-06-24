@@ -17,6 +17,7 @@ let [selectedToken, setSelectedToken] = useState({});
 
 let [markdownDATA, setMarkdownDATA] = useState("");
 let [tokenzDATA, setTokenzDATA] = useState([]);
+let [tokenzCOUNT, setTokenzCOUNT] = useState("");
 useEffect(() => { document.title = "Good_Ai";  }, []);
 // useEffect(() => { getMarkdownDATA(); }, [])
 useEffect(() => { getTokenzDATA() }, []);
@@ -30,8 +31,10 @@ function getTokenzDATA(){
     }
     axios.request(options).then((response) => {
         setTokenzDATA(response.data.tokenz)
+        // setTokenzCOUNT("tokenz "+response.data.tokenz.length)
     }).catch((error) => {
         console.error(error)
+        setTokenzCOUNT("no data")
     })    
 }
 
@@ -90,47 +93,86 @@ function TokenCard({ token }) {
     } 
     let fontColor = (token.state==='prize')?'mediumpurple':(token.state==='clue')
                     ?'#d08701':(token.state==='locked')?'#de6666':'steelblue';
-    //GAMIFICATION AGENT
-    let gameTitle = gameAGENT(token); 
-    return (
-        <TokenFrame token={token} setMainViewStatefn={setMainViewStatefn}/>
-    );
+    let gameTitle = gameAGENT(token); //GAMIFICATION AGENT
+    return ( <TokenFrame token={token} setMainViewStatefn={setMainViewStatefn}/> );
 }
 
-function gameAGENT(token){ //REACT to state and RESPOND
+function gameAGENT(token){ //REACT to state to update game view state.
   if(!token){return ''}
   else if (token.state==='locked'){return 'X'}
   else if (token.state==='prize'){return '!'}
   else if (token.state==='clue'){return '?'}
 }
 
-let DetailView =  ( {itemDetails} ) => { 
+let DetailView =  ( {token} ) => { 
     let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
     let [localDetails,setLocalDetails] = useState([])
 
     useEffect(() => {
-        if(itemDetails){
-            setLocalDetails(itemDetails)
+        if(token.details){
+            setLocalDetails(token.details)
         }
         else { console.log("details",0 )}
      }, [])
 
-    function addLocalItemDetails(){
+    function addLocalDetails(){
         let newArr = [...localDetails , exampleDetail]
         setLocalDetails(newArr)
         setSelectedDetails(newArr)
     }
+    function dynamicDetailDisplay(){
+        return(<>
+        {(token && token.state && token.state.txtz && token.state.txtz.length)?
+            token.state.txtz[0] : 'unlocked' }
+        <br></br>
+        {(token && token.timestamp)?token.timestamp:'no date'}
+        <br></br>
+        {(token && token.txtz)?
+            token.txtz.map( (item, idx)=> { //short description txt
+                return (item.title==="short")?item.txtz[0]:'';
+            })
+            :'no short description'
+        }
+        <br></br>
+        {(token && token.txtz)?
+            token.txtz.map( (item, idx)=> { //long description txt
+                return (item.title==="long")?item.txtz[0]:'';
+            })
+            :'no long description'
+        }
+
+        </>)
+    }
 
     return(
     <>
-        <h1>example details</h1>
-        <button onClick={ ()=>{ addLocalItemDetails()   }  } >details</button>
+        {/* <h1>add details</h1> */}
+        {dynamicDetailDisplay()}
+        <hr></hr>
+        <button onClick={ ()=>{ addLocalDetails()   }  } >details</button>
         {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )}
     </>
     )
 }
 
 let pageViewBtnStyle = {width:'4em',cursor:'pointer',borderRadius:'13px',background:'skyblue',border:'1px solid steelblue'}
+
+function setPageViewContent(direction){
+    if(direction==='up'){
+        setViewState('overview')
+    } else if  (direction==='right'){ //look at numz, calculate offset, apply offset, look up numz, if found load, not loop default.
+        debugger;
+        let tgt = '', offsetRight = 1, offsetVert = 1;
+        let numz = selectedToken.numz.split('.');
+        offsetRight = numz[0]++;
+        if(offsetRight>= humanIDX){ offsetRight = 1; } //reset default
+        if(colm && colm.length && offsetVert >= colm[offsetRight].length){ offsetRight = 1; } //reset default
+        tgt = offsetRight+'.'+offsetVert;
+        //let newToken = lookUpNewToken();
+        let newToken = {numz:tgt, id:111, txt:'hi',title:'yooooo!'}
+        setSelectedToken(newToken); //load tgt view.
+    }
+}
 
 let PageView =  ( {token} ) => { 
 
@@ -140,45 +182,56 @@ let PageView =  ( {token} ) => {
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
             <button style={pageViewBtnStyle} 
-                onClick={ ()=>{setViewState('overview')}}>UP1</button>
+                onClick={ ()=>{setPageViewContent('up')}}>UP</button>
             <button style={pageViewBtnStyle} 
-                onClick={ ()=>{setViewState('overview')}}>RIGHT</button>
+                onClick={ ()=>{setPageViewContent('right')}}>RIGHT</button>
+                {/* onClick={ ()=>{setViewState('overview')}}>RIGHT</button> */}
         </header>
         <article style={{flex:1, color:'steelblue'}}>
             {(selectedToken && selectedToken.title)?selectedToken.title:'_'}
             <hr></hr>
-            <DetailView itemDetails={selectedToken.details}/>
+            <DetailView token={selectedToken}/>
         </article>
         <footer style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
             <button style={pageViewBtnStyle} 
-                onClick={ ()=>{setViewState('overview')}}>LEFT</button>
+                onClick={ ()=>{setPageViewContent('overview')}}>LEFT</button>
+                {/* onClick={ ()=>{setViewState('overview')}}>LEFT</button> */}
             <button style={pageViewBtnStyle} 
-                onClick={ ()=>{setViewState('overview')}}>DOWN</button>
+                onClick={ ()=>{setPageViewContent('overview')}}>DOWN</button>
+                {/* onClick={ ()=>{setViewState('overview')}}>DOWN</button> */}
         </footer>
     </main>
     </>)
 }
 
+
+let colm = [];
+let COLNUM=6; //vertical wrap limit
+let tokenCOLUMNS = [];
+let humanIDX = 0; //column header
 function TokenGrid (){ 
-    let colm = [];
-    let COLNUM=3; //vertical wrap limit
-    let tokenCOLUMNS = [];
-    let humanIDX = 0; //column header
+    // let colm = [];
+    // let COLNUM=6; //vertical wrap limit
+    // let tokenCOLUMNS = [];
+    // let humanIDX = 0; //column header
     for(let i=0; i<tokenzDATA.length; i += COLNUM){
         colm = tokenzDATA.slice(i,i+COLNUM);
         ++humanIDX;
          tokenCOLUMNS.push( <div style={{display:'flex',flexDirection:'column',flex:'1 1 0'}}>
+            <header style={{minHeight:'2em'}}></header>
             <header>{humanIDX}</header>
-            { colm.map( (token)=>{ 
+            { colm.map( (token,idx)=>{ token.numz = humanIDX+'.'+idx;       //apply dynamic_numz
                 return <TokenCard token={token}/>
-                // return <TokenCard token={token} onTokenClick={() => onTokenClick(token)} />
             }) }
+            <footer style={{minHeight:'3em'}}></footer>
          </div> 
          );
     }    
     return(tokenCOLUMNS)
 }
+
+
 
 function setMainViewStatefn(selection,token){ //update app, show view
     setViewState(selection);
@@ -204,14 +257,14 @@ return (
             {markdownDATA}
         </ReactMarkdown> */}
 <main style={{overflowY:'auto'}}>
-    <section className='mainframe' style={{display:'flex',display:'flex',justifyContent:'space-evenly',
-    paddingLeft:'1.444em',paddingRight:'1.444em',flex:1}}>
+    <section className='mainframe scrollBar2' style={{display:'flex',
+    justifyContent:'space-evenly',boxShadow:'0px 1px 14px 1px purple',paddingBottom:'3em',
+    marginTop:'0.444em',paddingLeft:'1.444em',paddingRight:'1.444em',flex:1,
+    marginRight:'1em',marginLeft:'1em'} }>
         { (viewState==='overview') ?
             <TokenGrid/>
         : (viewState==='pageview') ?
            <PageView token={selectedToken}/>
-        // : (viewState==='detailview') ?
-        //     <DetailView/>
         : <TokenGrid/>
         }
     </section>
@@ -229,7 +282,7 @@ return (
 
         </main>
         <footer style={{marginTop:'2em'}}>
-          WORD_GAME TOKENZ".
+          WORD_GAME TOKENZ". {tokenzCOUNT}
         </footer>
     </>
 )

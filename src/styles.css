@@ -127,3 +127,13 @@
   @media only screen and (min-width: 1500px) {
     .cardTileBtn{ width:18vw; height:18vw }  
   }
+
+/*  custom scroll bar */
+/* .scrollBar2 {height:97%; overflow-x:hidden; background:#010111; border: 1px steelblue solid; border-radius:13px; padding:0.5em; } */
+.scrollBar2 {height:97%; overflow-x:scroll; background:#010111; border: 1px steelblue solid; border-radius:13px; padding:0.5em; }
+.scrollBar2::-webkit-scrollbar-track { background-color: #010213;  border-radius: 13px; }
+.scrollBar2::-webkit-scrollbar { width: 1.3em; }
+.scrollBar2::-webkit-scrollbar-thumb { background-color: #04223c; border-radius: 13px;
+  background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 0.6) 26%, transparent 26%, transparent 51%, rgba(255, 255, 255, -0.4) 51%, rgba(255, 255, 255, 0.6) 74%, transparent 74%, transparent);
+}
+
