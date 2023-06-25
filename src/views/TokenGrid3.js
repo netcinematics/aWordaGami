@@ -55,7 +55,7 @@ function TokenGrid (){ //Everything is a token.
         console.log('ASD')
     }
     // console.log('x2',langData.roots.length)  
-    let COLNUM=4;
+    
     //roots already sorted by "rhyme-closeness" by agents.
     //agent_RHYMECLOSE()
     //sort tokens by letter density, AGENT 
@@ -70,6 +70,7 @@ function TokenGrid (){ //Everything is a token.
     // });
 
     //CUT TOKENS into COLUMNS:
+    let COLNUM=4;
     let tokenCOLARR = [];
     let colm = [];
     // debugger;

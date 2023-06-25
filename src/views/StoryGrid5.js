@@ -3,7 +3,7 @@ import LangData from '../data/SocialPhraseCLM'
 import { useState, useEffect } from 'react';
 import TokenFrame from "./TokenFrame3";
 import axios from 'axios'
-import ReactMarkdown from 'react-markdown'
+// import ReactMarkdown from 'react-markdown'
 
 export default function StoryGrid () {
 let [rootsARR, setRootsARR] = useState([]);
@@ -11,21 +11,17 @@ let [viewState, setViewState] = useState('overview');
 // let [tokenDetailArray, setTokenDetailArray] = useState([]);
 let [selectedToken, setSelectedToken] = useState({});
 
-// const [hover, setHover] = useState(false);
-// const handleMouseIn = ()=> {setHover(true) };
-// const handleMouseOut = ()=> {setHover(false) };
-
 let [markdownDATA, setMarkdownDATA] = useState("");
 let [tokenzDATA, setTokenzDATA] = useState([]);
 let [tokenzCOUNT, setTokenzCOUNT] = useState("");
 useEffect(() => { document.title = "Good_Ai";  }, []);
 // useEffect(() => { getMarkdownDATA(); }, [])
-useEffect(() => { getTokenzDATA() }, []);
 
+useEffect(() => { getTokenzDATA() }, []);
 function getTokenzDATA(){
     const options = {
         method: 'GET',
-        // url: 'https://node-dashboard-server.vercel.app/ai2',
+        // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
         params: {'lookup':'tokenz'},
         url: 'http://localhost:8008/libz/tokenz/',
     }
@@ -67,11 +63,9 @@ function displayMarkdown(md){
     setMarkdownDATA(md)
 }
 
-useEffect(() => {
-    loadTokenData();
- }, [])
 
- function loadTokenData(){
+ useEffect(() => { loadTokenData(); }, [])
+ function loadTokenData(){  //This is local social_phrase data.
     let nn = LangData(); 
     let tgtRootARR = [], tgtStemARR=[],tgtRootSTR='';
     for(let i=0; i<nn.length;i++){ //TASK: LOOP nn, match exact, match synonym, sort by length

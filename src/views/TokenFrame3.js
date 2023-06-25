@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 function TokenFrame ( { token, setMainViewStatefn } ) {
-    useEffect(() => { document.title = "aGood_a_Storya";  }, []);
+    useEffect(() => { document.title = "ai_tree";  }, []);
 
     let [isHovered, setHovered] = useState(false);
 
