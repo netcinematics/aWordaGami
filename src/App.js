@@ -1,7 +1,7 @@
 import './App.css';
 import MainView from './views/MainView';
 // import StoryGrid4 from './views/StoryGrid4';
-import StoryGrid from './views/StoryGrid5';
+import StoryGrid from './views/StoryGrid6';
 import SongPhrases from './views/SongPhrases';
 import TicTacToe from './views/TicTacToeView';
 import AWordaGami1 from './views/aWordaGami1';

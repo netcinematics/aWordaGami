@@ -1,22 +1,23 @@
 import "../styles.css";
 import LangData from '../data/SocialPhraseCLM'
 import { useState, useEffect } from 'react';
-import TokenFrame from "./TokenFrame3";
+import TokenFrame from "./TokenFrame4";
 import axios from 'axios'
-// import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
 
 export default function StoryGrid () {
     useEffect(() => { document.title = "Good_Ai";  }, []);
     let [rootsARR, setRootsARR] = useState([]);
     let [viewState, setViewState] = useState('overview');
-    let [selectedToken, setSelectedToken] = useState({});
+    let [selectedToken, setSelectedTokenObj] = useState({});
 
     let [markdownDATA, setMarkdownDATA] = useState("");
-    let [tokenzDATA, setTokenzDATA] = useState([]);
-    let [tokenzCOUNT, setTokenzCOUNT] = useState("");
+    let [tokenz_INDEX_DATA, setTokenz_INDEX_DATA] = useState([]);
+    let [tokenz_CARD_COUNT, setTokenz_CARD_COUNT] = useState("");
 
-useEffect(() => { getTokenzDATA() }, [tokenzCOUNT]);
-function getTokenzDATA(){
+useEffect(() => { getTokenzINDEX() }, [tokenz_CARD_COUNT]); 
+function getTokenzINDEX(){ //SHOW MAIN CARDS.
+    console.log("LOAD INDEX")
     const options = {
         method: 'GET',
         // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
@@ -24,11 +25,12 @@ function getTokenzDATA(){
         url: 'http://localhost:8008/libz/tokenz/',
     }
     axios.request(options).then((response) => {
-        setTokenzDATA(response.data.tokenz)
-        setTokenzCOUNT("tokenz "+response.data.tokenz.length)
+        setTokenz_INDEX_DATA(response.data.tokenz)
+        setTokenz_CARD_COUNT("tokenz "+response.data.tokenz.length)
+        console.log("LOADED INDEX",response.data.tokenz.length)
     }).catch((error) => {
         console.error(error)
-        setTokenzCOUNT("no data")
+        setTokenz_CARD_COUNT("no data")
     })    
 }
 
@@ -77,6 +79,7 @@ function displayMarkdown(md){
 
 
 function TokenCard({ token }) {
+    // console.log("tokenCard",token)
     let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
         borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
         color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
@@ -86,7 +89,7 @@ function TokenCard({ token }) {
     let fontColor = (token.state==='prize')?'mediumpurple':(token.state==='clue')
                     ?'#d08701':(token.state==='locked')?'#de6666':'steelblue';
     let gameTitle = gameAGENT(token); //GAMIFICATION AGENT
-    return ( <TokenFrame token={token} setMainViewStatefn={setMainViewStatefn}/> );
+    return ( <TokenFrame token={token} setTokenViewfn={setTokenViewfn}/> );
 }
 
 function gameAGENT(token){ //REACT to state to update game view state.
@@ -99,9 +102,11 @@ function gameAGENT(token){ //REACT to state to update game view state.
 let DetailView =  ( {token} ) => { 
     let exampleDetail = {key:'a13',txt:"add details",title:'a13',ctx:{}}
     let [localDetails,setLocalDetails] = useState([])
+    let [markdownDetailsTXT,setMarkdownDETAILSView] = useState('')
 
     useEffect(() => {
         if(token.details){
+            console.log("INIT details",token.title)
             setLocalDetails(token.details)
         }
         // else { console.log("details",0 )}
@@ -114,8 +119,30 @@ let DetailView =  ( {token} ) => {
         // let newArr = addTokenz;
         setLocalDetails(newArr)
         setSelectedDetails(newArr)
+        getTokenDETAILS(token)
     }
 
+    function getTokenDETAILS(token){
+        if(!token || !token.title){ return }
+        let lookupTitle = token.title;
+        if(token.title.indexOf('~')>-1){
+            lookupTitle = token.title.replaceAll('~','')
+        }
+        const options = {
+            method: 'GET',
+            // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
+            params: {'lookup':'markdown'},
+            url: `http://localhost:8008/libz/tokenz/${lookupTitle}`,
+        }
+        axios.request(options).then((response) => {
+            console.log("LOADED DETAILS")
+            // setMarkdownDETAILSView(response.data)
+            displayMarkdown(response.data)
+        }).catch((error) => {
+            console.error(error)
+            // setItemCOUNT("no data")
+        })    
+    }
 
     // let [tokenITEMS, setTokenITEMS] = useState([]);
     // let [itemCOUNT, setItemCOUNT] = useState("");
@@ -141,17 +168,21 @@ let DetailView =  ( {token} ) => {
     //     })    
     // }
 
-    function dynamicLink(title){
-        if(!title) return;
-        console.log('clicked',title)
+    function dynamicLink(token){
+        if(!token || !token.title) return;
+        console.log('clicked',token.title)
+        debugger;
+        // setTokenViewfn( "detailview" , title );
+        setTokenViewfn( "pageview" , token );
         // getDynamicTokenz(title)
         //load page view with new selected token
     }
     function dynamicDetailDisplay(){
         return(<>
 
-        <h1 onClick={ ()=>dynamicLink(token.title)}>{(token && token.title)?token.title:'aWORDZa'}</h1>
-
+        <h1 style={{cursor:"pointer"}} 
+        onClick={ ()=>dynamicLink(token)}>
+        {(token && token.title)?token.title:'aWORDZa'}</h1>
         {(token && token.state && token.state.txtz && token.state.txtz.length)?
             token.state.txtz[0] : 'unlocked' }
         <br></br>
@@ -179,8 +210,12 @@ let DetailView =  ( {token} ) => {
         {/* <h1>add details</h1> */}
         {dynamicDetailDisplay()}
         <hr></hr>
-        {/* <button onClick={ ()=>{ addLocalDetails()   }  } >details</button> */}
-        {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )}
+        <button onClick={ ()=>{ addLocalDetails()   }  } >details</button>
+        {/* {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )} */}
+        {/* <section style={{margin:'1em',fontSize:'22px'}}>{markdownDetailsTXT}</section> */}
+        { <ReactMarkdown>
+            {markdownDATA}
+        </ReactMarkdown> }
     </>
     )
 }
@@ -200,7 +235,7 @@ function setPageViewContent(direction){
         tgt = offsetRight+'.'+offsetVert;
         let nextToken = lookUpNUMZToken(tgt);
         // let newToken = {numz:tgt, id:111, txt:'hi',title:'yooooo!'}
-        if(nextToken) { setSelectedToken(nextToken); } //load tgt view.
+        if(nextToken) { setSelectedTokenObj(nextToken); } //load tgt view.
     }
 }
 
@@ -208,7 +243,9 @@ let PageView =  ( {token} ) => {
 
     return(<>
     <main className='pageview' style={{background:'skyblue',borderRadius:'6px',
-        display:'flex',width:'100%',flexDirection:'column',marginRight:'1.444em'}}>
+        display:'flex',width:'100%',flexDirection:'column',marginRight:'1.444em',
+        height:'100%', flex:'1'
+        }}>
         <header style={{width:'100%',display:'flex',justifyContent:'space-between',
             padding:'0.666em'}}>
             <button style={pageViewBtnStyle} 
@@ -245,8 +282,8 @@ function TokenGrid (){
     // let COLNUM=6; //vertical wrap limit
     // let tokenCOLUMNS = [];
     // let humanIDX = 0; //column header
-    for(let i=0; i<tokenzDATA.length; i += COLNUM){
-        colm = tokenzDATA.slice(i,i+COLNUM);
+    for(let i=0; i<tokenz_INDEX_DATA.length; i += COLNUM){
+        colm = tokenz_INDEX_DATA.slice(i,i+COLNUM);
         ++humanIDX;
          tokenCOLUMNS.push( <div style={{display:'flex',flexDirection:'column',flex:'1 1 0'}}>
             <header style={{minHeight:'2em'}}></header>
@@ -266,26 +303,27 @@ function lookUpNUMZToken(tgt){
     console.log("test3",colm.length)
 }
 
-function setMainViewStatefn(selection,token){ //update app, show view
-    setViewState(selection);
-    setSelectedToken(token);
+function setTokenViewfn(selectedView,token){ //update app, show view
+    console.log("setTokenView",selectedView, token.title)
+    setViewState(selectedView);
+    setSelectedTokenObj(token);
 }
 
 function setSelectedDetails(newDetails){
     let newObj = selectedToken
     newObj.details = newDetails
-    setSelectedToken(newObj);
+    setSelectedTokenObj(newObj);
 }
 
-let btnCardStyle = { background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
-borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
-color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
-alignContent:'flex-end',alignItems:'stretch',height:'10em',flex:'1',minWidth:'6em',
-flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly' }
+// let btnCardStyle = { background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
+// borderRadius:'13px',boxShadow:'inset 1px 1px 5px 0px blue',cursor:'pointer',
+// color:'#013434',textShadow:'-1px 0px 1px whitesmoke',display:'flex',
+// alignContent:'flex-end',alignItems:'stretch',height:'10em',flex:'1',minWidth:'6em',
+// flexDirection:'column',padding:'0.555em',justifyContent:'space-evenly' }
 
 return (
     < >
-    <h1>aWORDaGAME</h1>
+    <h1>aWORDaGAMEa</h1>
     {/* <h1>StoryTree</h1> */}
     {/* <ReactMarkdown>
             {markdownDATA}
@@ -316,7 +354,7 @@ return (
 
         </main>
         <footer style={{marginTop:'2em'}}>
-          WORD_GAME TOKENZ". {tokenzCOUNT}
+          WORD_GAME : {tokenz_CARD_COUNT}
         </footer>
     </>
 )

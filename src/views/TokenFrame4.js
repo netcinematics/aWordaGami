@@ -2,23 +2,27 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 
-function TokenFrame ( { token, setMainViewStatefn } ) {
-    useEffect(() => { document.title = "ai_tree";  }, []);
-
-    // let [tokenITEMS, setTokenITEMS] = useState([]);
-    // let [itemCOUNT, setItemCOUNT] = useState("");
-    // useEffect(() => { getTokenzITEMS() }, [itemCOUNT]);
-    // function getTokenzITEMS(param){
+function TokenFrame ( { token, setTokenViewfn } ) {
+    // console.log("tokenFrame",token.title)
+    useEffect(() => { document.title = token.title;  }, []);
+    // useEffect(() => { document.title = "ai_tree";  }, []);
+    console.log("LOAD TOKENFRAME ITEMS", token.title)
+    let [tokenITEMS, setTokenITEMS] = useState([]);
+    let [itemCOUNT, setItemCOUNT] = useState("");
+    // useEffect(() => { getTokenITEMS() }, [itemCOUNT]);
+    // function getTokenITEMS(param){
     //     if(!param){ param = 'aWORDZa'}
     //     const options = {
     //         method: 'GET',
     //         // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
-    //         // params: {'lookup':'tokenz'},
+    //         params: {'lookup':1},
     //         url: `http://localhost:8008/libz/tokenz/${param}`,
     //     }
     //     axios.request(options).then((response) => {
+    //         debugger;
     //         setTokenITEMS(response.data.tokenz)
     //         setItemCOUNT("tokenz "+response.data.tokenz.length)
+    //         console.log("LOADED TOKENFRAME ITEMS", response.data.tokenz.length)
     //     }).catch((error) => {
     //         console.error(error)
     //         setItemCOUNT("no data")
@@ -34,8 +38,10 @@ function TokenFrame ( { token, setMainViewStatefn } ) {
         setHovered(false)
     }
 
-    function onTokenClick(  ){ 
-        setMainViewStatefn("pageview",token);
+    function onTokenCardClick(  ){ 
+        console.log("clicked",token.title)
+        setTokenViewfn("pageview",token);
+        // getTokenITEMS()
     }
 
     let cardStyle={background:'#6facf7',border:'1px solid #444',lineHeight:'20px',margin:'0.5em',
@@ -65,7 +71,7 @@ function TokenFrame ( { token, setMainViewStatefn } ) {
         {/* <h2>StoryFrame</h2> */}
         <button className={isHovered ? 'btnHover' : ''} style={cardStyle}
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-            onClick={onTokenClick}>
+            onClick={onTokenCardClick}>
             { (token.state)?
                 <section style={{background:'lightskyblue',flex:'1',borderTopLeftRadius:'13px',
                     borderTopRightRadius:'13px',display:'flex',justifyContent:'center',
