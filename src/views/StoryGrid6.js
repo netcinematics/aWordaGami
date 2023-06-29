@@ -213,9 +213,8 @@ let DetailView =  ( {token} ) => {
         <button style={{marginTop:'1em'}} onClick={ ()=>{ addLocalDetails()   }  } >unlock</button>
         {/* {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )} */}
         {/* <section style={{margin:'1em',fontSize:'22px'}}>{markdownDetailsTXT}</section> */}
-        { <article style={{border:'solid 1px steelblue',background:'skyblue',
-                marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
-                boxShadow:'1px 1px 1px blue'}}><ReactMarkdown>
+        { <article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
+            }}><ReactMarkdown>
             {markdownDATA}
         </ReactMarkdown>
         </article> }
@@ -257,7 +256,8 @@ let PageView =  ( {token} ) => {
                 onClick={ ()=>{setPageViewContent('right')}}>RIGHT</button>
                 {/* onClick={ ()=>{setViewState('overview')}}>RIGHT</button> */}
         </header>
-        <article style={{flex:1, color:'steelblue'}}>
+        <article className="scrollBarV" style={{flex:1, color:'steelblue',
+            boxShadow:'inset 0px 0px 10px 0px blue'}}>
             {/* {(selectedToken && selectedToken.title)?selectedToken.title:'_'} */}
             <hr></hr>
             <DetailView token={selectedToken}/>
@@ -333,7 +333,7 @@ return (
         </ReactMarkdown> */}
 <main className='scrollBarH' style={{overflowY:'auto'}}>
     <section className='mainframe scrollBarV' style={{display:'flex',
-    boxShadow:'0px 1px 14px 1px purple',paddingBottom:'3em',
+    boxShadow:'0px 1px 14px 1px purple',paddingBottom:'1em',
     marginTop:'0.444em',paddingLeft:'1.444em',paddingRight:'1.444em',flex:1,
     marginRight:'1em',marginLeft:'1em'} }>
         { (viewState==='overview') ?

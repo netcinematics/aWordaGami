@@ -25,7 +25,7 @@ export default function SongPhrases(){ //first letter needs to be capital to hav
     let [stemsARR, setStemsARR] = useState([]);
     let [rootsARR, setRootsARR] = useState([]);
     let [showResults, setShowResults] = useState(false);
-    let [promptTXT, setPromptTXT] = useState('I get no satisfaction');
+    let [promptTXT, setPromptTXT] = useState('just a simulation');
     const textArea = useRef();
 
     //:ai: INIT - artificial intelligence TEMPLATE OBJ.

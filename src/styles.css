@@ -132,7 +132,7 @@
 /* .scrollBar2 {height:97%; overflow-x:hidden; background:#010111; border: 1px steelblue solid; border-radius:13px; padding:0.5em; } */
 .scrollBarV {height:97%; overflow-x:scroll; background:#010111; border: 1px steelblue solid; border-radius:13px; padding:0.5em; }
 .scrollBarV::-webkit-scrollbar-track { background-color: #010213;  border-radius: 13px; }
-.scrollBarV::-webkit-scrollbar { width: 1.3em; height: 100%; }
+.scrollBarV::-webkit-scrollbar { width: 0.666em; height: 100%; }
 .scrollBarV::-webkit-scrollbar-thumb { background-color: #04223c; border-radius: 13px;
   background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 0.6) 26%, transparent 26%, transparent 51%, rgba(255, 255, 255, -0.4) 51%, rgba(255, 255, 255, 0.6) 74%, transparent 74%, transparent);
 }
@@ -142,4 +142,14 @@
 .scrollBarH::-webkit-scrollbar { width: 100%; height: 1.3em; }
 .scrollBarH::-webkit-scrollbar-thumb { background-color: #04223c; border-radius: 13px;
   background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.6) 26%, transparent 26%, transparent 51%, rgba(255, 255, 255, -0.4) 51%, rgba(255, 255, 255, 0.6) 74%, transparent 74%, transparent);
+}
+
+::marker {
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+  text-transform: none;
+  text-indent: 20px !important;
+  text-align: end !important;
+  text-align-last: end !important;
+  color:black;
 }
