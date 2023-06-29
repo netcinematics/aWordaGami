@@ -210,12 +210,15 @@ let DetailView =  ( {token} ) => {
         {/* <h1>add details</h1> */}
         {dynamicDetailDisplay()}
         <hr></hr>
-        <button onClick={ ()=>{ addLocalDetails()   }  } >details</button>
+        <button style={{marginTop:'1em'}} onClick={ ()=>{ addLocalDetails()   }  } >unlock</button>
         {/* {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )} */}
         {/* <section style={{margin:'1em',fontSize:'22px'}}>{markdownDetailsTXT}</section> */}
-        { <ReactMarkdown>
+        { <article style={{border:'solid 1px steelblue',background:'skyblue',
+                marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
+                boxShadow:'1px 1px 1px blue'}}><ReactMarkdown>
             {markdownDATA}
-        </ReactMarkdown> }
+        </ReactMarkdown>
+        </article> }
     </>
     )
 }
