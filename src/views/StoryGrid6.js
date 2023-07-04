@@ -20,9 +20,10 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
     console.log("LOAD INDEX")
     const options = {
         method: 'GET',
-        // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
         params: {'lookup':'tokenz'},
-        url: 'http://localhost:8008/libz/tokenz/',
+        // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
+        url: 'https://node-dashboard-server.vercel.app/libz/tokenz/', //prod url
+        // url: 'http://localhost:8008/libz/tokenz/',
     }
     axios.request(options).then((response) => {
         setTokenz_INDEX_DATA(response.data.tokenz)
@@ -34,19 +35,19 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
     })    
 }
 
-function getMarkdownDATA(){
-    const options = {
-        method: 'GET',
-        // url: 'https://node-dashboard-server.vercel.app/ai2',
-        params: {'lookup':'tokenz'},
-        url: 'http://localhost:8008/libz/',
-    }
-    axios.request(options).then((response) => {
-        displayMarkdown(response.data)
-    }).catch((error) => {
-        console.error(error)
-    })    
-}
+// function getMarkdownDATA(){
+//     const options = {
+//         method: 'GET',
+//         // url: 'https://node-dashboard-server.vercel.app/ai2',
+//         params: {'lookup':'tokenz'},
+//         url: 'http://localhost:8008/libz/',
+//     }
+//     axios.request(options).then((response) => {
+//         displayMarkdown(response.data)
+//     }).catch((error) => {
+//         console.error(error)
+//     })    
+// }
 
 function displayMarkdown(md){
     // setMarkdownDATA(md)
@@ -130,9 +131,12 @@ let DetailView =  ( {token} ) => {
         }
         const options = {
             method: 'GET',
-            // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
             params: {'lookup':'markdown'},
-            url: `http://localhost:8008/libz/tokenz/${lookupTitle}`,
+            // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
+            url: `https://node-dashboard-server.vercel.app/libz/lookup/${lookupTitle}`, //prod url
+            // url: `https://node-dashboard-server.vercel.app/libz/tokenz/${lookupTitle}`, //prod url
+           // url: `https://node-dashboard-server.vercel.app/libz/tokenz/`, //prod url working index
+            // url: `http://localhost:8008/libz/tokenz/${lookupTitle}`,
         }
         axios.request(options).then((response) => {
             console.log("LOADED DETAILS")

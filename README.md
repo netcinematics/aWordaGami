@@ -151,7 +151,7 @@ new viewz
 // npm i react-reveal --save
 // npm i gh-pages --save-dev
 // npm i typewriter-effect
-// npm run deploy
+
 ---
 // npm i axios
 // npm install react-markdown
@@ -173,6 +173,10 @@ npm start
 
 ## LIVE EXAMPLE
 
+//change paths from local to remote
+
+// npm run deploy
+
 LIVE EXAMPLE: https://netcinematics.github.io/aWordaGami/
 
 # ~ : ) 
@@ -181,16 +185,16 @@ LIVE EXAMPLE: https://netcinematics.github.io/aWordaGami/
 #### Future Steps:
 
 REACTJS:
-O - Add details click
+X - Add details click
 O - Move to new project called aPRYZMaWORDZa
 O - Responsive Resize.
 O - Clean up other tabs.
 O - simple context input/combo ui (security/envpwd)
 
 NODEJS
-O - train/ data1/ folder with txt and md and scriptz/: 
+X - train/ data1/ folder with txt and md and scriptz/: 
 
-O - tokenz/ folder with ontology names.
+X - tokenz/ folder with ontology names.
 
 O - token_net/ taxonomy data files.
 
