@@ -70,22 +70,24 @@ X into aWORDaGAMi
 
 ---
 
-### AI / NLP
+## AI / NLP
 
-Category: HUGE WORDS
+Artificial Intelligence, Natural Language Processing integration.
+
+### Category: HUGE WORDS
 scintilla 
 hyper fragmented
 super structure
 infini-vasta
 
-Category: Psychology
+### Category: Psychology
 anthropomorphic
 red-herring
 confirmation-bias
+etc..
 
-Category: aWordza...?
 
-Category: natural-disaster words
+### Category: natural-disaster words
 atmospheric-river
 long-track-tornado,
 mega-drought,
@@ -109,6 +111,22 @@ treated-waste-water
 great-pacific-garbage-patch
 toxic-fog
 wildfire-haze
+superfire
+gustnado
+
+### Category: aWORDZa
+
+Uses short, self-descriptive naming-convention, 
+to enhance english, 
+with significant results.
+
+#### Observable Results:
+
+Apparent plasticity increase, 
+from software mechanism, 
+generative awareness
+needs review.
+
 ---
 
 ### UI TODO:
@@ -156,15 +174,21 @@ new viewz
 // npm i axios
 // npm install react-markdown
 
+## DATA SERVICE
+
+// vercel server - was a problem with dynamic routes
+// after creating scriptz to convert markdown to json
+// github raw data format was discovered
+// vercel server unnecessary!
 
 
 # GOALS:
 
 1. EXAMPLE (simple) Ai CONCEPTS and PATTERNS:
     X - algorithm, LLM, NLP, Tokenizer
-    O - file-server integration
+    X - file-server integration
      
-## Run
+## Runtime INSTRUCTIONS
 
 npm install
 

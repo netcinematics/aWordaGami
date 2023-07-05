@@ -134,15 +134,17 @@ let DetailView =  ( {token} ) => {
         }
         const options = {
             method: 'GET',
-            params: {'lookup':'markdown'},
+            url : `https://raw.githubusercontent.com/netcinematics/node_dashboard_server/main/libz/aBETTaWORDZa.json`
+            // params: {'lookup':'markdown'},
             // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
-            url: `https://node-dashboard-server.vercel.app/libz/lookup/${lookupTitle}`, //prod url
+            // url: `https://node-dashboard-server.vercel.app/libz/lookup/${lookupTitle}`, //prod url broke
             // url: `https://node-dashboard-server.vercel.app/libz/tokenz/${lookupTitle}`, //prod url
            // url: `https://node-dashboard-server.vercel.app/libz/tokenz/`, //prod url working index
             // url: `http://localhost:8008/libz/tokenz/${lookupTitle}`,
         }
         axios.request(options).then((response) => {
             console.log("LOADED DETAILS")
+            debugger;
             // setMarkdownDETAILSView(response.data)
             displayMarkdown(response.data)
         }).catch((error) => {
