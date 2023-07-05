@@ -108,6 +108,9 @@ let DetailView =  ( {token} ) => {
     let [localDetails,setLocalDetails] = useState([])
     let [markdownDetailsTXT,setMarkdownDETAILSView] = useState('')
 
+    let [localDetailsCOUNT,setLocalDetailsCOUNT] = useState('')
+    let [localDetailsARRAY,setLocalDetailsARRAY] = useState([])
+
     useEffect(() => {
         if(token.details){
             console.log("INIT details",token.title)
@@ -134,7 +137,8 @@ let DetailView =  ( {token} ) => {
         }
         const options = {
             method: 'GET',
-            url : `https://raw.githubusercontent.com/netcinematics/node_dashboard_server/main/libz/aBETTaWORDZa.json`
+            url : `https://raw.githubusercontent.com/netcinematics/aWordaGami/main/cardz/aWORDZa.json`
+            // url : `https://raw.githubusercontent.com/netcinematics/node_dashboard_server/main/libz/aBETTaWORDZa.json`
             // params: {'lookup':'markdown'},
             // url: 'https://node-dashboard-server.vercel.app/ai2', //prod url
             // url: `https://node-dashboard-server.vercel.app/libz/lookup/${lookupTitle}`, //prod url broke
@@ -143,13 +147,16 @@ let DetailView =  ( {token} ) => {
             // url: `http://localhost:8008/libz/tokenz/${lookupTitle}`,
         }
         axios.request(options).then((response) => {
-            console.log("LOADED DETAILS")
+            // console.log("LOADED JSON DETAILS")
             debugger;
+            setLocalDetailsCOUNT(response.data.token.txtz.length)
+            setLocalDetailsARRAY(response.data.token.txtz)
             // setMarkdownDETAILSView(response.data)
-            displayMarkdown(response.data)
+            // displayMarkdown(response.data)
+            // setItemCOUNT(`data loaded: $ `)
         }).catch((error) => {
-            console.error(error)
-            // setItemCOUNT("no data")
+            console.error('oops',error)
+            setLocalDetailsCOUNT("no data")
         })    
     }
 

@@ -210,32 +210,35 @@ LIVE EXAMPLE: https://netcinematics.github.io/aWordaGami/
 
 REACTJS:
 X - Add details click
-O - Move to new project called aPRYZMaWORDZa
+O - Move to new project called aPRYZMa
 O - Responsive Resize.
-O - Clean up other tabs.
-O - simple context input/combo ui (security/envpwd)
+O - Clean up other tabs / files.
+O - token_net/ taxonomy data files.
+O - token_net/token_cardz/
+O - token_net/token_markdown/
+O - Render cardz on click and details.
+O - Error, not found.
 
 NODEJS
 X - train/ data1/ folder with txt and md and scriptz/: 
-
 X - tokenz/ folder with ontology names.
+O - scriptz/markdown_to_cardz
 
-O - token_net/ taxonomy data files.
 
 
 1) NODEJS LOOPS
-- open md file, or txt file, or html file
-- search for 
-a) [_] underscore words.
-b) `~...~` tilde words.
-c) errors_list of partial tokenz
+X - open md file, or txt file, or html file
+X - search for 
+X a) [_] underscore words.
+X b) `~...~` tilde words.
+O c) turn into links...
 
 2) NODEJS "training" 
 - TOKENIZE search results
 - TRANSFORM data into TAXONOMY by title
 - Title is KEY for different "training" loops
 
-3) NODEJS SCRIPTS for PARSE_PIPELINE
+3) Additional NODEJS SCRIPTS for PARSE_PIPELINE
 - parse_tokenz () 
 - index_tokenz ()
 - alpha_tokenz ()

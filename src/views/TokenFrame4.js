@@ -6,7 +6,7 @@ function TokenFrame ( { token, setTokenViewfn } ) {
     // console.log("tokenFrame",token.title)
     useEffect(() => { document.title = token.title;  }, []);
     // useEffect(() => { document.title = "ai_tree";  }, []);
-    console.log("LOAD TOKENFRAME ITEMS", token.title)
+    // console.log("LOAD TOKENFRAME ITEMS", token.title)
     let [tokenITEMS, setTokenITEMS] = useState([]);
     let [itemCOUNT, setItemCOUNT] = useState("");
     // useEffect(() => { getTokenITEMS() }, [itemCOUNT]);
