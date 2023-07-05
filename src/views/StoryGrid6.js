@@ -144,7 +144,7 @@ let DetailView =  ( {token} ) => {
             // url: `https://node-dashboard-server.vercel.app/libz/lookup/${lookupTitle}`, //prod url broke
             // url: `https://node-dashboard-server.vercel.app/libz/tokenz/${lookupTitle}`, //prod url
            // url: `https://node-dashboard-server.vercel.app/libz/tokenz/`, //prod url working index
-            // url: `http://localhost:8008/libz/tokenz/${lookupTitle}`,
+            // url: `http://localhost:8008/libz/tokenz/${lookupTitle}`, 
         }
         axios.request(options).then((response) => {
             // console.log("LOADED JSON DETAILS")
