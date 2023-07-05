@@ -26,9 +26,12 @@ function getTokenzINDEX(){ //SHOW MAIN CARDS.
         // url: 'http://localhost:8008/libz/tokenz/',
     }
     axios.request(options).then((response) => {
-        setTokenz_INDEX_DATA(response.data.tokenz)
-        setTokenz_CARD_COUNT("tokenz "+response.data.tokenz.length)
-        console.log("LOADED INDEX",response.data.tokenz.length)
+        console.log("LOADED token_INDEX",response.data.token_index.length)
+        setTokenz_INDEX_DATA(response.data.token_index)
+        setTokenz_CARD_COUNT("token_index "+response.data.token_index.length)
+        // setTokenz_INDEX_DATA(response.data.tokenz)
+        // setTokenz_CARD_COUNT("tokenz "+response.data.tokenz.length)
+        // console.log("LOADED INDEX",response.data.tokenz.length)
     }).catch((error) => {
         console.error(error)
         setTokenz_CARD_COUNT("no data")
