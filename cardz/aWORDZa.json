@@ -1,9 +1,12 @@
 { "title": "aWORDZa",
   "token" :   
-    { "title": "aWORDZa", "txtz":[
-        {"title":"short","txtz":["testtxt1"]},
-        {"title":"long","txtz":["1...","2...","3..."]}], 
-        "imgz":"", 
-        "linkz":"" },
-  "timestamp":"1_1_2020"
+    { "title": "aWORDZa", 
+      "txtz":[
+        {"title":"first token txt","txtz":["testtxt1"],"imgz":[],"meta":[]},
+        {"title":"second token txt","txtz":["1...","2...","3..."]}], 
+      "imgz":[], 
+      "meta":[] },
+    "date":"1_1_2020",
+    "src":"source_file.md",
+    "version":"1.1.1.1"
 }

@@ -219,6 +219,8 @@ O - token_net/token_markdown/
 O - Render cardz on click and details.
 O - Error, not found.
 
+O - rename grid_tokenz, card_tokenz, & txt_tokenz
+
 NODEJS
 X - train/ data1/ folder with txt and md and scriptz/: 
 X - tokenz/ folder with ontology names.

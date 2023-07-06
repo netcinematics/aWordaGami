@@ -108,6 +108,7 @@ let DetailView =  ( {token} ) => {
     let [localDetails,setLocalDetails] = useState([])
     let [markdownDetailsTXT,setMarkdownDETAILSView] = useState('')
 
+    let [localDetailsINDEX,setLocalDetailsINDEX] = useState(0)
     let [localDetailsCOUNT,setLocalDetailsCOUNT] = useState('')
     let [localDetailsARRAY,setLocalDetailsARRAY] = useState([])
 
@@ -148,7 +149,8 @@ let DetailView =  ( {token} ) => {
         }
         axios.request(options).then((response) => {
             // console.log("LOADED JSON DETAILS")
-            debugger;
+            // debugger;
+            setLocalDetailsINDEX(localDetailsINDEX+1)
             setLocalDetailsCOUNT(response.data.token.txtz.length)
             setLocalDetailsARRAY(response.data.token.txtz)
             // setMarkdownDETAILSView(response.data)
@@ -230,9 +232,36 @@ let DetailView =  ( {token} ) => {
         {/* {localDetails.map( (item,idx)=>{ return <div>{item.txt}</div>   } )} */}
         {/* <section style={{margin:'1em',fontSize:'22px'}}>{markdownDetailsTXT}</section> */}
         { <article style={{background:'skyblue',marginTop:'2em',borderRadius:'22px',fontSize:'22px',padding:'1em',
-            }}><ReactMarkdown>
+            }}>
+                
+        {/* <ReactMarkdown>
             {markdownDATA}
-        </ReactMarkdown>
+        </ReactMarkdown> */}
+        {(localDetailsARRAY && localDetailsARRAY.length)?
+            localDetailsARRAY.map( (item, token_idx)=> { //txt_tokenz
+                return (
+                    <>
+                        <section>{item.title}</section>
+                        {(item.txtz && item.txtz.length)?
+                            item.txtz.map( (txt, txt_idx)=> { //txt_tokenz
+                                return (
+                                    <>
+                                        <section>{txt}</section>
+                                    </>
+                                )
+                            })
+                            :'no txtz'
+                        }
+
+
+
+
+                    </>
+                )
+            })
+            :'no tokenz'
+        }
+        COUNT: {localDetailsINDEX} of {localDetailsCOUNT}
         </article> }
     </>
     )
