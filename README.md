@@ -176,13 +176,36 @@ new viewz
 
 ## DATA SERVICE
 
-// vercel server - was a problem with dynamic routes
+Raw JSON /tokenz/, generated from /libz/ of markdown.
+
+// NOTE: vercel server - was a problem with dynamic routes
 // after creating scriptz to convert markdown to json
-// github raw data format was discovered
-// vercel server unnecessary!
+// github raw data format was discovered server unnecessary!
 
+### NEW CLEAN PROJECT - aPRYZMaGAMEa
+O Jettison Vercel dependency
+O Jettison Crypto dependency
+O Jettison Typewriter dependency
+O Jettison AI ChatGPT dependency
+O Jettison Markup dependency
 
-# GOALS:
+All CUSTOM! Simple. 
+
+#### NEW DESIGN GOALZ
+
+Reduced design to:
+
+1) X - rich writing and editing environment, markdown.
+
+2) X - tokenized by javascript, converted to JSON.
+
+3) O - filtered and sorted by dynamic api
+
+4) O - gamified in local storage
+
+5) O - use token_grid to tell episodic sci-fi fantasy token_books.
+
+# NODE GOALS:
 
 1. EXAMPLE (simple) Ai CONCEPTS and PATTERNS:
     X - algorithm, LLM, NLP, Tokenizer
@@ -210,7 +233,8 @@ LIVE EXAMPLE: https://netcinematics.github.io/aWordaGami/
 
 REACTJS:
 X - Add details click
-O - Move to new project called aPRYZMa
+O - Move to new project called aPRYZMaGAMEa
+O - New production on GITHUB.
 O - Responsive Resize.
 O - Clean up other tabs / files.
 O - token_net/ taxonomy data files.
@@ -220,20 +244,23 @@ O - Render cardz on click and details.
 O - Error, not found.
 
 O - rename grid_tokenz, card_tokenz, & txt_tokenz
+O - get files from dashboard_server put into libz/
+O - use scriptz to read all libz, and write versioned_tokenz.
 
-NODEJS
+
+NODEJS - SCRIPTZ
 X - train/ data1/ folder with txt and md and scriptz/: 
 X - tokenz/ folder with ontology names.
 O - scriptz/markdown_to_cardz
-
-
+O a) [_] underscore words.
+O b) `~...~` tilde words, turn into links...
+O c) wordz begin and end in 'a'.
+O d) cardz are like content FILTER.
+O e) txtz are like content SORT.
 
 1) NODEJS LOOPS
 X - open md file, or txt file, or html file
-X - search for 
-X a) [_] underscore words.
-X b) `~...~` tilde words.
-O c) turn into links...
+X - search for keywords.
 
 2) NODEJS "training" 
 - TOKENIZE search results
