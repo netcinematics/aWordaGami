@@ -166,8 +166,8 @@ new viewz
 
 ## Manifest 
 // npm i create-react-app
-// npm i react-reveal --save
 // npm i gh-pages --save-dev
+// npm i react-reveal --save
 // npm i typewriter-effect
 
 ---
